@@ -240,7 +240,3 @@ Step 3:	Execute the Java program.
 		
 		--> Java programs start executing from the main method.
 		--> It prints the Hello World in command-prompt.
-		
-************************
-Date: 02-FEB-2024
-************************
