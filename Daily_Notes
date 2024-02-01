@@ -1,0 +1,246 @@
+************************
+Date: 31-JAN-2024
+************************
+************************
+Core Java COURSE CONTENTS:
+************************
+Introduction to Java
+Data Types & Keywords in Java
+Java Variables
+Operators in Java
+Methods in Java
+Java Objects & Classes
+OOPS
+Access Modifiers
+static & final keywords
+Exception Handling
+Arrays
+String, StringBuffer & StringBuilder
+Enhanced for-loop
+Object Class
+Packages
+Garbage Collection
+Collection Framework
+Serialization
+Multithreading
+Java 8 features
+************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+************************
+Introduction to Java
+************************
+What is Java?
+	-> Java is a programming language.
+	-> Java is a high-level, class-based, object-oriented programming language. High-Level language is a language in normal English. i.e., Human understandable form.
+	-> Programming Language :
+		-> A programming language is a formal language that is used to give instructions to a computer.
+		It is a set of rules and syntax that allows programmers to write code and create software applications, websites, algorithms and more.
+		-> Programming languages are used to communicate with computers and tell them what tasks to perform and how to perform them.
+		-> There are numerous programming languages available, each with its own syntax, rules and purpose.
+		Some popular programming languages:
+		-> Java, C, C++, Javascript, Python, Ruby, C#, Swift.
+		
+	-> James Gosling is a person who introduced Java, so called him father of Java.
+	-> The company that started Java is Sun Microsystems Inc. (US), but currently Java is Owned by Oracle Corporation.
+
+
+
+History behind Java:
+
+	-> The history of Java is very interesting. In 1991 ,Sun micro systems Inc.(US) started a project to develop software for consumer electronic devices, televisions etc that could be controlled by a remote . This project was called the Green project.
+
+	->  Ultimately, it was James Gosling, one of the members of the Green Project. Gosling thought C or C++ could be used to develop the project.But the problem he faced with them is that they were system dependent languages. Hence could not be used on various processors, which the electronics devices use. So they started developing a new language which is completely system dependent.
+
+	-> The language was initially called Oak after an oak tree that stood outside Gosling's office. Later the project was renamed as Java.
+
+	-> Why the name Java ? James Gosling and his team  members were consuming a lot of coffee while developing this language.Good quality of coffee was exported to all over the world from a place called Java Island. Hence they fixed the name of the place for the language java. And the symbol for the java language is coffee cup and saucer.
+
+	-> Sun Microsystems released the first public implementation as Java 1.0 in 1996.
+	
+	-> Later Java was divided into J2SE,J2EE & J2ME.
+
+	J2SE: Java Platform, Standard Edition. Which is used to develop desktop applications.
+	J2EE: Java platform, Enterprise Edition. Which is used to develop Enterprise applications.
+	J2ME: Java platform, Micro Edition. Which is used to develop embedded & mobile applications.
+
+	-> J2SE 1.2 is released in December 1998 and latest release is Java SE 21 in September 19, 2023
+
+	-> Oracle Corporation's acquisition of Sun Microsystems in 2009–10.
+
+Refer PPT
+
+
+Companies that Use Java:
+	->	Java is used by companies in tech, government, finance, healthcare, insurance, education, manufacturing, defense and more. 90 percent of Fortune 500 companies use Java for their backend architecture. Yet because of its speed and scalability, many startups facing rapid growth use Java to power their tools too. 
+	
+
+Java developers make great money:
+	->	The median entry-level salary for Java developers is $60,000 USD. With a few years of experience, Java developers can expect to meet and exceed $100,000 USD per year. While salaries vary by company and location, Java salaries are consistently competitive with other common language developer salaries.
+	
+Java has a strong and active community:
+	->	Oracle estimates that there are more than 10 million Java developers worldwide. Any developer can tell you the immense role the programming community plays in their ongoing education. When you are stuck, you turn to Stack Overflow, a programming question and answer platform. 
+
+Java is beginner-friendly:
+	->	Java evolved from the languages C and C++, which are also still widely used today. While Java shares some functionalities with C and C++, it has evolved into a much more beginner-friendly language.
+	
+Features of Java:
+
+	1.Simple and Familiar 
+	2.Object-Oriented 
+	3.Portable & Platform Independent
+	4.Secured 
+	5.Robust 
+	6.Architecture Neutral
+	7.Compiled & Interpreted
+	8.High Performance
+	9.Multithreaded
+	10.Distributed
+	11.Dynamic and Extensible
+	
+1. Simple and Familiar :
+	-> Java is very easy to learn, and its syntax is simple, clean and easy to understand. 
+	-> Java is familiar since it's based on existing languages like C++ and incorporates many features from it.
+	
+2. Object-Oriented:
+	-> Java strongly supports Object-Oriented Programming concepts such as abstraction ,encapsulation, inheritance and  polymorphism. So Java is an object-oriented programming language. Everything in Java is an object.
+	
+	-> All the instructions and data in a Java program have to be added inside a class.
+
+3.Portable & Platform Independent:	
+	-> 	Java is portable because it facilitates you to carry the Java bytecode to any platform. It doesn't require any implementation.
+	->	Java is platform independent because the Java program can be compile in one machine & which can be executed on any other machine, regardless of the OS, as lang as there is a JVM installed.
+	
+4. Secured:
+	With Java, we can develop virus-free systems. Java is secured because:
+		-> No explicit pointer
+		-> Java Programs run inside a virtual machine sandbox
+		-> Class loader 
+		-> Bytecode Verifier
+		-> Security Manager
+		
+5. Robust:
+	-> It uses strong memory management.
+	-> Java provides automatic garbage collection which runs on the Java Virtual Machine to get rid of objects which are not being used by a Java application anymore.
+	->	There are exception handling and the type checking mechanism in Java. 
+	-> Java is a strongly-typed language, which is a feature that can help lower the number of bugs in an application, and provides error handling mechanisms.
+	All these points make Java robust.
+	
+6. Architecture Neutral:
+	Java is architecture neutral because there are no implementation dependent features, for example, the size of primitive types is fixed.
+	
+7. Compiled and Interpreted:
+	->	Java combines the power of compiled languages with the flexibility of interpreted languages.
+	->	The compiler (javac) compiles the source code into bytecode, then the Virtual Machine (JVM) executes this bytecode by transforming it into machine-readable code..
+
+8. High Performance:
+	-> Bytecodes that the compiler generates are highly optimized, so the Virtual Machine can execute them much faster. This is why Java is faster than other traditional interpreted programming languages.
+	
+9. Multithreaded:
+	->	Also known as Thread-based Multitasking, multithreading is a feature that allows executing multiple threads simultaneously.
+
+
+10. Distributed:
+	->	Java is distributed because it facilitates users to create distributed applications in Java. Remote Method Invocation (RMI) and Enterprise Java Beans (EJB) are used for creating distributed applications.
+	
+11.Dynamic and Extensible:
+	->	Java is a dynamic language. It supports the dynamic loading of classes. It means classes are loaded on demand. It also supports functions from its native languages, i.e., C and C++.
+
+************************
+Date: 01-FEB-2024
+************************
+
+Java versions and its release dates:
+
+	Version				Date:
+
+	JDK Beta			1995
+	JDK 1.0				January 23, 1996
+	JDK 1.1				February 19, 1997
+	J2SE 1.2			December 8, 1998
+	J2SE 1.3			May 8, 2000
+	J2SE 1.4			February 6, 2002
+	J2SE 5.0			September 30, 2004
+	Java SE 6			December 11, 2006
+	Java SE 7			July 28, 2011
+	Java SE 8(LTS)		March 18, 2014
+	Java SE 9			September 21, 2017
+	Java SE 10			March 20, 2018
+	Java SE 11(LTS)		September 25, 2018
+	Java SE 12			March 19, 2019
+	Java SE 13			September 17, 2019
+	Java SE 14			March 17, 2020
+	Java SE 15			September 15, 2020
+	Java SE 16			March 16, 2021
+	Java SE 17(LTS)		September 14, 2021
+	Java SE 18			March 22, 2022
+	Java SE 19			September 20, 2022
+	Java SE 20			March 21, 2023
+	Java SE 21(LTS)		September 19, 2023
+
+*LTS(Long Term Support): A Java LTS version is that will remain the industry standard for several years.
+
+Installation of Java:
+
+Download Java Link: https://www.oracle.com/java/technologies/downloads/#jdk21-windows
+
+
+
+Java Hello World Program:
+
+	The process of Java programming can be simplified in three steps:
+	
+		Step 1: Create a Java program.
+		Step 2:	Compile the Java program. 
+		Step 3:	Execute the Java program.
+		
+
+Step 1: Create a program:
+		Syntax:
+				public class ClassName{
+					public static void main(String[] args){
+						//Statements
+					}
+				}
+				
+				
+		Example:
+				public class HelloWorld{
+					public static void main(String[] args){
+						System.out.println("Hello World");
+					}
+				}
+				
+		--> Save this program with file name "HelloWorld.java"
+				
+Step 2:	Compile the Java program:
+		Syntax:
+				javac filename
+		Example:
+				javac HeloWorld.java
+				
+Step 3:	Execute the Java program.		
+		Syntax:	
+				java classname
+		
+		Example:	
+				java HelloWorld
+		
+		--> Java programs start executing from the main method.
+		--> It prints the Hello World in command-prompt.
+		
+************************
+Date: 02-FEB-2024
+************************
