@@ -240,3 +240,77 @@ Step 3:	Execute the Java program.
 		
 		--> Java programs start executing from the main method.
 		--> It prints the Hello World in command-prompt.
+
+************************
+Date: 02-FEB-2024
+************************
+JDK, JRE, and JVM:
+
+JDK(Java Development Kit):
+	-> The JDK is a software development kit that develops applications in Java. Along with JRE, the JDK also consists of various development tools (Java Debugger, JavaDoc, compilers, etc.)
+	->	It primarily functions in development & assists in executing codes. 
+	->	The JDK is platform-dependent. It means that for every different platform, you require a different JDK.
+	->	Since JDK is primarily responsible for the development, it consists of various tools for debugging, monitoring, and developing java applications.
+	->	JDK = Development Tools + JRE (Java Runtime Environment)
+	->	It basically provides an environment for developing and executing the Java source code.
+	->	Any user can easily install JDK on Unix, Mac, and Windows OS (Operating Systems).
+		Download Java Link: https://www.oracle.com/java/technologies/downloads/#jdk21-windows
+	
+JRE (Java Runtime Environment):
+	-> 	JRE = JVM + Libraries( ex: rt.jar,etc) for running the application + Some Supporting  files.
+	->  (JRE) is an implementation of JVM. It is a type of software package that provides class libraries of Java, JVM & various other components for running the applications written in Java programming. JRE is only used by those who only want to run Java programs that are clients of software applications.
+	->  JRE has a major responsibility for creating an environment for the execution of code.
+	->	JRE, just like JDK, is also platform-dependent. It means that for every different platform, you require a different JRE.
+	->	JRE, on the other hand, does not consist of any tool- like a debugger, compiler, etc. It rather contains various supporting files for JVM, and the class libraries that help JVM in running the program.
+	
+JVM (Java Virtual Machine):
+	-> It provides a runtime environment for driving Java applications or code. JVM is an abstract machine that converts the Java bytecode into a machine language. It is also capable of running the programs written by programmers in other languages (compiled to the Java bytecode). The JVM is also known as a virtual machine as it does not exist physically.
+	-> JVM is essentially a part of the JRE (Java Run Environment). You cannot separately download and install it. 
+	-> JVM primarily performs the following tasks:
+		->	Provides runtime environment
+		->	Verifies code
+		->	Loads code
+		->	Executes code
+		
+	-> JVM is the one that actually calls the main method present in a java code. 
+
+	-> Java applications are called WORA (Write Once Run Anywhere). This means a programmer can develop Java code on one system and can expect it to run on any other Java-enabled system without any adjustments. This is all possible because of JVM.
+	
+	-> Java is a purely interpreted language. However, before execution, Java source code needs to be compiled into bytecode. Bytecode is a special machine language native to the JVM. The JVM interprets and executes this code at runtime.
+	
+	-> Whenever the Java application starts, a JVM instance is to be created.
+	
+	Class Loader:
+		->	The JVM makes use of the ClassLoader subsystems to bring the compiled class files into JVM memory.Besides loading, the ClassLoader also performs linking and initialization.
+			-> Verifying the bytecode for any security breaches
+			-> Allocating memory for static variables
+			-> Replacing symbolic memory references with the original references
+			-> Assigning original values to static variables
+			-> Executing all static code blocks
+			
+	JVM Memory:
+		Method Area: This is  where JVM keeps all of your class information. Static variables, static blocks, static methods, and instance methods are all stored in this section.
+		
+		Heap Area:	When the JVM boots up, it creates a heap. During the application’s runtime, it may grow or shrink in size. All the objects will be stored in the heap.
+
+		Stack Area:	The stack is a specific part of a computer's memory that is used to store information about local variables and function calls.
+		
+		PC(Program Counter) Register: Each JVM thread has its PC register. Each thread executes the code of a single method at any given time. The behavior of the PC depends on the nature of the method: For a non-native method, the PC register stores the address of the current instruction being executed.
+		
+		Native Stack: All native methods used in your program are included in this category.
+		
+			
+	Execution Engine :
+		->	The execution engine subsystem is in charge of reading the bytecode, converting it into machine native code, and executing it. It uses an interpreter to execute bytecode.
+		
+		Interpreter : This converts the high-level program statement into Assembly-level language. It converts the code into machine code when the program is run.
+		
+		JIT Compiler: The JIT (Just In Time) compiler improves performance by compiling bytecode to native code for repeated method calls
+		
+		Garbage Collector: The Garbage collector collects and removes all unreferenced objects.
+		
+		Native Interface: The Java Native Interface acts as a bridge between Java method calls and native library calls.
+		
+		Native Libraries: Java Native Libraries are libraries that include code or programs written in languages other than Java, such as C, C++, and others. With the help of Java Native Interface(JNI), they can be integrated into the Java application as needed.
+
+
