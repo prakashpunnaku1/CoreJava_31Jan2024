@@ -313,4 +313,69 @@ JVM (Java Virtual Machine):
 		
 		Native Libraries: Java Native Libraries are libraries that include code or programs written in languages other than Java, such as C, C++, and others. With the help of Java Native Interface(JNI), they can be integrated into the Java application as needed.
 
+************************
+Date: 05-FEB-2024
+************************
+*********************		
+Data Types 		
+*********************		
+
+What is Data type?
+
+	->	A Data type is used to define the type of value that variable can hold. 
+	
+	->	Java is a statically-typed languagelanguage, which means that the data type of a variable is declared before the variable is used.
+	
+	->	Java is also a strongly typed, which means once a variable is declared to be of a certain data type, it cannot hold values of other data types.
+	
+	Syntax:
+			datatype variablename;
+
+There are two categories of data types in Java:
+																
+	1. Primitive data types :
+	2. Non-primitive data types:
+	
+1. Primitive data types: Java supports 8 primitive data types under four categories.
+	
+		i)	Integers	
+					1.byte	-> 	8 bits 		( 1 byte)		-128 to 127
+					2.short	->	16 bits		( 2 bytes)		-32,768 to 32,767
+					3.int	->	32 bits		( 4 bytes)		-2,147,483,648 to 2,147,483,647
+					4.long	->	64 bits		( 8 bytes)		-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+					
+			Example:
+					byte marks=90;
+					short year=2024;
+					int salary=200000;
+					long networth=9147483647L;
+					
+		ii)	Real Numbers
+					5.float	->	32 bits		( 4 bytes)		upto 7 decimal digits
+					6.double->	64 bits		( 8 bytes)		upto 16 decimal digits
+					
+			Example:
+					float percentage=95.50f;
+					double exchangerate=1.9876556789;
+		iii)Character
+					7.char	->	16 bits		( 2 bytes)		
+						
+					In Java, the char data type is used to represent a single 16-bit Unicode character. It can store any character from the Unicode character set, including letters, digits, punctuation, symbols, and control characters.
+					
+					It's important to note that when assigning a character literal, should use single quotes ('). 
+					
+			For example, char ch = 'P';
+
+					
+		iV)	Boolean
+					8.boolean->	1 bit (true or false)
+					
+			Example:
+					boolean flag=true;
+					or
+					boolean flag=false;
+					
+	2. Non-primitive data types: The non-primitive data types include Classes, Interfaces, and Arrays.
+
+
 
