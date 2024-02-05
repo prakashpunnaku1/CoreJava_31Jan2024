@@ -350,7 +350,7 @@ There are two categories of data types in Java:
 					int salary=200000;
 					long networth=9147483647L;
 					
-		ii)	Real Numbers
+		ii)	Decimalals
 					5.float	->	32 bits		( 4 bytes)		upto 7 decimal digits
 					6.double->	64 bits		( 8 bytes)		upto 16 decimal digits
 					
