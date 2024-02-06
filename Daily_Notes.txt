@@ -350,7 +350,7 @@ There are two categories of data types in Java:
 					int salary=200000;
 					long networth=9147483647L;
 					
-		ii)	Real Numbers
+		ii)	Decimalals
 					5.float	->	32 bits		( 4 bytes)		upto 7 decimal digits
 					6.double->	64 bits		( 8 bytes)		upto 16 decimal digits
 					
@@ -376,6 +376,235 @@ There are two categories of data types in Java:
 					boolean flag=false;
 					
 	2. Non-primitive data types: The non-primitive data types include Classes, Interfaces, and Arrays.
+
+************************
+Date: 06-FEB-2024
+************************
+2. Non-primitive data types: 
+		Non-primitive data types, also known as reference types or complex data types, are data types that are not directly supported by the programming language itself, but are created by the programmer using combinations of primitive data types. These data types are typically more complex and can represent Class, Object, String,Arrays,Collections .. etc.
+		
+		-> Class : 
+				-> In general a class is a user-defined data type.
+				-> A class is a blueprint or a prototype that defines the structure and behavior of objects.
+				-> A class encapsulates data (attributes) and behavior (methods).
+				
+		-> Object: 
+					-> An object is an instance of a class created at runtime.
+					-> Each object has its own state (attribute values), and its behavior is defined by the methods of the class.				
+		-> String :
+				-> String is a class in java.
+				-> Strings are defined as an array of characters. String is a sequence of characters.
+
+			String firstName = “Rajesh";
+			or
+			String company = new String("Wipro");
+			or
+			String name = firstName + " Kumar";
+		
+		-> Memory allocation for Non-primitive data types happens on the Heap Memory within the Java Virtual Machine (JVM) .
+		
+		
+Java Variables:
+		-> A variable is a name of the memory location that holds data, and its value can be changed during the execution of a program.
+		-> A variable is assigned with a data type, which indicates the type of data it holds. 
+		
+		Syntax:
+			datatype variablename;
+			
+		Examples:
+			byte marks;											// Variable declaration
+			short mathsMarks, scienceMarks, socialStudiesMarks;	// Declares multiple variables
+			char grade = 'B';        							// Declare & assign a value for single variable.
+			int mathsMarks = 95, scienceMarks = 80;  			// Declare & assign a value for multiple variable.
+
+			
+		-> Naming conventions:
+				=> There are conventions for naming variables to enhance code readability and maintainability.
+				=> Adhering to these conventions helps make your code more understandable to others and promotes consistency across projects.
+				
+				=> Variable Names: Variables should be named in camel case, starting with a lowercase letter and using mixed case for subsequent words.
+					Example: firstName,lastName,salary.
+					
+				=> Class Names: Class names should follow the camel case convention and start with an uppercase letter.
+					Example: EmployeeDetails,StudentInfo,...etc.
+					
+				=> Constants : Constants, variables whose values should not change, are typically written in uppercase letters with underscores separating words.
+					Example: COMPANY_NAME,MIN_VALUE,MAX_VALUE	
+					
+				=> Packages : Package names should be in lowercase letters and follow a reverse domain name convention.
+					Example: com.grats.projectname
+					
+				=> Booleans: Use names that convey a sense of true/false values for boolean variables.
+					Example: isAvailable, hasPermission, isEnabled.
+					
+			->Avoid using Java reserved words as variable names (e.g., int, class, public).
+					
+		-> Java has mainly below type of variables
+		
+				1. Local Variables
+				2. Instance Variables
+				3. Static Variables
+		
+		1. Local Variables: Local variables in Java are variables declared within a method, constructor, or block of code. These variables have a limited scope, meaning they are only accessible within the block of code where they are declared. Once the block of code is exited, the local variable goes out of scope, and its memory is eligible for garbage collection.
+		
+			Example:
+					public void method(){
+						int no=123;
+						String name="Grats";
+					}
+					
+					public Student(){
+						int studentId=1001;
+						String studentName="abc";
+						float percentage="9.9";
+						boolean isOptedExtraCourse=true;
+						char grade='B';
+					}
+					
+					if(condition){
+						int no=123;
+						String name="Grats";
+					}
+					
+				-> Local variables memory is allocated on the Stack Area within the Java Virtual Machine (JVM)
+				
+				-> Memory allocation for primitive data type variables in Java happens on the stack.
+				-> The stack is a region of memory that operates in a last-in, first-out (LIFO) fashion, and it is used for storing local variables and method call information.
+				-> When a method is called, a stack frame is created for that method, and local variables, including primitive data types, are allocated within this frame.
+				-> The memory for primitive variables on the stack is automatically reclaimed when the method exits, making it a fast and efficient way to manage memory.
+	
+				Example:
+					public class PrimitiveMemoryAllocation {
+						public static void main(String[] args) {
+							int num1 = 14;  // 'int' variable 'num1' is allocated on the stack
+							double num2 = 20.5;  // 'double' variable 'num2' is also allocated on the stack
+						}
+					}
+					-> the variables num1 and num2 are local variables, and their memory is allocated on the stack. When the main method exits, the memory for these variables is automatically reclaimed.
+					-> It's important to note that the stack is generally faster for memory access compared to the heap.
+					
+		
+		2. Instance Variables: Variables that are declared inside a class without the ‘static’ keyword are referred to as instance variables. Instance variables can be accessed with an object. Instance variables are replicated for every object of the class being created.
+			
+			Example: 
+				public class Student{
+					int studentId;
+					String studentName;
+					float percentage;
+					boolean isOptedExtraCourse;
+					char grade;
+				}
+			
+				-> Instance variables memory is allocated on the Heap Area within the Java Virtual Machine (JVM).
+				-> instance variables (also known as fields or members) are automatically assigned default values if they are not explicitly initialized. The default values depend on the data type of the instance variable. 
+				
+				Here are the default values for various data types:
+				
+				Primitive Types:
+					byte, short, int, long: 0
+					float, double: 0.0
+					char: '\u0000'
+					boolean: false
+				
+				Default value is null for any Object type.
+				
+				Example:
+					public class DefaultValues {
+						byte byteVar;      // 0
+						short shortVar;    // 0
+						int intVar;        // 0
+						long longVar;      // 0
+						float floatVar;    // 0.0
+						double doubleVar;  // 0.0
+						char charVar;      // '\u0000'
+						boolean boolVar;   // false
+						String name;		// null
+					}
+					
+		3. Static variable - Variables that are declared inside a class with the ‘static’ keyword are referred as static variables. 
+			Example: 
+				public class Employee{
+					static String companyname = "Wipro";
+				}
+			-> Instance variables memory is allocated on the Method Area within the Java Virtual Machine (JVM)
+
+
+Keywords or reserved words in Java:
+		
+		keywords are reserved words that have a specific meaning and cannot be used as identifiers (names for variables, classes, methods, etc.). These keywords are an essential part of the language's syntax and define the structure and behavior of Java programs. Here's a list of Java keywords:
+
+		->Access Modifiers:
+				public
+				protected
+				private
+				
+		-> Class, Method, and Variable Declaration:
+				class
+				interface
+				extends
+				implements
+				void
+				return
+				this
+				super
+				new
+				static
+				final
+				abstract
+				
+		-> Conditional Statements:
+				if
+				else
+				switch
+				case
+				default
+				
+		-> Looping Statements:
+				for
+				while
+				do
+				break
+				continue
+				
+		-> Exception Handling:
+				try
+				catch
+				finally
+				throw
+				throws
+				
+		-> Package and Import:
+				package
+				import
+			
+		-> Data Types:
+				boolean
+				byte
+				short
+				int
+				long
+				float
+				double
+				char
+			
+		-> Modifiers:
+				abstract
+				final
+				static
+				volatile
+				synchronized
+				transient
+			
+		-> Other Keywords:
+				instanceof
+				native
+				strictfp
+			
+		-> Reserved Literals:
+				true
+				false
+				null
+
 
 
 
