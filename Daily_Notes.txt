@@ -605,6 +605,156 @@ Keywords or reserved words in Java:
 				false
 				null
 
+************************
+Date: 07-FEB-2024
+************************
+
+	=>	Java allows the use of certain special characters like underscores (_) and dollar signs ($), it's generally recommended to use letters, numbers, and underscores for better readability.
+	=>	The first character must be a letter, underscore, or dollar sign.
+	=>	Variable names cannot contain spaces.
+
+
+
+1. What is a variable in Java?
+	
+2. Can use a variable before it is declared in Java?
+	
+3. What is the difference between primitive data types and objects in terms of variables?
+	
+4. Differentiate between local variables, instance variables, and class variables?
+		
+5. What is the default value of a variable if it is not explicitly initialized in Java?
+
+6. Explain the concept of variable shadowing in Java?
+	
+
+Operators in Java:
+	=> Operators are symbols that perform operations on variables and values. There are several types of operators in Java, and they can be categorized into different groups based on their functionality.
+
+	=> If an operator acts on a single variable, it is called a unary operator.
+	=> If it acts on two variables, it is called a binary operator.
+	=> If it acts on three variables then it is called a ternary operator.
+
+Here are some common types of operators in Java:
+
+	1. Arithmetic Operators
+	2. Relational Operators
+	3. Logical Operators
+	4. Assignment Operators
+	5. Increment and Decrement Operators (Unary Operators)
+	6. Ternary Operator
+	7. Bitwise Operators
+	8. Shift Operators
+
+
+	1. Arithmetic Operators: Arithmetic Operators used to perform mathematical calculations.
+		=> + (addition)
+		=> - (subtraction)
+		=> * (multiplication)
+		=> / (division)
+		=> % (modulo, remainder after division)
+
+		Example:
+			int a=55;
+			int b=12;
+
+			int sum = a+b; //67
+			int sub = a-b; //43
+			int mult = a*b; //660
+			int div= a/b; //4
+			int mod=a%b; //7
+
+	2. Relational Operators: Relational operators are used to compare values. Which returns boolean value as result.
+		-> == (equal to)
+		-> != (not equal to)
+		-> > (greater than)
+		-> < (less than)
+		-> >= (greater than or equal to)
+		-> <= (less than or equal to)
+
+		Example:
+
+			int a = 5;
+			int b = 8;
+
+			System.out.println(":(a==b):"+(a==b)); //false
+			System.out.println(":(a!=b):"+(a!=b)); //true
+			System.out.println(":(a>b):"+(a>b)); //false
+			System.out.println(":(a<b):"+(a<b)); //true
+			System.out.println(":(a>=b):"+(a>=b)); //false
+			System.out.println(":(a<=b):"+(a<=b)); //true
+
+	3. Logical Operators: Logical Operators work on the Boolean operand. It operates on two Boolean values, which return Boolean values as a result.
+
+		-> && (logical AND)	: 	If both operands are true then only the "logical AND" operator evaluates true.
+		-> ||
+		: 	The logical OR operator is only evaluated as true when one of its operands evaluates true.
+								If either or both expressions evaluate true, then the result is true.
+		-> ! (logical NOT) 	: 	The logical NOT is a Unary Operator, it operates on single operands.
+								It reverses the value of operands, if the value is true, then it gives false, and if it is false, then it gives true.
+
+			boolean condition1 = true;
+			boolean condition2 = false;
+			boolean resultAnd = (condition1 && condition2);  // false
+			boolean resultOr = (condition1 || condition2);   // true
+			boolean resultNot = !condition1;
+
+			int a = 5;
+			int b = 6;
+			System.out.println("logical and stmt..."+( (a < b) && (a <= b)));
+
+	4. Assignment Operator: This operator is used to store some value into a variable.
+
+		Operator 		Example 		Equivalent To
+		= 				a=b; 			a=b;
+		+= 				a+=b; 			a=a+b;
+		-= 				a-=b; 			a=a-b;
+		*= 				a*=b; 			a=a*b;
+		/= 				a/=b; 			a=a/b;
+		%= 				a%=b; 			a=a%b;
+
+	5. Increment and Decrement Operators (Unary Operators):
+		-> The Unary operators require only one operand. Unary operators are used to perform various operations i.e.:
+		-> ++ (Increment): It is used to increment the value by 1.
+				It can be used in two ways.
+
+				Pre-increment:
+					Syntax:  ++variableName;
+					Example: int k=10;
+					++k;
+					System.out.println(":k:"+k);//11
+
+
+				Post-increment:
+					Syntax:  variableName++;
+					Example: int k=10;
+					System.out.println(":k:"+(k++));//10
+					
+		-> -- (Decrement): It is used to decrement the value by 1.
+				It can be used in two ways.
+
+				Pre-decrement:
+					Syntax:  --variableName;
+					Example: int k=10;
+					--k;
+
+
+				Post-decrement:
+					Syntax:  variableName--;
+					Example: int k=10;
+					k--;
+
+	6. Ternary Operator : The ternary operator, also known as the conditional operator, is a concise way to express an if-else statement in a single line. The ternary operator has the following.
+
+		Syntax: variable = (condition) ? expression executes if condition true : expression executes if condition false;
+
+		Example:  
+		 int a=50;
+		 int b=100;
+		 
+		 int minVal;
+		 minVal = (a>b)?b:a;
+
 
 
 
