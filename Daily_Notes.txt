@@ -756,5 +756,171 @@ Here are some common types of operators in Java:
 		 minVal = (a>b)?b:a;
 
 
+****************************************
+08Feb2024
+****************************************
+		 
+	7. Bitwise Operators: Bitwise operators are used to perform operations on individual bits of binary numbers. These operators work at the binary level, manipulating the bits of integers.
+				
+		=>	& -> AND :	-> Performs a bitwise AND operation.
+						-> Returns true if both arguments are true.
+						
+						boolean flag1=true;
+						boolean flag2=false;
+						boolean result = (flag1 & flag2); // false
+						
+						
+						int a = 5  # binary: 0101
+						int b = 7  # binary: 0111
+						
+			   int result = a & b  # binary: 0101   =>  5
+						
+		=>	| -> OR:	-> Performs a bitwise OR operation.
+						-> Returns true if atleast one argument is true.
+						
+						boolean flag1=true;
+						boolean flag2=false;
+						boolean result = (flag1 | flag2); // true
+						
+						a = 5  # binary: 0101
+						b = 7  # binary: 0111
+						
+			   result = a | b  # binary: 0111   => 7						
+
+						
+		=> 	^ -> X-OR:	-> Performs a bitwise XOR (exclusive OR) operation.
+						-> Returns true if both arguments are different.
+						
+						boolean flag1=true;
+						boolean flag2=false;
+						boolean result = (flag1 ^ flag2); // true
+						
+						a = 5  # binary: 0101
+						b = 7  # binary: 0111
+						
+			   result = a ^ b  # binary: 0010   => 2	
+			
+		=>	NOT (~):	->	bitwise complement operator.
+							Inverts the bits, changing 0s to 1s and vice versa.
+							boolean flag=true;
+							boolean result=(~flag); // Compile time error.
+						-> This operator applicable for only for integral types, can't apply for boolean type.
+							
+						int a=5;
+						System.out.println(~a); //-6
+						
+	8. Shift Operators:
+		=>	<<	(Left Shift Operator:	
+					-> The left shift operator (<<) shifts the bits of a number to the left by a specified number of positions.
+					-> The vacant positions on the right are filled with zeros.
+					
+					int a = 5  //# binary: 0101
+					int result = a<<3; //# binary: 0101000 =>40
+					
+		=> 	>> 	(Right Shift Operator):
+					-> The right shift operator (>>) shifts the bits of a number to the right by a specified number of positions.
+					-> The vacant positions on the left are filled with the sign bit (the leftmost bit).
+					int a = 5  //# binary: 0101
+					int result = a>>1; //# binary: 0010 =>2
+					
+******************************************
+Conditional Statements:
+******************************************
+	=> 	Decision Making in programming is similar to decision-making in real life. In programming also face some situations where we want a certain block of code to be executed when some condition is fulfilled.  
+
+	=>	Conditional statements are used to control the flow of a program based on certain conditions. 
+		
+	=>	The main conditional statements in Java are:
+		1. if
+		2. if-else
+		3. if-else if
+		4. nested if
+		5. switch
+		
+		1. if Statement:
+			The if statement is used to execute a block of code only if the given condition is true.
+			syntax:
+				if(condition) 
+				{
+				   // Statements to execute if
+				   // condition is true
+				}
+				
+			if(condition)  //Assume condition is true
+				statement1;  //part of if block
+			statement2;    // separate from if block
+			
+			Example:
+				int x = 10;
+				if (x > 5) {
+					System.out.println("x is greater than 5");
+				}
+			
+		2. if-else Statement: The if-else statement allows you to execute one block of code if the condition is true and another block if it is false.
+			Syntax:
+				if (condition) {
+					// code to be executed if the condition is true
+				} else {
+					// code to be executed if the condition is false
+				}
+				
+			Example:
+				int y = 3;
+				if (y % 2 == 0) {
+					System.out.println("y is even");
+				} else {
+					System.out.println("y is odd");
+				}	
+
+		3. if- else if Statement:	This statement allows you to check multiple conditions in sequence.
+		
+			Syntax:
+			if (condition1) {
+				// code to be executed if condition1 is true
+			} else if (condition2) {
+				// code to be executed if condition2 is true
+			} else {
+				// code to be executed if all conditions are false
+			}
+			
+			Example:
+			int z = 0;
+			if (z > 0) {
+				System.out.println("z is positive");
+			} else if (z < 0) {
+				System.out.println("z is negative");
+			} else {
+				System.out.println("z is zero");
+			}
+		4. nested if statement: A nested if is an if statement that is the target of another if or else. Nested if statements mean an if statement inside an if statement. 
+		
+			Syntax:
+		
+			if (condition1) 
+			{
+			   // Executes when condition1 is true
+			   if (condition2) 
+			   {
+				  // Executes when condition2 is true
+			   }
+			}
+			
+			Example:
+			int x = 10;
+			int y = 5;
+
+			if (x > 5) {
+				System.out.println("x is greater than 5");
+				if (y > 2) {
+					System.out.println("y is greater than 2");
+				} else {
+					System.out.println("y is not greater than 2");
+				}
+				System.out.println("==========>");
+			} else {
+				System.out.println("x is not greater than 5");
+			}
+
+
 
 
