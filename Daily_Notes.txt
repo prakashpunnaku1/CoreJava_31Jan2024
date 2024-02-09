@@ -923,4 +923,174 @@ Conditional Statements:
 
 
 
+************************************
+09Feb2024
+************************************			
+		
+		5. switch Statement: 
+			-> The switch statement is a multiway branch statement. It provides an easy way to dispatch execution to different parts of code based on the value of the expression. 
+			-> Basically, the expression can be a byte, short, char, or int primitive data types. It basically tests the equality of variables against multiple values.	
+			-> From JDK7, it also works with String, Wrapper classes and enum types.
+			
+			-> There can be any number of cases, but duplicate case's values are not allowed.
+			-> The value for a case must be of the same data type as the variable in the switch.
+			-> The value for a case must be constant or literal. Variables are not allowed.
+			-> The break statement is used inside the switch to terminate a statement sequence.
+			-> The break statement is optional. If omitted, execution will continue on into the next case.
+			-> The default statement is optional and can appear anywhere inside the switch block. In case, if it is not at the end, then a break statement must be kept after the default statement to omit the execution of the next case statement.
+		
+			-> Default Case:
+				If none of the case labels match the value of the expression, the optional default case (if present) is executed.
+		
+			Syntax:
+			switch (expression) {
+			
+				case value1:
+					// code to be executed if expression equals value1
+					break;
+				case value2:
+					// code to be executed if expression equals value2
+					//
+				case value2:
+					// code to be executed if expression equals value2
+					//
+					
+					break;
+				// additional cases as needed
+				default:
+					// code to be executed if none of the cases match
+			}
+					
+			Example:
+				char grade = 'B';
+				switch (grade) {
+					case 'A':
+						System.out.println("Excellent");
+						break;
+					case 'B':
+						System.out.println("Good");
+						break;
+					case 'C':
+						System.out.println("Satisfactory");
+						break;
+					default:
+						System.out.println("Needs Improvement");
+				}
+
+				
+1. Question: swap these 2 variables without using temporary operator.
+	int a=7;
+	int b=3;
+	
+	a=3,b=7;
+	
+	a = a+b; //a=10,b=3
+	b = a-b; //b=7,a=10
+	a = a-b; //a=3,b=7
+
+2. O/P of below code?
+		int x=5;
+		x=x++;
+		sop(x); //5
+		
+3. O/P of below code?
+		int x = 5;
+		int y = ++x+x--; x=6
+						 
+		sop(":x:"+x); // 5
+		sop(":y:"+y); //12
+
+4. O/P of below code?
+		int a = 10;
+		int b = 5;
+		int c = a++ - --b * 2;
+		
+		sop(":a:"+a); // 11
+		sop(":b:"+b); //4
+		sop(":c:"+c); //2
+
+		
+5. O/P of below code?
+		int p = 5, q = 7, r = 10;
+		p = ++q + r-- - p++;
+		
+
+6. int number = 15;
+	int result = (number % 2 == 0) ?  ++number : number++;
+	sop(":result:"+result); //15
+	sop(":number:"+number); //16
+	
+7. Print the nearest odd number if the given number is even, print the same.
+	
+
+8.	O/P of below code?
+		int result2= 1 + 5 * 3 ;
+		sop(":result2:"+result2);
+		
+9.	O/P of below code?
+		int result3 = 5 + 6 * 4 / 3 ;
+		sop(":result3:"+result3); //13
+		
+10. Is the given year a leap year?
+	
+
+Interactive Programming:	
+
+	=> We have written programs that print console output, but it is also possible to read input from the console
+	=> The user types input into the console.  We capture the input and use it in our program. Such a program is called an interactive program.
+	=> Interactive programs can be challenging. Computers and users think in very different ways.Users misbehave.
+
+	=> System.out
+		An object with methods named println and print
+
+	=> System.in
+		not intended to be used directly
+		We use a second object, from a class Scanner, to capture the input.
+	
+	Scanner class:
+		=>	The Scanner class is used to get user input, and it is found in the java.util package.
+		=>	To use the Scanner class, create an object of the class.
+		
+		Example:
+		
+		
+		Scanner sc=new Scanner(System.in);
+				
+		System.out.println(":Start:");
+		Scanner sc=new Scanner(System.in);
+		System.out.println(":Enter a Number1:");
+		int num1=sc.nextInt();
+		System.out.println(":Enter a Number2:");
+		int num2=sc.nextInt();
+		System.out.println(":sum is:"+(num1+num2));
+		System.out.println(":End:");
+		
+		Java class libraries: Classes included with Java's JDK is organized into groups named packages
+		To use a package, put an import declaration in your program.
+		Syntax:
+			// put this at the very top of your program
+			import packageName.*;
+			
+		Scanner is in a package named java.util
+
+			import java.util.*;
+
+		To use Scanner, you must place the above line at the top of your program (before the public class header).
+		
+		Method				Description
+		======================================================
+		nextBoolean()		Reads a boolean value from the user
+		nextByte()			Reads a byte value from the user
+		nextDouble()		Reads a double value from the user
+		nextFloat()			Reads a float value from the user
+		nextInt()			Reads a int value from the user
+		nextLine()			Reads a String value from the user
+		nextLong()			Reads a long value from the user
+		nextShort()			Reads a short value from the user
+		
+Assignment:
+	Find the age of a person.
+
+
+
 
