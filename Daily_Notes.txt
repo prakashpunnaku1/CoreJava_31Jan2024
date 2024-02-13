@@ -1318,6 +1318,203 @@ Methods in Java:
 			->	Generally, a method has a unique name within the class in which it is defined but sometimes a method might have the same name as other method names within the same class which is called method overloading.
 			->	method overloading  is allowed in java.
 
+************************************
+13Feb2024
+************************************	
+	
+	=>	Parameters are variables in the method declaration, while arguments are the actual values passed to the method when it is called.
+	
+	=>	Sample Programs:
+			
+		Example-1:
+		
+			public class MethodDemo1 {
+	
+				int id=1001;
+				String name="Rajesh";
+				String company="Grats IT";
+				double salary=70000.00;
+				
+				void printEmployeeDetails(){ //method with no parameters
+					System.out.println(":id:"+id);
+					System.out.println(":name:"+name);
+					System.out.println(":company:"+company);
+					System.out.println(":salary:"+salary);
+				}
+				
+				void printEmployeeName(){
+					System.out.println(":name:"+name);
+				}
+				
+				double getEmployeeSalary(){
+					return salary;
+				}
 
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					MethodDemo1 obj=new MethodDemo1();
+					obj.printEmployeeDetails();
+					obj.printEmployeeName();
+					System.out.println(":Salary:"+obj.getEmployeeSalary());
+				}
+			}
+		Example-2:
+			public class MethodDemo2 {
+			
+				int a=100;
+	
+				int sum(int k,int b){
+					sop(":a:"+a);
+					sop(":b:"+b);
+					return a+b;
+				}
+
+				int mult(int a,int b){
+					sop(":a:"+a);
+					sop(":b:"+b);
+					return a*b;
+				}
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					MethodDemo2 obj=new MethodDemo2();
+					int sum=obj.sum(300,500);
+					
+					
+					sop(":sum:"+sum);
+					int x=20;
+					int y=30;
+					int mult=obj.mult(x,y);
+					sop(":mult:"+mult);
+				}
+			}
+
+Implement a method to find the average of 5 integers.
+			
+
+	Java Type Casting:
+		=>	Type casting is a technique to convert one data type to another datatype, that is used either by the compiler or a programmer.
+		=>  Example : byte to short, short to int, etc.
+		=>	There are 2 types of type casting in Java.
+				
+				1. Implicit Type Casting.
+				2. Explicit Type Casting
+				
+		1. Implicit Type Casting:	
+				=>	In this smaller type converted into larger type, it is done by the compiler automatically.
+				=>	Hirarchy of implicit type casting as follows.
+						
+						byte -> short -> char -> int -> long -> float -> double.
+						
+				=>	Here the type of the variable changes at compile time. 
+				=>	Type conversion occurs from small data type to large data type only.
+				
+				Examples:
+					short a=100;
+					short b=200;
+					long sum=a+b;
+					System.out.println(":a:"+a);
+					System.out.println(":b:"+b);
+					System.out.println(":sum:"+sum);
+					char ch='Y';
+					int code=ch;
+					System.out.println(":code:"+code);
+						
+		
+		2. Explicit Type Casting:
+				=>	Explicit type casting is done by the programmer manually. 
+				=>	In this a larger type can be converted into a smaller type.
+				
+					Example :
+								  double num1 = 24234.43;
+								  double num2 = 2.5;
+								  int sum = num1 + num2; // Here compiler gives the error i.e., Type mismatch: can not convert from double to int.
+								  
+					By using explicit type casting we can avoid the compilation error.
+					
+						Syntax	:	datatype varname2 = (datatype)varname1;
+						
+						Example :
+								int sum = (int)  (num1 + num2);
+								
+					Example :
+							  double num1 = 24234.43;
+							  double num2 = 2.5;
+							  int sum = (int) (num1 + num2);
+							  System.out.println("::"+sum);
+							  double sum2= num1 + num2;
+							  System.out.println(":sum2:"+sum2);
+							  
+							  char ch='8';
+							  byte code=(byte)ch;
+							  System.out.println(":code:"+code);
+							  System.out.println(":ch:"+((int)ch));
+							  
+							  char ch1=56;
+							  System.out.println(":ch1:"+ch1);
+								
+*************************************
+Class and Object								  
+*************************************	
+
+In object-oriented programming system, we design each and every program using classes and objects.
+An object in Java is a physical entity, whereas a class in Java is a logical entity.
+							
+
+Class : 
+	=>	In General, a Class is a user-defined datatype.
+	=>	It is a template or blueprint from which objects are created.
+	=>	Classes define the properties (attributes or fields) and behaviors (methods or functions).
+	
+	=>	Attributes/Fields: These represent the properties or characteristics of an object. 
+		For example, a Employee might have attributes such as empId, name, and dateOfJoin, dateOfRelieving, manager,projectName;
+		
+	=>	Methods/Functions: These define the behaviors or actions that objects of the class can perform. Using the Employee class example, methods could include developProject(), meetings(), fixIssues(), unitTesting() & deploymens().
+		
+	=>	Classes provide a way to structure and organize code in a modular and reusable manner, making it easier to manage and maintain large software projects.
+	
+	=>	A class can contain:                    
+			->	Data members
+			->	Methods or behavior
+			->	Constructors
+			->	Blocks
+			->	Nested class and interface
+			
+	=>	Syntax:	
+				access_modifier class <class_name>
+				{  
+					data member or state;  
+					method or behaviour;  
+					constructor;
+					nested class;
+					interface;
+				}
+				
+		Example :
+					class Employee{
+						int id;
+						String name;
+						float salary;
+						Date dateOfJoin;
+						Date dateOfRelieving;
+						String managerId;
+						String projectName;
+						
+						String developProject(){
+						
+						}
+						
+						void meetings(){
+						
+						}
+						
+						String unitTesting(){
+						
+						}
+						//	
+					}
+			=>	Other Example classes: Student, Company, Vehicle.
+
+Assignment: Create the classes like (Student, Company & Vehicle) and define the properties and behaviours of it.
 
 
