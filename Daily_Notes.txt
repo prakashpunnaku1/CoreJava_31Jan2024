@@ -1091,6 +1091,430 @@ Interactive Programming:
 Assignment:
 	Find the age of a person.
 
+************************************
+12Feb2024
+************************************			
+Unicode System: 
+	-> Unicode is an universal international standard character encoding that is capable of representing most of the world's written languages.
 
+	Why does Java use the Unicode System?
+		-> Before Unicode, there were many language standards:
+			-> ASCII (American Standard Code for Information Interchange) for the United States.
+			-> ISO 8859-1 for Western European Language.
+			-> KOI-8 for Russian.
+			-> GB18030 and BIG-5 for chinese, and so on.
+			-> These systems caused problems.
+				-> A particular code value corresponds to different letters in the various language standards.
+				-> The encodings for languages with large character sets have variable length. Some common characters are encoded as single bytes, others require two or more bytes.
+
+	->	To solve these problems, a new language standard was developed i.e. Unicode System.
+	->	lowest value:0000
+	->	highest value: FFFF
+	->  The Unicode standard uses hexadecimal to express a character.
+	->  The most common encoding for Unicode is UTF-8, UTF-16, and UTF-32.
+			*Unicode Transformation Format (UTF)
+	
+	Character	Decimal Value	Hexadecimal Value
+	 A			65				0041
+	 Z			90				005A
+	  అ			3077			0C05
+	  ఔ			3092			0C14
+	 a			97				0061	
+	 z			122				007A
+	 
+	 	char ch='అ';
+		char ch1=3077;
+		char ch2='\u0C05';
+		System.out.println(":ch:"+ch);
+		System.out.println(":ch1:"+ch1);
+		System.out.println(":ch2:"+ch2);
+		
+		char ch='A';
+		char ch1=65;
+		char ch2='\u0041';
+		System.out.println(":ch:"+ch);
+		System.out.println(":ch1:"+ch1);
+		System.out.println(":ch2:"+ch2);
+		
+		System.getProperty("file.encoding");
+		System.out.println(":file.encoding:"+System.getProperty("file.encoding"));
+
+	=>	Escape Sequence:
+		->	An escape sequence in java is a combination of specific characters or a sequence of characters with a backslash. 
+		->  Use it to represent the special characters.
+		
+		Example:
+			\t: It is used to insert a tab in the text.
+			\': It is used to insert a single quote of character in the text.
+			\": It is used to insert a double-quote character in the text.
+			\n: It is used to insert a new line in the text.
+		
+********************************************
+Methods in Java:
+********************************************
+
+	=>	In general, a method is a way to perform some task. In java the method is a collection of instructions or statements that performs a specific task.
+	=>	A method is a block of code which only runs when it is called.
+	=>	You can pass data, known as parameters, into a method. Methods are used to perform certain actions, and they are also known as functions.
+	=>	In Java, every method must be a part of some class, i.e. used to expose the behavior of an object.
+	=>	It provides Code reusability and Code Optimization. We create a method once and then use it repeatedly.
+	=>	A method returns the result to the caller or should mention the void as return type if it is not returning anything.
+	
+	Syntax Of a method:
+		accessmodifer returntype methoName(list of parameters){
+			//Statements
+			return data;
+		}
+
+	Example:
+		public int sum(int a,int b){
+			int sum=a+b;
+			return sum;
+		}
+		
+	=>	Method Declaration:
+	
+		-> In general, method declarations have 6 components:
+			
+		1. Access Modifier:
+			=>	It defines the access type of the method i.e. from where it can be accessed in an application. 
+			=>	In Java, there are 4 types of access specifiers.
+
+				public: It is accessible in all classes in an application.
+				
+				protected: It is accessible within the class in which it is defined and in its subclasses
+				
+				private: It is accessible only within the class in which it is defined.
+				
+				default: It is declared/defined without using any modifier. It is accessible within the same class and package within which its class is defined.
+			=> It is optional and considered default if we don't declare it.	
+				
+		2. Return type: 
+			=> 	The data type of the value returned by the method or void if does not return a value. 
+			=>	It is Mandatory.
+			
+			public void sum(int a,int b){
+				int sum=a+b;
+				sop(sum);
+			}
+			
+		3. Method Name: 
+			=> 	The rules for field names apply to method names as well, but the convention is a little different. 
+			=>	It is Mandatory.
+			
+		4. Parameter list: 
+			=>	Comma-separated list of the input parameters is defined, preceded by their data type, within the enclosed parenthesis. If there are no parameters, you must use empty parentheses ().  
+			=>	It is Optional.
+		
+		5. Exception list: 
+			=>	The exceptions you expect by the method can throw, you can specify these exception(s). 
+			=>	It is Optional.
+					void sum()throws Exception{
+						//statements
+					}
+			
+		6. Method body: 
+			=>	It is enclosed between braces. The code you need to be executed to perform your intended operations.  
+			
+	=>	Types of Methods in Java:
+	
+		1. Predefined Method
+			=>	In Java, predefined methods are the method that is already defined in the Java class libraries.
+			=>	It is also known as the standard library method or built-in method. We can directly use these methods just by calling them in the program at any point. 
+			=>	Some predefined methods are length(), equals(), compareTo(), sqrt(), print() etc. 
+			=>	When we call any of the predefined methods in our program, a series of codes related to the corresponding method runs in the background that is already stored in the library.
+
+
+		2. User-defined Method
+			=>	The method written by the programmer is known as a user-defined method. These methods are modified according to the requirement.
+			
+	=>	Two ways can create a method in Java.
+			1. Instance Method: Declared inside a class.
+				Syntax:
+						returnType methodName(){
+							//body
+						}
+						
+						int sum(int a,int b,int c){
+							int result=a+b+c;
+							return result;
+						}
+						
+				=>	To call an instance method should have an object.
+				Syntax:
+						ClassName obj=new ClassName();
+						obj.methodName();
+						
+				Example:
+						public class Addition{
+							public int add(int a,int b){
+								int sum=a+b;
+								return sum;
+							}
+						}
+				
+						public class AdditionTest{
+						
+							public static void main(String[] args){
+								int a=10;
+								int b=14;
+								Addition obj=new Addition();
+								int result = obj.add(a,b);
+								System.out.println(":result:"+result);
+							}
+						
+						}
+						
+			2. Static Method: Declared inside class with static keyword.
+
+						static returnType methodName(){
+							//body
+						}
+						
+						static int mult(int a,int b){
+							int c=a*b;
+							return c;
+						}
+
+					=>	Can call static methods with the class name.
+					Syntax:
+							ClassName.methodName();
+							public class Addition2{
+								static int sum;
+								public static void add(int a,int b){
+									sum=a+b;
+									return sum;
+								}	
+							}
+							
+							public class AdditionTest2{
+								public static void main(String[] args){
+									int a=15;
+									int b=20;
+									int c=Addition.sum();
+									System.out.println(":c:"+c);
+								}
+							}
+
+	=>	Method Signature:
+			=>	It consists of the method name and a parameter list (i.e, number of parameters, type of the parameters, and order of the parameters). 
+			=>	The return type and exceptions are not considered as part of it. 
+			
+			Example :
+				sum(int a, int b) Number of parameters is 2, Type of parameter is int,int.
+				
+	=>	How to Name a Method?
+			->	While defining a method, remember that the method name must be a verb and start with a lowercase letter.
+	
+			->	If a method name is a single word that should be a verb in lowercase.
+					Example : add(int a,int b)
+							  
+			->	If the method name has more than two words, the first name must be a verb followed by an adjective or noun. In the multi-word method name, the first letter of each word must be in uppercase except the first word.
+					Example:
+								setName(String name)
+								getName()
+								downloadFile()
+								
+			->	Generally, a method has a unique name within the class in which it is defined but sometimes a method might have the same name as other method names within the same class which is called method overloading.
+			->	method overloading  is allowed in java.
+
+************************************
+13Feb2024
+************************************	
+	
+	=>	Parameters are variables in the method declaration, while arguments are the actual values passed to the method when it is called.
+	
+	=>	Sample Programs:
+			
+		Example-1:
+		
+			public class MethodDemo1 {
+	
+				int id=1001;
+				String name="Rajesh";
+				String company="Grats IT";
+				double salary=70000.00;
+				
+				void printEmployeeDetails(){ //method with no parameters
+					System.out.println(":id:"+id);
+					System.out.println(":name:"+name);
+					System.out.println(":company:"+company);
+					System.out.println(":salary:"+salary);
+				}
+				
+				void printEmployeeName(){
+					System.out.println(":name:"+name);
+				}
+				
+				double getEmployeeSalary(){
+					return salary;
+				}
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					MethodDemo1 obj=new MethodDemo1();
+					obj.printEmployeeDetails();
+					obj.printEmployeeName();
+					System.out.println(":Salary:"+obj.getEmployeeSalary());
+				}
+			}
+		Example-2:
+			public class MethodDemo2 {
+			
+				int a=100;
+	
+				int sum(int k,int b){
+					sop(":a:"+a);
+					sop(":b:"+b);
+					return a+b;
+				}
+
+				int mult(int a,int b){
+					sop(":a:"+a);
+					sop(":b:"+b);
+					return a*b;
+				}
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					MethodDemo2 obj=new MethodDemo2();
+					int sum=obj.sum(300,500);
+					
+					
+					sop(":sum:"+sum);
+					int x=20;
+					int y=30;
+					int mult=obj.mult(x,y);
+					sop(":mult:"+mult);
+				}
+			}
+
+Implement a method to find the average of 5 integers.
+			
+
+	Java Type Casting:
+		=>	Type casting is a technique to convert one data type to another datatype, that is used either by the compiler or a programmer.
+		=>  Example : byte to short, short to int, etc.
+		=>	There are 2 types of type casting in Java.
+				
+				1. Implicit Type Casting.
+				2. Explicit Type Casting
+				
+		1. Implicit Type Casting:	
+				=>	In this smaller type converted into larger type, it is done by the compiler automatically.
+				=>	Hirarchy of implicit type casting as follows.
+						
+						byte -> short -> char -> int -> long -> float -> double.
+						
+				=>	Here the type of the variable changes at compile time. 
+				=>	Type conversion occurs from small data type to large data type only.
+				
+				Examples:
+					short a=100;
+					short b=200;
+					long sum=a+b;
+					System.out.println(":a:"+a);
+					System.out.println(":b:"+b);
+					System.out.println(":sum:"+sum);
+					char ch='Y';
+					int code=ch;
+					System.out.println(":code:"+code);
+						
+		
+		2. Explicit Type Casting:
+				=>	Explicit type casting is done by the programmer manually. 
+				=>	In this a larger type can be converted into a smaller type.
+				
+					Example :
+								  double num1 = 24234.43;
+								  double num2 = 2.5;
+								  int sum = num1 + num2; // Here compiler gives the error i.e., Type mismatch: can not convert from double to int.
+								  
+					By using explicit type casting we can avoid the compilation error.
+					
+						Syntax	:	datatype varname2 = (datatype)varname1;
+						
+						Example :
+								int sum = (int)  (num1 + num2);
+								
+					Example :
+							  double num1 = 24234.43;
+							  double num2 = 2.5;
+							  int sum = (int) (num1 + num2);
+							  System.out.println("::"+sum);
+							  double sum2= num1 + num2;
+							  System.out.println(":sum2:"+sum2);
+							  
+							  char ch='8';
+							  byte code=(byte)ch;
+							  System.out.println(":code:"+code);
+							  System.out.println(":ch:"+((int)ch));
+							  
+							  char ch1=56;
+							  System.out.println(":ch1:"+ch1);
+								
+*************************************
+Class and Object								  
+*************************************	
+
+In object-oriented programming system, we design each and every program using classes and objects.
+An object in Java is a physical entity, whereas a class in Java is a logical entity.
+							
+
+Class : 
+	=>	In General, a Class is a user-defined datatype.
+	=>	It is a template or blueprint from which objects are created.
+	=>	Classes define the properties (attributes or fields) and behaviors (methods or functions).
+	
+	=>	Attributes/Fields: These represent the properties or characteristics of an object. 
+		For example, a Employee might have attributes such as empId, name, and dateOfJoin, dateOfRelieving, manager,projectName;
+		
+	=>	Methods/Functions: These define the behaviors or actions that objects of the class can perform. Using the Employee class example, methods could include developProject(), meetings(), fixIssues(), unitTesting() & deploymens().
+		
+	=>	Classes provide a way to structure and organize code in a modular and reusable manner, making it easier to manage and maintain large software projects.
+	
+	=>	A class can contain:                    
+			->	Data members
+			->	Methods or behavior
+			->	Constructors
+			->	Blocks
+			->	Nested class and interface
+			
+	=>	Syntax:	
+				access_modifier class <class_name>
+				{  
+					data member or state;  
+					method or behaviour;  
+					constructor;
+					nested class;
+					interface;
+				}
+				
+		Example :
+					class Employee{
+						int id;
+						String name;
+						float salary;
+						Date dateOfJoin;
+						Date dateOfRelieving;
+						String managerId;
+						String projectName;
+						
+						String developProject(){
+						
+						}
+						
+						void meetings(){
+						
+						}
+						
+						String unitTesting(){
+						
+						}
+						//	
+					}
+			=>	Other Example classes: Student, Company, Vehicle.
+
+Assignment: Create the classes like (Student, Company & Vehicle) and define the properties and behaviours of it.
 
 
