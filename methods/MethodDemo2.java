@@ -1,6 +1,7 @@
 public class MethodDemo2 {
 			
 	int a=100;
+	
 
 	int sum(int a,int b){
 		System.out.println(":a:"+a);
