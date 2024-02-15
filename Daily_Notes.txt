@@ -1593,3 +1593,159 @@ Object :
 
 Assignment: Implement AccountManagement Application.
 
+
+************************************
+15Feb2024
+************************************
+			
+Assignment : Implement a method to find the average of 5 integers.
+
+Assignment: Implement AccountManagement Application.
+
+****************:Please Enter Source Account Details:****************
+Please Enter Account No: 	500001
+Please Account Holder Name: xyz
+Please Enter Balance: 25000
+Please Enter Bank Name: Axis Bank
+****************:Please Enter Beneficiary Account Details:****************
+Please Enter Account No: 	600001
+Please Account Holder Name: abc
+Please Enter Balance: 100
+Please Enter Bank Name: HDFC Bank
+****************:Please Fund Transfer Details:****************
+Please Enter Source Account No: 	500001
+Please Enter Beneficiary Account No: 	600001
+Please Enter Amount to transfer: 9000
+****************:Fund Transfer completed successfully:****************
+Print All details about Source Account Holder
+Print All details Beneficiary Account Holder
+****************:Thank You:****************
+
+********************************
+Method Overloading:
+********************************
+
+Method Signature: 
+	=> Method signature contains only method name & followed by argument types.
+	=> Compiler checks the method signature on reference types when calling the methods.
+		
+		Syntax: 	methodName(parameterTypes);
+		Example:	methodName(int,double,String);
+	
+	
+		public class MethodSignatureDemo1{
+			public int method1(int num1){
+				System.out.println(":num1:"+num1);
+				return num1;
+			}
+			public void method2(String name){
+				System.out.println(":name:"+name);
+			}
+			public static void main(String[] args){
+					MethodSignatureDemo1 obj=new MethodSignatureDemo1();
+					obj.method1(200);
+					obj.method2("sadf");
+					obj.method1(600.50);
+			}
+		}
+	=> Within the class multiple methods with the same signature is not allowed.
+	
+		public class MethodSignatureDemo2{
+			public int method1(int num1){
+				System.out.println(":num1:"+num1);
+				return num1;
+			}
+			public void method1(int num2){			
+				System.out.println(":num2:"+num2);
+			}		//Compile Time Error method1(int) is already defined.
+			public static void main(String[] args){
+					MethodSignatureDemo1 obj=new MethodSignatureDemo1();
+					obj.method1(200);
+					obj.method1(500);
+			}
+		}
+
+Method Overloading:
+	=>	In method overloading, multiple methods have the same name but different types of parameters or number of parameters are different 
+	=>  In java method overloading concept reduces the complexity.
+	=>	In method overloading, method resolution is taken care of by the compiler based on reference type. 
+			(method resolution means which method should call decided by the compiler at compile time).
+			
+		-> So method overloading is also known as compile time polymorphism or static polymorphism or early binding.
+		
+	=>	Polymorphism: Poly + morphism
+					  -> Poly means many
+					  -> morphism means behaviours.
+					  
+			-> Defining multiple methods with the same name and within the same class or its related classes is also known as polymorphism.
+			
+			-> There are 2 types of Polymorphism:
+				1. Compile Time polymorphism
+				2. Runtime polymorphism
+			
+	=>  Compile time polymorphism: If defining more than one functionality with the same name but with different arguments in the same class is known as compile time polymorphism or static polymorphism or early binding.
+	
+			
+		Example: Here m1 method is overloaded.
+		
+				public class MethodOverloadingDemo1 {
+					
+					public void m1() {
+						System.out.println(":No Arguments:");
+					}
+					
+					public void m1(int i) {
+						System.out.println(":int type:"+i);
+					}
+					
+					public double m1(double k) {
+						System.out.println(":double type:"+k);
+						return k;
+					}
+
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						MethodOverloadingDemo1 object = new MethodOverloadingDemo1();
+						object.m1();
+						object.m1(500);
+						object.m1(8888.999);
+
+					}
+
+				}
+	
+		=>	Example 2:
+		
+			public class MethodOverloadingDemo2 {
+	
+				public void method2(int i) {
+					System.out.println(":i:"+i);
+				}
+				
+				public void method2(float j) {
+					System.out.println(":j:"+j);
+				}
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					MethodOverloadingDemo2 obj=new MethodOverloadingDemo2();
+					obj.method2(10);
+					obj.method2(20.50);
+					
+					//obj.method2('H');
+					//obj.method2(30l);
+					//obj.method2(40.50);
+					
+				}
+			}
+			
+						byte->short->int->long->float->double
+							char->int->long->float->double
+			
+		=> If the compiler doesn't find the exact type argument then it checks if the next level type argument is available or not, if available that method is going to call. This concept can say automatic promotion in method overloading.
+		
+		=> In Overloading the exact match gets the highest priority.
+		
+
+********************************
+
