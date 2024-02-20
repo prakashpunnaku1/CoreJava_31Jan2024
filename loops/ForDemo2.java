@@ -9,6 +9,7 @@ public class ForDemo2{
 //	void method1(int i){
 //		System.out.println("====>:i:"+i);
 //		System.out.println("====>:k:"+k);
+//C:\Program Files\Java\jdk-1.8
 //	}
 	
 	public static void main(String[] args){
