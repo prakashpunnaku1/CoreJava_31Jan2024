@@ -2099,3 +2099,180 @@ Assignment :
 		input: 56089
 		O/P	: 98065
 
+****************************************
+21-FEB-2024
+****************************************
+
+default constructor:
+
+	=>	 A default constructor is a constructor that is automatically created by the compiler if no explicit constructor is defined within a class. 
+	
+	=>	The default constructor has no parameters and provides a default implementation.
+	=>	If you don't define any constructor in your class, Java Compiler automatically includes a default constructor during compilation.
+	=>	access modifier of default constructor is same access modifier of the class.
+		
+	
+	Example 1: 
+				public class Student{
+					int empId;
+					String name;
+				} // In this class doesn't define any constructor.
+				
+				-> During compilation add the default constructor like below in the class file.
+				public class Student{
+					int empId;
+					String name;
+					public Student(){ // Since class is public default constructor is also public
+					
+					}
+				}
+				
+				public class DefaultConstructorDemo{
+					public static void main(String[] args){
+						Student std=new Student();
+					}
+				}
+				
+	Example 2:
+				public class Computer{
+					String computerName;
+					Computer(String name){
+						computerName=name;
+					}
+					public static void main(String[] args){
+						Computer obj=new Computer();
+						System.out.println(":obj:"+obj.computerName);
+					}
+				}
+				
+				
+=>	 If any return type is defined before the constructor then it's considered a normal method, so it doesn't throw any compilation error.
+		class Company{
+			String compName;
+			String location;
+			public void Company(){
+				System.out.println(":Inside Company():");
+			}
+		}
+
+		public class CompanyTest1{
+			public static void main(String[] args){
+				Company comp=new Company();
+				System.out.println(":Inside CompanyTest1:");
+				comp.Company();
+			}
+		}				
+
+this:
+		=>	'this' is a keyword, which behaves like a reference variable that is used to refer to the current object within a method or constructor.
+		=>	It is often used to distinguish instance variables from local variables when they have the same name
+		
+		=> Some common uses of the this keyword
+		
+		1. Referencing Instance Variables:
+		
+		Example 1:
+		class DepartmentOne{
+			int deptId;
+			String deptName;
+			Department(int deptId,String deptName){
+				System.out.println("1.:deptId:"+deptId+":deptName:"+deptName);
+				System.out.println("2.:this.deptId:"+this.deptId+":this.deptName:"+this.deptName);
+				deptId=deptId;
+				deptName=deptName;
+				System.out.println("3.:deptId:"+deptId+":deptName:"+deptName);
+				System.out.println("4.:this.deptId:"+this.deptId+":this.deptName:"+this.deptName);
+			}
+		}
+		
+		Example 2:
+		class DepartmentTwo{
+			int deptId;
+			String deptName;
+			Department(int deptId,String deptName){
+				System.out.println("1.:deptId:"+deptId+":deptName:"+deptName);
+				System.out.println("2.:this.deptId:"+this.deptId+":this.deptName:"+this.deptName);
+				this.deptId=deptId;
+				this.deptName=deptName;
+				System.out.println("3.:deptId:"+deptId+":deptName:"+deptName);
+				System.out.println("4.:this.deptId:"+this.deptId+":this.deptName:"+this.deptName);
+			}
+		}
+		
+		Example 3:
+		class DepartmentThree{
+			int deptId;
+			String deptName;
+			
+			void departmentDetails(int deptId,String deptName){
+				System.out.println("1.:deptId:"+deptId+":deptName:"+deptName);
+				System.out.println("2.:this.deptId:"+this.deptId+":this.deptName:"+this.deptName);
+				this.deptId=deptId;
+				this.deptName=deptName;
+				System.out.println("3.:deptId:"+deptId+":deptName:"+deptName);
+				System.out.println("4.:this.deptId:"+this.deptId+":this.deptName:"+this.deptName);
+			}
+		}				
+		
+		2. Invoking Current Object's Constructor:
+			
+			=> To call another constructor you can use the 'this' keyword.
+			=> Constructor call must be the first statement in a constructor.
+			=> Constructors can call from another constructor only, can't call from methods.
+			
+				syntax:
+						this();//to call no parameter constructor.
+						
+						this(1001,"ABC"); // to call parameterized constructor.			
+						
+				Example 1:
+			
+					public class DepartmentDemo1 {
+						int deptId;
+						String deptName;
+						DepartmentDemo1(){
+							System.out.println(":Inside DepartmentDemo():");
+							this.deptId="3002";
+						}
+						DepartmentDemo1(int deptId,String deptName){
+							this();
+							System.out.println(":Inside DepartmentDemo(int,String):");
+							//this(); This can't possible because this is not the first statement in this constructor.
+						}
+						
+						public static void main(String[] args) {
+							DepartmentDemo1 obj=new DepartmentDemo1(1001,"IT");
+							System.out.println(":deptId:"+obj.deptId+":deptName:"+obj.deptName);
+						}
+					}
+
+				Example 2:
+						public class DepartmentDemo2 {
+							int deptId;
+							String deptName;
+							DepartmentDemo2(){
+								System.out.println(":Inside DepartmentDemo():");
+								this.deptId=5555;
+								this.deptName="IT";
+							}
+							DepartmentDemo2(int deptId,String deptName){
+								this();
+								System.out.println(":Inside DepartmentDemo(int,String):");
+							}
+							
+							DepartmentDemo2(int deptId){
+								this(deptId,"Library");
+								System.out.println(":Inside DepartmentDemo(int):");
+							}
+							
+							public static void main(String[] args) {
+								DepartmentDemo2 obj=new DepartmentDemo2(1001,"Accounts");
+								System.out.println(":deptId:"+obj.deptId+":deptName:"+obj.deptName);
+								
+								DepartmentDemo2 obj2=new DepartmentDemo2(1001);
+								System.out.println(":obj2.deptId:"+obj2.deptId+":obj2.deptName:"+obj2.deptName);
+								
+								DepartmentDemo2 obj3=new DepartmentDemo2(1001);
+								System.out.println(":obj3.deptId:"+obj3.deptId+":obj3.deptName:"+obj3.deptName);
+							}
+						}
