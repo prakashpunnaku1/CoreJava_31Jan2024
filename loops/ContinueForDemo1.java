@@ -7,7 +7,7 @@ public class ContinueForDemo1{
                 // Skip the rest of the code for i == 3
                 continue;
             }
-            System.out.println("Iteration " + i); //1 ,2 , 4,5
+            System.out.println("Iteration " + i); //1 ,2 , 4, 5
         }
 		System.out.println(":End:");
 	}

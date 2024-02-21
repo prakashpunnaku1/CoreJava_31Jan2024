@@ -1,7 +1,7 @@
 class Employee2{
 	int id;
 	String name;
-	double salary;
+	double 	;
 	String companyName;
 	
 	Employee2(){
@@ -14,11 +14,16 @@ class Employee2{
 	}
 	
 	Employee2(int empId,String empName,double empSal,String compName){
-		System.out.println(":Constructor:Start:");
-		id=empId;
-		name=empName;
-		salary=empSal;
-		companyName=compName;
+		System.out.println(":Constructor:Start:"); //empId 3002, empName=Ramesh empSal=5000.00, compName=Infosys
+		
+		id=empId; id=3002
+		
+		name=empName; name=Ramesh
+		
+		salary=empSal; //salary=5000.00
+		
+		companyName=compName; //companyName=Infosys
+		
 		System.out.println(":Constructor:End:");
 	}
 }
@@ -26,7 +31,13 @@ class Employee2{
 class EmployeeDemo2{
 	public static void main(String[] args){
 		Employee2 emp1=new Employee2(3001,"Jashu",5000.00,"GratsIT");
+		
+		
+		
 		Employee2 emp2=new Employee2(3002,"Ramesh",5000.00,"Infosys");
+		
+		
+		
 		Employee2 emp3=new Employee2(4001,"Dinesh",7000.00,"Wipro");
 		
 		System.out.println(":Employee 1:id:"+emp1.id+":name:"+emp1.name+":salary:"+emp1.salary+":companyName:"+emp1.companyName);
