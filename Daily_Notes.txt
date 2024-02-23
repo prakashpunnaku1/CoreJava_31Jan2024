@@ -2601,3 +2601,238 @@ What is mean by pass by value?
 
 Why Java does not support Pass by reference?
 	=>	Java does not support Pass by reference because in Pass by reference we need to pass the address and address are stored in pointers, java does not support pointers and it is because pointers breaks the security. Java is always pass-by-value.
+
+*********************
+23-Feb-2024
+*********************
+
+return statement in java:
+
+	=>	The return statement is used for returning a value when the execution of the block is completed. 
+	=>	The return statement inside a loop will cause the loop to break and further statements will be ignored by the compiler.
+	
+		public class ReturnDemo1 {
+		
+				int method() {
+					System.out.println(":Start:Inside method():");
+					return 14;
+				}
+				
+				int method(int k) {
+					System.out.println(":Start:Inside method():");
+					return k;
+					System.out.println(":End:Inside method():");
+					return k;
+				}
+			
+				void method1() {
+					System.out.println(":Start:Inside method1():");
+					return;
+					System.out.println(":End:Inside method1():");
+					return;
+				}
+
+				void isEvenNumber(int num) {
+					System.out.println(":Start:Inside method1():");
+					if(num%2==0) {
+						System.out.println(num+" is an even number");
+						return;
+					}else {
+						System.out.println(num+" is an odd number");
+					}
+					System.out.println(":End:Inside method1():");
+				}
+				
+				int method2() {
+					System.out.println(":Start:Inside method2():");
+					int k=1;
+					for(;k<=100;k++) {
+						System.out.print(" "+k);
+						if(k==50) {
+							System.out.println("");
+							return k;
+						}
+					}
+					System.out.println("");
+					System.out.println(":End:Inside method2():");
+					return k;
+				}
+				
+				int method3() {
+					System.out.println(":Start:Inside method2():");
+					int k=1;
+					for(;k<=100;k++) {
+						System.out.print(" "+k);
+						if(k==50) {
+							System.out.println("");
+							for(int j=0;j<10;j++) {
+								System.out.print(" "+j);
+								if(j==5) {
+									System.out.println("");
+									return j;
+								}
+							}
+							
+						}
+					}
+					System.out.println("");
+					System.out.println(":End:Inside method2():");
+					return k;
+				}
+				
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					System.out.println(":Start:main():");
+					ReturnDemo1 obj=new ReturnDemo1();
+			//		obj.method1();
+			//		obj.isEvenNumber(15);
+			//		int k=obj.method2();
+					int k=obj.method3();
+					System.out.println(":k:"+k);
+					System.out.println(":End:main():");
+				}
+		}
+				
+				
+	=>	Method can be declared with a return primitive type such as boolean,byte,short,char,int,long,float and double.
+	
+		Syntax:
+				<primitive type> method(){
+					<primitive type> variableName;
+					return variableName;
+				}
+				
+		Example:
+				boolean isEligibleForExams(double averageMarks){
+					return averageMarks>20.00?true:false;
+				}
+	
+	=> 	Method can be declared with a return reference type (i.e, class type) such as String, Student, Company ... etc.
+		->A method can have the class name as its return type. Therefore it must return the object of the exact class or its subclass.
+		->An interface name can also be used as a return type but the returned object must implement methods of that interface.
+
+		The following Java program shows the implementation of a class name as a return type.
+			Syntax:
+					<Class Name> method(){
+						<Class Name> referenceName;
+						return referenceName;
+					}
+			Example 1:
+			
+					class Student{
+						int studentId;
+						String name;
+						double totalMarks;
+						
+						Student getStudent(int studentId,String name,double totalMarks){
+							Student std;
+							std=new Student();
+							std.studentId=studentId;
+							std.name=name;
+							std.totalMarks=totalMarks;
+							
+							return std;
+						}
+						public static void main(String[] args){
+							Student std=new Student();
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks);//0 null 0.0
+							
+							
+							std.getStudent(1001,"Rajesh",555.50);
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks); //0 null 0.0
+							std=std.getStudent(1002,"Venkat",444.50);
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks); //1002 Venkat 444.50
+						}
+					}
+					
+			Example 2:
+					class StudentDemo2{
+						int studentId;
+						String name;
+						double totalMarks;
+						
+						void updateStudent(StudentDemo2 std){
+							//Student std;
+							std.studentId=std.studentId+100; //0+100
+							std.name="Jashu";
+							std.totalMarks=454.55+10;
+						}
+						public static void main(String[] args){
+							StudentDemo2 std=new StudentDemo2();
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks); //
+							
+							std.updateStudent(std); 
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks);//
+							std.updateStudent(std);
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks);//
+						}
+					}
+
+			Example 2: -> must return the object of the exact class or its subclass.
+			
+					class Company{
+						String compName;
+						String location;
+					}
+					class Student{
+						int stdId;
+						String stdName;
+					}
+					
+					class ReturnDemo1{
+					
+						public static void main(String[] args){
+							Company comp;
+							Student std;
+							comp = new Company();
+							
+							//int x=10;
+							//String y;
+							//y=x;
+							
+							std = comp;
+							comp = new Student();
+						}
+					}
+					
+			Example 3:
+					class ReturnDemo2{
+					
+						public static void main(String[] args){
+							Company comp;
+							Student std;
+							comp = new Company();
+							comp.compName="GratsIT";
+							comp.location="Bangalore";
+							System.out.println(":compName:"+comp.compName+":location:"+std.location); //
+							
+							Company compOne=new Company();
+							System.out.println(":compName:"+compOne.compName+":location:"+compOne.location); //
+							compOne = comp;
+							System.out.println(":compName:"+compOne.compName+":location:"+compOne.location);//
+						}
+					}
+					
+			Example 4:
+					class ReturnDemo6{
+						Company getCompany(){
+							Company comp = new Company();
+							comp.compName="GratsIT";
+							comp.location="Bangalore";
+							
+							//Student std=new Student();
+							//return std;
+							return comp;
+						}
+						
+						public static void main(String[] args){
+							ReturnDemo6 obj = ReturnDemo6();
+							Comapny comp=obj.getCompany();
+							System.out.println(":compName:"+comp.compName+":location:"+comp.location);//
+						}
+					}
+
+	
+
+	=> 	Method can be declared with a return primitive type array such as int[],char[] .... etc.
+	=>	Method can be declared with a return reference type array such as String[],Student[],Company[]...etc.
