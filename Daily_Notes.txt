@@ -2276,3 +2276,563 @@ this:
 								System.out.println(":obj3.deptId:"+obj3.deptId+":obj3.deptName:"+obj3.deptName);
 							}
 						}
+
+*********************
+22-Feb-2024
+*********************
+		
+			3. Passing the Current Object as a Parameter:
+					
+					public class Laptop{
+						int id;
+						String name;
+						void method1(){
+							System.out.println(":Inside method1:");
+							method2(this);
+						}
+						
+						void method2(Laptop obj){
+							System.out.println(":Inside method2:");
+						}
+						
+						public static void main(String[] args) {
+							Laptop obj=new Laptop();
+							obj.method1();
+						}
+					}
+					
+			4. Calling another method by using 'this':
+					
+					public class Laptop{
+						int id;
+						String name;
+						void method3(){
+							System.out.println(":Inside method3:");
+							this.method4();
+						}
+						
+						void method4(){
+							System.out.println(":Inside method4:");
+						}
+						
+						public static void main(String[] args) {
+							Laptop obj=new Laptop();
+							obj.method3();
+						}
+					}
+	
+			NOTE: 	->	Using 'this' is optional in many cases,and in simple scenarios, you may not need it.
+					->	However, it becomes more crucial when there is a need to disambiguate between instance variables and local variables or when you want to explicitly reference the current object.
+					
+					
+
+class Test{
+		int y;
+		Test(int y){
+			
+		}
+		void mult(int y){
+			this.y*=5;
+		}
+		public static void main(String[] args){
+			int y=10;
+			Test t=new Test(y);
+			System.out.println(":y:"+y); //10
+		}
+	}
+			
+public class Test1 {
+
+	int k; // k=0; k=110, k=110
+	int method1(int k){ //k=10 
+		this.k=k+k*k; //10+10*10 ==> 110
+		return k; //10
+	}
+	public static void main(String[] args){
+		int k=10;
+		Test1 t=new Test1();
+		//k=10
+		
+		t.method1(k); //
+		t.method1(k); //
+		System.out.println(t.method1(k));//10  
+		System.out.println(t.method1(k));//10
+		System.out.println(t.k+k);//110+10 ==>120
+	}
+}
+
+public class Test2 {
+
+	int k; //k=0 100 200
+	int method1(int k){ //k=10
+		this.k=this.k+k*k; //0+10*10 ==> 100 + 10*10 ==>
+		return k;
+	}
+	public static void main(String[] args){
+		int k=10;
+		Test2 t=new Test2();
+		//k=10
+		System.out.println(t.method1(k));//10
+		System.out.println(t.method1(k));//10
+		System.out.println(t.k+k);//210
+		
+	}
+}
+
+public class Test{
+
+}
+
+javac Test;
+
+java Test;
+
+Can we overload main method?
+
+public class Test1{
+	void main(String[] args){
+	
+	}
+	public static void main(String[] args){
+		System.out.println(":Inside main(args):");
+	}
+}
+
+public class Test1{
+	public static void main(String args){
+	
+	}
+	public static void main(String[] args){
+		System.out.println(":Inside main(args):");
+	}
+}
+
+public class Test1{
+	public static void main(String args){
+	
+	}
+	public void main(String args){
+	
+	}
+	public static void main(String[] args){
+		System.out.println(":Inside main(args):");
+	}
+}
+
+
+What is mean by pass by value?
+
+	=>	In Java, all arguments to methods are passed by value. This means that when you pass a variable to a method, a copy of the variable's value is passed to the method, not the actual variable itself.
+	
+	It's important to understand the difference between passing by value and passing by reference:
+	
+	Pass by Value: The method receives a copy of the value of the variable. Any changes made to the parameter inside the method do not affect the original variable outside the method.
+	
+	
+	
+	Example 1: 
+	
+		public class PassByValueDemo {
+		
+			void method1(int id,double marks) { //id=1001 marks=150.50
+				System.out.println(":2:In method1():id:"+id+":marks:"+marks); //1001 150.50
+				id=3001;
+				marks=350.50;
+				System.out.println(":3:In method1():id:"+id+":marks:"+marks);//3001 350.50
+			}
+
+			public static void main(String[] args) {
+				// TODO Auto-generated method stub
+				int id=1001;
+				double marks=150.50;
+				System.out.println(":1:In main():id:"+id+":marks:"+marks);//1001 150.50
+				
+				PassByValueDemo obj=new PassByValueDemo();
+				obj.method1(id, marks);
+				System.out.println(":4:In main():id:"+id+":marks:"+marks);//1001 150.50
+			}
+		}
+		
+		Note: Here passing primitive data to a method so local copy is created inside method1 if any changes happen to local variable those changes will not effect to caller.
+		
+	Example 2:
+	public class PassByValueDemo1 {
+		int method1(int marks1) {
+			System.out.println(":2:In method1():marks1:"+marks1); //89
+			marks1=99;
+			System.out.println(":3:In method1():marks1:"+marks1); //99
+			return marks1;
+		}
+
+		public static void main(String[] args) {
+			int marks1=89;
+			PassByValueDemo1 obj=new PassByValueDemo1();
+			System.out.println(":1:In main():marks1:"+marks1); //89
+			marks1=obj.method1(89);
+			System.out.println(":4:In main():marks1:"+marks1); //99
+
+		}
+	}
+
+	Example 3:
+		 class Company {
+			int companyId;
+			String compName;
+			String location;
+			int deptId;
+			public Company() {	
+			}
+		}
+		
+		 class PassByValueDemo3 {
+		
+			void companyDetails(Company obj) {
+				System.out.println(":2:companyDetails():companyId:"+obj.companyId+":compName:"+obj.compName);//1001 GratsIT
+				obj = new Company();
+				obj.companyId=2001;
+				obj.compName="Infosys";
+				System.out.println(":3:companyDetails():companyId:"+obj.companyId+":compName:"+obj.compName); //2001 Infosys
+
+			}
+
+			public static void main(String[] args) {
+				// TODO Auto-generated method stub
+				int companyId=1001;
+				String compName="GratsIT";
+				
+				Company obj=new Company();
+				
+				obj.companyId=companyId;
+				obj.compName=compName;
+				
+				System.out.println(":1:main():companyId:"+obj.companyId+":compName:"+obj.compName);//1001 GratsIT
+				PassByValueDemo3 passByValObj = new PassByValueDemo3();
+				passByValObj.companyDetails(obj);
+				System.out.println(":4:main():companyId:"+obj.companyId+":compName:"+obj.compName); //1001 GratsIT 
+			}
+		}
+		
+	Example 4:
+		public class PassByValueDemo4 {
+		
+			Company companyDetails(Company obj) {
+				System.out.println(":2:companyDetails():companyId:"+obj.companyId+":compName:"+obj.compName);
+				obj = new Company();
+				obj.companyId=2001;
+				obj.compName="Infosys";
+				System.out.println(":3:companyDetails():companyId:"+obj.companyId+":compName:"+obj.compName);
+				return obj;
+			}
+
+			public static void main(String[] args) {
+				// TODO Auto-generated method stub
+				int companyId=1001;
+				String compName="GratsIT";
+				
+				Company obj=new Company();
+				obj.companyId=companyId;
+				obj.compName=compName;
+				
+				System.out.println(":1:main():companyId:"+obj.companyId+":compName:"+obj.compName);
+				PassByValueDemo4 passByValObj = new PassByValueDemo4();
+				obj = passByValObj.companyDetails(obj);
+				System.out.println(":4:main():companyId:"+obj.companyId+":compName:"+obj.compName);
+			}
+		}
+
+	Example 5:
+	
+	public class PassByValueDemo5 {
+		void companyDetails(Company obj) {
+			System.out.println(":2:companyDetails():companyId:"+obj.companyId+":compName:"+obj.compName); //1001 GratsIT
+			obj.companyId=2001;
+			obj.compName="Infosys";
+			System.out.println(":3:companyDetails():companyId:"+obj.companyId+":compName:"+obj.compName); //2001 Infosys
+
+		}
+
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			int companyId=1001;
+			String compName="GratsIT";
+			
+			Company obj=new Company();
+			obj.companyId=companyId;
+			obj.compName=compName;
+			
+			System.out.println(":1:main():companyId:"+obj.companyId+":compName:"+obj.compName); //1001 GratsIT
+			
+			PassByValueDemo5 passByValObj = new PassByValueDemo5();
+			passByValObj.companyDetails(obj);
+			System.out.println(":4:main():companyId:"+obj.companyId+":compName:"+obj.compName); //2001 Infosys
+		}
+	}
+	
+	Question 6:
+		class Laptop{
+			int version; //555 777 777
+			double cost;//200  255 310
+			Laptop(int version,double cost){
+				this.version=version;
+				this.cost=cost;
+			}
+		}
+
+		class Test3{
+			
+			void updateLaptop(Laptop b,double cost){ ,55
+				b.version=777;
+				b.cost=b.cost+cost;
+			}
+			public static void main(String[] args) {
+				Laptop lp=new Laptop(555,200);
+				Test3 t=new Test3();
+				double newPrice=55;
+				
+				t.updateLaptop(lp,newPrice); 
+				
+				t.updateLaptop(lp,newPrice);
+				
+				System.out.println(":"+lp.version+":"+newPrice+":"+lp.cost); //777 55  310
+			}
+		}
+
+	=>Pass by Reference (Not in Java): In some programming languages, when you pass a variable to a method, you're passing a reference to the original variable. Changes made to the parameter inside the method affect the original variable outside the method. Java does not support pass-by-reference; it only uses pass-by-value.
+
+Why Java does not support Pass by reference?
+	=>	Java does not support Pass by reference because in Pass by reference we need to pass the address and address are stored in pointers, java does not support pointers and it is because pointers breaks the security. Java is always pass-by-value.
+
+*********************
+23-Feb-2024
+*********************
+
+return statement in java:
+
+	=>	The return statement is used for returning a value when the execution of the block is completed. 
+	=>	The return statement inside a loop will cause the loop to break and further statements will be ignored by the compiler.
+	
+		public class ReturnDemo1 {
+		
+				int method() {
+					System.out.println(":Start:Inside method():");
+					return 14;
+				}
+				
+				int method(int k) {
+					System.out.println(":Start:Inside method():");
+					return k;
+					System.out.println(":End:Inside method():");
+					return k;
+				}
+			
+				void method1() {
+					System.out.println(":Start:Inside method1():");
+					return;
+					System.out.println(":End:Inside method1():");
+					return;
+				}
+
+				void isEvenNumber(int num) {
+					System.out.println(":Start:Inside method1():");
+					if(num%2==0) {
+						System.out.println(num+" is an even number");
+						return;
+					}else {
+						System.out.println(num+" is an odd number");
+					}
+					System.out.println(":End:Inside method1():");
+				}
+				
+				int method2() {
+					System.out.println(":Start:Inside method2():");
+					int k=1;
+					for(;k<=100;k++) {
+						System.out.print(" "+k);
+						if(k==50) {
+							System.out.println("");
+							return k;
+						}
+					}
+					System.out.println("");
+					System.out.println(":End:Inside method2():");
+					return k;
+				}
+				
+				int method3() {
+					System.out.println(":Start:Inside method2():");
+					int k=1;
+					for(;k<=100;k++) {
+						System.out.print(" "+k);
+						if(k==50) {
+							System.out.println("");
+							for(int j=0;j<10;j++) {
+								System.out.print(" "+j);
+								if(j==5) {
+									System.out.println("");
+									return j;
+								}
+							}
+							
+						}
+					}
+					System.out.println("");
+					System.out.println(":End:Inside method2():");
+					return k;
+				}
+				
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					System.out.println(":Start:main():");
+					ReturnDemo1 obj=new ReturnDemo1();
+			//		obj.method1();
+			//		obj.isEvenNumber(15);
+			//		int k=obj.method2();
+					int k=obj.method3();
+					System.out.println(":k:"+k);
+					System.out.println(":End:main():");
+				}
+		}
+				
+				
+	=>	Method can be declared with a return primitive type such as boolean,byte,short,char,int,long,float and double.
+	
+		Syntax:
+				<primitive type> method(){
+					<primitive type> variableName;
+					return variableName;
+				}
+				
+		Example:
+				boolean isEligibleForExams(double averageMarks){
+					return averageMarks>20.00?true:false;
+				}
+	
+	=> 	Method can be declared with a return reference type (i.e, class type) such as String, Student, Company ... etc.
+		->A method can have the class name as its return type. Therefore it must return the object of the exact class or its subclass.
+		->An interface name can also be used as a return type but the returned object must implement methods of that interface.
+
+		The following Java program shows the implementation of a class name as a return type.
+			Syntax:
+					<Class Name> method(){
+						<Class Name> referenceName;
+						return referenceName;
+					}
+			Example 1:
+			
+					class Student{
+						int studentId;
+						String name;
+						double totalMarks;
+						
+						Student getStudent(int studentId,String name,double totalMarks){
+							Student std;
+							std=new Student();
+							std.studentId=studentId;
+							std.name=name;
+							std.totalMarks=totalMarks;
+							
+							return std;
+						}
+						public static void main(String[] args){
+							Student std=new Student();
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks);//0 null 0.0
+							
+							
+							std.getStudent(1001,"Rajesh",555.50);
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks); //0 null 0.0
+							std=std.getStudent(1002,"Venkat",444.50);
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks); //1002 Venkat 444.50
+						}
+					}
+					
+			Example 2:
+					class StudentDemo2{
+						int studentId;
+						String name;
+						double totalMarks;
+						
+						void updateStudent(StudentDemo2 std){
+							//Student std;
+							std.studentId=std.studentId+100; //0+100
+							std.name="Jashu";
+							std.totalMarks=454.55+10;
+						}
+						public static void main(String[] args){
+							StudentDemo2 std=new StudentDemo2();
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks); //
+							
+							std.updateStudent(std); 
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks);//
+							std.updateStudent(std);
+							System.out.println(":studentId:"+std.studentId+":name:"+std.name+":totalMarks:"+std.totalMarks);//
+						}
+					}
+
+			Example 2: -> must return the object of the exact class or its subclass.
+			
+					class Company{
+						String compName;
+						String location;
+					}
+					class Student{
+						int stdId;
+						String stdName;
+					}
+					
+					class ReturnDemo1{
+					
+						public static void main(String[] args){
+							Company comp;
+							Student std;
+							comp = new Company();
+							
+							//int x=10;
+							//String y;
+							//y=x;
+							
+							std = comp;
+							comp = new Student();
+						}
+					}
+					
+			Example 3:
+					class ReturnDemo2{
+					
+						public static void main(String[] args){
+							Company comp;
+							Student std;
+							comp = new Company();
+							comp.compName="GratsIT";
+							comp.location="Bangalore";
+							System.out.println(":compName:"+comp.compName+":location:"+std.location); //
+							
+							Company compOne=new Company();
+							System.out.println(":compName:"+compOne.compName+":location:"+compOne.location); //
+							compOne = comp;
+							System.out.println(":compName:"+compOne.compName+":location:"+compOne.location);//
+						}
+					}
+					
+			Example 4:
+					class ReturnDemo6{
+						Company getCompany(){
+							Company comp = new Company();
+							comp.compName="GratsIT";
+							comp.location="Bangalore";
+							
+							//Student std=new Student();
+							//return std;
+							return comp;
+						}
+						
+						public static void main(String[] args){
+							ReturnDemo6 obj = ReturnDemo6();
+							Comapny comp=obj.getCompany();
+							System.out.println(":compName:"+comp.compName+":location:"+comp.location);//
+						}
+					}
+
+	
+
+	=> 	Method can be declared with a return primitive type array such as int[],char[] .... etc.
+	=>	Method can be declared with a return reference type array such as String[],Student[],Company[]...etc.
