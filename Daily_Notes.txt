@@ -2836,3 +2836,120 @@ return statement in java:
 
 	=> 	Method can be declared with a return primitive type array such as int[],char[] .... etc.
 	=>	Method can be declared with a return reference type array such as String[],Student[],Company[]...etc.
+
+*********************
+28-Feb-2024
+*********************
+******************************************
+OOP - Object Orientd Programming
+******************************************
+
+What Is Object-Oriented Programming?
+
+	-> Object-Oriented Programming is a paradigm and it is used by many popular languages such C++, Java, C#, Javascript and Python. etc.
+	-> Object-oriented programming (OOP) is a programming paradigm that organizes code around the concept of "objects" which are instances of classes. In OOP, a class is a blueprint or template for creating objects, and objects are instances of classes that encapsulate data and behavior.
+	-> Object-Oriented Programming or OOPs refers to languages that use objects in programming. An object which contains properties and behaviors. In the programming world properties are in the form of attributes and the behaviors are in the form of methods.
+
+How to implement Object Oriented Programming using Java?
+
+	-> There are different ways to do Object-Oriented Programming and the most famous one is class-based programming. Java is a class-based, object-oriented programming language with a “write once, run anywhere” principle.
+	-> In Java, it is able to implement OOP Paradigm based on classes and objects concept. Each Object has its own properties and behavior.
+
+
+What are the different Object-Oriented Programming concepts?
+ 
+	This paradigm is based on four main principles:
+
+	1. Encapsulation
+	2. Inheritance
+	3. Polymorphism
+	4. Abstraction
+
+	1. Encapsulation:
+		=> The process of grouping or combining data members and its corresponding methods into a single unit is an encapsulation.
+			
+			Example:
+					class Company{
+						int compId;
+						String compName;
+						String address;
+						//+
+						void printCompDetl(){
+						}
+						void setCompDetl(){
+						}
+					}			
+			-> Can say every java class is an example of encapsulation.
+			
+		=> If anything follows data hiding and abstraction then it's called encapsulation.
+				Encapsulation = Data Hiding + Abstraction.
+
+				-> Data hiding can be implemented by private properties
+				-> Abstraction can be implemented by methods.
+				
+					Example:
+
+						class Account{
+
+							private int accountNo;
+							private String name;
+
+							public int getAccountNo(){
+							//validate
+							return accountNo;
+							}
+							public String getName(){
+							//validate
+							return name;
+							}
+						}
+
+		=> Objects can encapsulate data (attributes or properties) and the methods (functions or procedures) that operate on the data. This helps in hiding the internal details of the object and exposing only what is necessary.
+
+		=> The concept of binding the data with its related functionalities is called Encapsulation.
+		
+		
+
+		=> We can create a fully encapsulated class in Java by making all the data members of the class private and use setter and getter methods to set and get the data in it.
+
+		The Java Bean class is the example of a fully encapsulated class.
+
+		Java Bean class called a POJO(Plain Old Java Object) .
+		: which will have private variables and public  setter and getter methods.
+
+		Example:
+		//A Java class which is a fully encapsulated class.  
+		//It has a private data member and getter and setter methods.  
+
+		public class Student{  
+			//private data member 
+			private int id;  
+			private String name; 
+			private double marks;  
+
+			//getter method for name  
+			public String getName(){  
+				
+			return name;  
+			}  
+			//setter method for name  
+			public void setName(String name){  
+			this.name=name  
+			}  
+		}  
+
+		Encapsulation provides several benefits
+
+			Data Hiding: Encapsulation allows the internal details (data and methods) of a class to be hidden from the outside world. This helps prevent direct access to the internal implementation, promoting a more secure and robust system.
+
+			Modularity: By grouping related data and methods together, encapsulation promotes modularity in code. Changes to the internal implementation of a class do not affect the external code that uses the class, as long as the public interface remains unchanged.
+
+			Abstraction: Encapsulation helps in abstracting the essential features of an object while hiding unnecessary details. Users of a class interact with the object through its public interface, without needing to understand its internal workings.
+
+			Control: Encapsulation allows the class to have control over its own state. By providing controlled access to data through methods (getters and setters), a class can enforce constraints and validation rules on its attributes.
+		
+		Advantages:
+
+			=> Security : It is the main advantage.
+			=> Enhancement
+			=> Maintainability
