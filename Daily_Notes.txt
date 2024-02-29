@@ -2953,3 +2953,284 @@ What are the different Object-Oriented Programming concepts?
 			=> Security : It is the main advantage.
 			=> Enhancement
 			=> Maintainability
+
+*********************
+28-Feb-2024
+*********************
+
+Inheritance:
+	=>	Inheritance is a fundamental concept in object-oriented programming (OOP) that allows a class (subclass/derived class/child class) to inherit properties and behaviors from another class (superclass/base class/parent class).
+	
+	=>	Inheritance  is a mechanism using which one object acquires all the properties and behaviors of a parent object. The main goal of inheritance is to achieve code reusability.
+	
+	=>	It is the mechanism in Java by which one class is allowed to inherit the features(fields and methods) of another class.
+	
+	=>	Base Class or Super Class or Parent Class:	The class whose features are inherited
+	=>	Derived Class or Sub Class or Child Class:	The class that inherits the other class
+
+How to Use Inheritance in Java?
+	=>	The extends keyword is used for inheritance.
+	
+			Syntax:
+					class <super-class>{
+						//fields and methods
+					}
+					
+					class <sub-class> extends <super-class>{
+						//fields and methods
+					}
+					
+
+					
+		Example 1:
+			class A{
+				int i;
+				void methodA(){
+					System.out.println(":Inside class A methodA():");
+				}
+			}
+			
+			class B extends A{ 
+				int j;
+				void methodB(){
+					System.out.println(":Inside class B methodB():");
+				}
+			}
+			
+			class InheritanceTest1{
+				public static void main(String[] args){
+					B obj=new B();
+					System.out.println(":obj.j:"+obj.j);
+					System.out.println(":obj.i:"+obj.i); // B class is extending A so can access members of a with B class object
+				}
+			}
+			
+		Note: We can access instance members of super class object from sub-class object but can't access instance members of sub-class object from super-class object.
+
+In Java, we have two types of relationship:
+
+	1. Is-A relationship: Whenever one class inherits another class, it is called an IS-A relationship.
+	
+		=>	Inheritance is an “IS-A” type of relationship. The below example can say Bike is a Vehicle, Car is a Vehicle.
+
+				class Vehicle{
+					byte noOfWheels;
+					String color;
+					float spead;
+					void start(){
+						SOP("Start");
+					}
+					void stop(){
+						SOP("Start");
+					}
+				}
+				
+				class Bike extends Vehicle{
+					String handClutch;
+					
+				}
+				
+				class Car extends Vehicle{
+					String seatBelt;
+					
+				}
+				
+				
+				
+	2. Has-A relationship: Whenever an instance of one class is used in another class, it is called a HAS-A relationship.
+	
+				class Engine {
+					void start() {
+						System.out.println("Engine is starting.");
+					}
+					void stop() {
+						System.out.println("Engine is stopping.");
+					}
+				}
+				
+				class Vehicle {
+					public Engine engine = new Engine();
+
+					void start() {
+						engine.start();
+						System.out.println("Vehicle is starting.");
+					}
+
+					void stop() {
+						engine.stop();
+						System.out.println("Vehicle is stopping.");
+					}
+				}
+				
+				public class InheritanceTest3 {
+					public static void main(String[] args) {
+						Vehicle myCar = new Vehicle();
+						myCar.start();
+						myCar.stop();
+					}
+				}
+
+Types Of Inheritance:
+	=>	There are several types of inheritance, which define the relationship between classes in terms of how they inherit and share properties and behaviors. 
+	=>	The main Types of inheritance:		
+			
+	1. Single Inheritance
+	2. Multilevel Inheritance
+	3. Hierarchical Inheritance
+	4. Multiple Inheritance
+	5. Hybrid Inheritance
+	
+	1. Single Inheritance:
+			=>	In single inheritance, a class can inherit from only one superclass.
+			=>	Java supports single inheritance for classes.
+			
+			Syntax:
+					class A {
+						// ...
+					}
+
+					class B extends A {
+						// ...
+					}
+					
+	2. Multilevel Inheritance: 
+		=>	In multilevel inheritance, a class can inherit from another class, and then another class can inherit from the second class.
+
+		=>	It forms a chain of inheritance.
+		
+			Syntax:
+					class A {
+						// ...
+					}
+
+					class B extends A {
+						// ...
+					}
+
+					class C extends B {
+						// ...
+					}
+			
+			Example:
+					class Calculator{
+						double pi=3.14;
+						int add(int num1,int num2){
+							return num1+num2;
+						}
+						int sub(int num1,int num2){
+							return num1-num2;
+						}
+					}
+					
+					class AdvCalculator{
+						int mult(int num1,int num2){
+							return num1*num2;
+						}
+					}
+
+					class SuperCalculator{
+						double power(int num1,int num2){
+							return Math.pow(num1, num2);
+						}
+					}	
+
+					class InheritanceTest2{
+						public static void main(String[] args){
+							SuperCalculator obj=new SuperCalculator();
+							double num=obj.pow(7,4);
+							System.out.println(":num:"+num);
+						}
+					}
+			
+		3. Hierarchical Inheritance:
+				In hierarchical inheritance, multiple classes inherit from a single superclass.
+				It forms a hierarchy with a common base class.
+			
+				Syntax:
+					class A {
+						// ...
+					}
+
+					class B extends A {
+						// ...
+					}
+
+					class C extends A {
+						// ...
+					}
+			
+				Example:
+					class Vehicle{
+							byte noOfWheels;
+							String color;
+							float spead;
+							void start(){
+								SOP("Start");
+							}
+							void stop(){
+								SOP("Start");
+							}
+						}
+						
+						class Bike extends Vehicle{
+							String handleClutch;
+							void methodB(){
+							
+							}
+							
+						}
+						
+						class Car extends Vehicle{
+							String seatBelt;
+							void methodC(){
+							
+							}
+						}
+					
+
+		4. Multiple Inheritance:
+			=>	In general, multiple inheritance means deriving the properties from multiple classes. which is not supported in java with classes.
+				class A{
+				
+				}
+				
+				class B{
+				
+				}
+				
+				class C extends A,B{ // This is not supported in java
+				
+				} 
+				
+			=>	In Java a class can extend only one class.
+		
+		5. Hybrid Inheritance:
+				=>	Hybrid inheritance is a combination of single, multilevel and hierarchical inheritance.
+				=>	It involves a mix of the inheritance types.
+				Syntax:
+					
+						class A{
+							// ...
+						}
+						class B extends A{ //single inheritance
+							// ...
+						}
+						
+						class C extends A{ //hierarchical inheritance
+						
+						}
+						
+						class D extends B{
+						
+						}
+						
+						class E extends D{	//multilevel inheritance
+						
+						}
+
+						
+Why Do We Need Java Inheritance?
+
+	Code Reusability: The code written in the Superclass is common to all subclasses. Child classes can directly use the parent class code.
+	
+	Method Overriding: Method Overriding is achievable only through Inheritance. It is one of the ways by which Java achieves Run Time Polymorphism.
