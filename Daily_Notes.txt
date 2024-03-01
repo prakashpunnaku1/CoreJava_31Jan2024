@@ -3122,13 +3122,15 @@ Types Of Inheritance:
 						}
 					}
 					
-					class AdvCalculator{
+					class AdvCalculator extends Calculator{
+						int x=100;
 						int mult(int num1,int num2){
 							return num1*num2;
 						}
 					}
 
-					class SuperCalculator{
+					class SuperCalculator extends AdvCalculator{
+						int y=200;
 						double power(int num1,int num2){
 							return Math.pow(num1, num2);
 						}
