@@ -14,6 +14,7 @@ class B extends A{
 		System.out.println(":Inside class B methodB():");
 		System.out.println(":j:"+j); //15
 		System.out.println(":i:"+i); 
+		methodA();
 	}
 }
 
