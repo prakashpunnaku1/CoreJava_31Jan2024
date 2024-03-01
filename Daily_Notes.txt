@@ -3236,3 +3236,139 @@ Why Do We Need Java Inheritance?
 	Code Reusability: The code written in the Superclass is common to all subclasses. Child classes can directly use the parent class code.
 	
 	Method Overriding: Method Overriding is achievable only through Inheritance. It is one of the ways by which Java achieves Run Time Polymorphism.
+
+*********************
+01-Mar-2024
+*********************	
+
+Cyclic inheritance:
+		
+		=> In Cyclic inheritance, once class extends the next class and so on and the last class extends the first class forming a circle.
+			Note: Cyclic inheritane is never used and Java don't support it.
+			
+		=>	Cyclic inheritance is also known as circular or recursive inheritance, occurs when a class is derived from itself either directly or indirectly through a chain of other classes. In Java, cyclic inheritance is not allowed, and the compiler will raise a compile-time error.
+		
+		Example:
+			class A extends B {
+			
+			}
+
+			class B extends C {
+
+			}
+
+			class C extends A { 
+			
+			}
+
+			
+			public class CyclicTest {
+				public static void main(String[] args) {
+					// Some code
+				}
+			}
+
+Object class:
+		=>	The Object class is a fundamental class that serves as the root of the class hierarchy. 
+		=>	A class extends another class using the keyword extends. If you don't have any other class to extend, that's fine. But the compiler will make your class extend the Object class.
+		
+		Example:
+					public class Xyz {
+						// Class members and methods go here
+					}
+					
+					In this case, Xyz implicitly extends the Object class, and you can use methods from the Object class in Xyz even though you haven't explicitly extended it.
+					
+
+super keyword:
+
+		=>	The super keyword is used to refer to the immediate parent class of a subclass. It can be used to access members (fields or methods) of the superclass,  invoke the superclass constructor, and distinguish between superclass and subclass members with the same name.
+
+
+Here are the main uses of the super keyword:
+
+1. Accessing Superclass Members:	
+		->	The super keyword in java is a reference variable that is used to refer parent class objects. The keyword “super” came into the picture with the concept of Inheritance, it is generally used to access the specific variable of a superclass.
+		
+		-> 	You can use super keyword to access the members of the superclass if they are hidden or overridden in the subclass.
+
+	class A {
+		int x = 10;
+
+		void display() {
+			System.out.println("display in A");
+		}
+	}
+
+	class B extends A {
+		int x = 20;
+
+		void display() {
+			System.out.println("display() in B: ");
+			System.out.println("x in B: " + x);
+			System.out.println(":x of A: " + super.x);
+			super.display();
+		}
+		static void methodB() {
+			System.out.println("in methodB()");
+			//super.x;  super keyword can not be used in static methods. Also this keyword can not be used in static methods.
+		}
+	}
+
+	class SuperTest1{
+		public static void main(String[] args){
+			B b1=new B();
+			b1.display();
+		}
+	}
+
+2. Calling Superclass constructor: 
+		->	When it comes to constructors, the super keyword is used to invoke the constructor of the parent class. 
+		->	The super keyword can also be used to access the parent class constructor by adding ‘()’ after it, i.e. super(). Also do remember that ‘super()’ can call both parametric as well as non-parametric constructors depending upon the situation.
+
+Example 1:
+	class C {
+		C(){
+			System.out.println(":Inside constructor A:");
+		}
+	}
+
+	class D extends C {
+		D(){
+			System.out.println(":Inside constructor A:");
+		}
+	}
+
+	class SuperTest2{
+		public static void main(String[] args){
+			D obj=new D();
+		}
+	}
+
+Example 2:	
+	
+	class E {
+		E(){
+		
+		}
+		E(int x){
+			System.out.println(":Inside constructor E(int):");
+		}
+	}
+
+	class F extends E {
+		F(){
+			System.out.println(":Inside constructor F:");
+		}
+		F(int x){
+			super(x);
+			System.out.println(":Inside constructor F(int):");
+		}
+	}
+
+	class SuperTest3{
+		public static void main(String[] args){
+			F obj=new F();
+			F obj=new F(10);
+		}
+	}
