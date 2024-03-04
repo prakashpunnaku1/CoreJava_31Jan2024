@@ -1,5 +1,6 @@
 class Calculator{
 						double pi=3.14;
+						
 						int add(int num1,int num2){
 							return num1+num2;
 						}
@@ -17,6 +18,8 @@ class Calculator{
 
 					class SuperCalculator extends AdvCalculator{
 						int y=200;
+						double pi=3.14;
+						super.pi;
 						double power(int num1,int num2){
 							return Math.pow(num1, num2);
 						}
