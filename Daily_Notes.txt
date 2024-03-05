@@ -3495,3 +3495,292 @@ Type Casting:
 					
 				}
 			}
+
+*********************
+05-Mar-2024
+*********************
+			
+2. Downcasting:
+	=>	Downcasting involves casting a reference to a more specific class type. It requires an explicit casting.
+	
+	public class DowncastingTest1 {
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					A refA = new C();
+					refA.funA();
+					//refA.funB(); This is not possible because can't access child class properties and methods from parent reference
+					
+					B refB=(B)refA;
+					refB.funB();
+					
+					C refC=(C)refA;
+					refC.funB();
+					
+				}
+			}
+	
+	
+3. Polymorphism	: 
+			=>	Polymorphism is one of the four fundamental principles of object-oriented programming (OOP) and is a key concept in Java.
+			=>	Polymorphism is derived from 2 Greek words i.e., Poly and morphs. The word "Poly" means many and "morphs" means forms. 
+			=>	The concept of defining multiple methods with the same name within the same class or its related sub-classes is known as Polymorphism.
+			
+			=>	There are two types of polymorphism in Java:
+				1. Compile Time (or static) polymorphism
+				2. Runtime (or dynamic) polymorphism
+				
+1. Compile Time (or static) polymorphism:
+		=>	Method overloading is a form of compile-time polymorphism where multiple methods in the same class have the same name but differ in the type or number of their parameters.
+		=>	The compiler determines which method to invoke based on the method signature during compilation.
+		=>	Method overloading is an example for Compile Time (or static) polymorphism.
+		
+2. Runtime Polymorphism (Method Overriding):	
+		=>	Method overriding is a form of runtime polymorphism where a subclass provides a specific implementation for a method that is already defined in its superclass. The decision on which method to call is made at runtime, based on the actual type of the object.
+		
+		=>	Overriding refers to the ability of a subclass to re-implement an instance method inherited from a superclass.		
+		=>	If a subclass (child class) has the same method as declared in the parent class, it is known as method overriding in Java.
+		
+		=>	In other words, If a subclass provides the specific implementation of the method that has been declared by one of its parent classes, it is known as method overriding.
+		
+		=>	Method overriding is used for runtime polymorphism
+		
+		Syntax:
+				class A{
+					int add(int a,int b){	//Overridden method
+						//statements
+					}
+				}
+				
+				class B extends A{
+					int add(int a,int b){	//Overriding method
+						//statements
+					}				
+				}
+				
+		Example 1:
+					class P{
+						void assets(){
+							System.out.println(":HOUSE, LAND & CASH:");
+						}
+						
+						void bike(){
+							System.out.println(":In Class P: Hero Splendor Plus:");
+						}
+					}
+					
+					class C{
+						void bike(){
+							System.out.println(":In Class C:Sports Bike:");
+						}
+					}
+					
+					public class OverrideTest{
+						psvm(String[] args){
+							P p1=new P();
+							p1.bike();
+							
+							C c1=new C();
+							c1.bike();
+							
+							P p2=new C();
+							p2.bike(); // compile time checks is the bike() present in Parent class or not and at run time jvm checks is the method overriding in child class or not if it overriding then it calls child class method.
+							//This concept is called Run time polymorphism or Dynamic Polymorphism or Late Binding.
+							//JVM is executing method based on Run time Object.
+						}
+					}
+		
+		Example 1:
+				class Bank{
+					double getFdROI(int adj){
+						sop("Inside Bank getFdROI():");
+						return 5.6;
+					}				
+				}
+
+				class SBIBank extends Bank{  
+					double getFdROI(int adj){
+						sop("Inside SBIBank getFdROI():");
+						return 5.6;
+					} 
+				}
+
+				class HDFCBank extends Bank{
+					double getFdROI(int adj){
+						sop("Inside HDFCBank getFdROI():");
+						return 5.6;
+					} 
+				}
+				
+				public class OverrideTest1{
+					public static void main(String[] args){
+						Bank bankRef = new Bank();
+						double roi1=bankRef.getFdROI(1);
+						sop(":roi1:"+roi1);
+						
+						Bank bankRef2 = new SBIBank();
+						double roi2=bankRef2.getFdROI(1);
+						sop(":roi2:"+roi2);	
+
+						Bank bankRef3 = new HDFCBank();
+						double roi3=bankRef3.getFdROI(1);
+						sop(":roi3:"+roi3);						
+					}
+				}
+				
+			Example 2: 
+						class A {
+							int methodA(){
+								sop(":Inside class A methodA():");		
+							}
+							
+							int methodB(){
+								sop(":Inside class A methodB():");
+							}
+						}
+						
+						class B extends A {
+							int methodA(){
+								sop(":Inside class B methodA():");		
+							}
+							
+						}
+						
+						class C extends B {
+							int methodA(){
+								sop(":Inside class C methodA():");
+							}
+							
+							//int methodB(){
+							//	sop(":Inside class C methodB():");
+							//}
+						}
+
+				public class OverrideTest2{
+					public static void main(String[] args){
+						A refA = new C();
+						refA.methodA();	
+						
+						C RefC = new C();
+						refB.methodB();
+						
+
+					}
+				}
+				
+		=>	When overriding a method, certain rules must be followed. Here are the rules for method overriding in Java:
+		
+		1.	Method Signature 
+				=>	The method in the subclass must have the same method signature (name, no of parameters and parameter types) as the method in the superclass.
+								
+					Example:
+							
+							class Y {
+								void methodY(int a,double b){
+									System.out.println(":Inside class Y methodY():");
+								}
+							}
+
+							class Z extends Y{
+								void methodY(int a,double b){
+									System.out.println(":Inside class Z methodY():");
+								}
+							}
+
+							public class OverridingTest3 {
+
+								public static void main(String[] args){
+									
+									Y refY=new Z();
+									refY.methodY(10,20.50);
+								}
+							}
+							
+		2.	Return Type:
+				=>	The overriding method must have the same return type of the overridden method. 
+				=>	From Java 1.5 and later, it is allowed to use covariant return types (sub types).
+				=>	If the return type is primitive then the same primitive type should be there. covariant return types not applicable for primitives.
+					
+				Parent class:
+				Object methoA(){
+				
+				}
+				child class:
+				String methodA(){ // this is valid.
+				
+				}
+				
+				parent class :
+				String methodB(){
+				
+				}
+				
+				child class:
+				Object methodB(){ // This is invalid
+				
+				}
+				
+				parent class:
+				double methodC(){
+				
+				}
+				
+				Child class:
+				int methodC(){
+				
+				}
+				
+				
+				
+								
+		3.	Access Level:
+				=>	The overriding method cannot have a more restrictive access modifier than the overridden method. It can have the same or a more permissive access level.
+				=>	Can't reduce the scope of Access modifier but increase the scope.
+					private<default<protected<public
+				->	If the overridden method has default access, then the overriding one must be default, protected or public.
+				->	If the overridden method is protected, then the overriding one must be protected or public.
+				->	If the overridden method is public, then the overriding one must be only public.
+				
+				
+		4.	Exception Handling:
+				=>	If the overridden method declares to throw any checked exception, the overriding method can only declare the same, subclass, or no exception. It cannot declare a broader exception.
+				
+				
+		5.	final Methods:
+				=>	final methods cannot be overriding.
+				
+		6.	static methods:
+				=>	The static methods cannot be overriding.
+					Parent class:
+						static void m1(){
+						
+						}
+					Child class:
+						void m1(){	//not possible
+						
+						}
+						
+					Parent class:
+						 void m1(){
+						
+						}
+					Child class:
+						static void m1(){	//not possible
+						
+						}
+				
+				=>	A static method in a subclass may hide another static one in a superclass, and that’s called method hiding.
+					Parent class:
+						 static void m1(){
+						
+						}
+					Child class:
+						static void m1(){
+						
+						}
+					->	If both are static then this concept is called Method Hiding. Method execution is decided by reference type at the time of compilation, not by the object at run-time.
+					->	Method Hiding comes under concept of static-polymorphism or early binding.
+
+		Note:	=>	Overriding concepts dont apply to constructors. 
+				=>	The synchronized,abstract,native methods has no effect on the rules of overriding.
+			
