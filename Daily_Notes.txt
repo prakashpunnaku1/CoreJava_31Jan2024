@@ -3784,3 +3784,103 @@ Type Casting:
 		Note:	=>	Overriding concepts dont apply to constructors. 
 				=>	The synchronized,abstract,native methods has no effect on the rules of overriding.
 			
+*********************
+06-March-2024
+*********************
+Abstraction:
+	=> In general, abstraction means hiding the details.
+	=> In Java you can say Hiding the implementation and showing only necessary information to the user.
+
+	=> Abstraction is the process of hiding certain details and showing only essential information to the user. Abstraction can be achieved with either abstract classes or interfaces.
+
+	=> Abstraction allows developers to create abstract classes and interfaces that define the structure and behavior of a system without specifying the implementation details.
+
+Advantages:
+	=> Security
+	=> Enhancement will become very easy.
+	=> Maintainability of the application is improved.
+
+Abstract class:
+	=> Partially implemented class or implementation of a class which is not fully completed, such classes can call it an abstract class.
+	=> Object creation is not possible for Abstract classes.
+	=> Abstract classes may have abstract methods (methods without a body) that must be implemented by concrete (non-abstract) subclasses.
+	=> We can't create objects for abstract classes, because they may contain abstract methods.
+
+	Syntax:
+	abstract class <class-name>{
+
+	}
+	
+Abstract method :
+	=> The method which has only method declaration without implementation is called abstract method.
+		Syntax:
+			abstract <return-type> <method-name>();
+			
+		Example:
+		    abstract void methodA();
+			
+	=> If a class contains at least one abstract method then that class must be declared as an abstract class.
+	
+
+	Example 1:
+	abstract class Bank{
+		  void printSavingsROI(){
+			SOP(4.25);
+		  }
+		  abstract void printHomeLoanROI();
+	}
+
+	class SBIBank extends Bank{
+		  void printHomeLoanROI(){
+			SOP(9.5);
+		  }
+	}
+
+	class AbstractTest1{
+		public static void main(String[] args){
+			//Bank b1=new Bank();// This is not possible because you can't create the object of abstract class.
+			Bank bank=new SBIBank();
+			bank.printSavingsROI();
+			bank.printHomeLoanROI();
+		}
+	}
+
+	Example 2:
+	abstract class Bank{
+	  void printSavingsROI(){
+		SOP(4.25);
+	  }
+	  abstract void printHomeLoanROI();
+	  abstract void printCreditCardROI();
+	}
+
+	abstract class SBIBank extends Bank{  
+	  void printHomeLoanROI(){
+		SOP(9.5);
+	  }
+	} // Here it should be an abstract class because not implementing all the abstract methods in child class.
+
+	class SBICard extends SBIBank{
+	  void printCreditCardROI(){
+		SOP(36.50);
+	  }
+	}
+
+
+	class AbstractTest1{
+	public static void main(String[] args){
+	Bank b1=new Bank();// This is not possible because you can't create the object of abstract class.
+	Bank bank=new SBICard();
+	bank.printSavingsROI();
+	bank.printHomeLoanROI();
+	bank.printCreditCardROI();
+	}
+	}
+
+Can create a abstract class without any abstract method:
+
+=> Yes, its possible abstract class can be created without any abstract method.
+=> If you feel the class implementation is not appropriate in such cases, you can also create an abstract class without any abstract method.
+
+=> HttpServlet is an example for abstract class but which does not contain any abstract method.
+	
