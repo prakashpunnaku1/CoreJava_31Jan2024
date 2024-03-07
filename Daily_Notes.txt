@@ -3783,7 +3783,34 @@ Type Casting:
 
 		Note:	=>	Overriding concepts dont apply to constructors. 
 				=>	The synchronized,abstract,native methods has no effect on the rules of overriding.
-			
+				=>	Variables in Java do not follow polymorphism. Overriding is only applicable to methods but not to variables.
+
+						class Aa
+						{
+							int i = 10;
+							void method1(){
+								SOP("In class Aa");
+							}
+						}
+						 
+						class Bb extends Aa
+						{
+							int i = 20;
+							void method1(){
+								SOP("In class Bb");
+							}
+						}
+						 
+						public class Test4
+						{
+							public static void main(String[] args)
+							{
+								Aa a = new Bb();
+								System.out.println(a.i); //10 
+								a.method1(); //In class Bb
+								
+							}
+						}			
 *********************
 06-March-2024
 *********************
@@ -3883,4 +3910,233 @@ Can create a abstract class without any abstract method:
 => If you feel the class implementation is not appropriate in such cases, you can also create an abstract class without any abstract method.
 
 => HttpServlet is an example for abstract class but which does not contain any abstract method.
+=> An abstract class can have a data member, abstract method, method body (non-abstract method), constructor, and even main() method.
+
+		abstract class AbstractClassDemo1{
+			int x=100;
+			AbstractClassDemo1(){
+				System.out.println(":Inside AbstractClassDemo1:");
+			}
+			
+			public void methodA() {
+				System.out.println(":methodA():");
+			}
+			
+			public static void main(String[] args){
+			
+		//		AbstractClassDemo1 obj=new AbstractClassDemo1(); Can't create abstract class object
+				AbstractClassDemo1 obj=new AbstractClassDemo2();
+				System.out.println(obj.x);
+		//		System.out.println(obj.y); Can't access child class property
+				obj.methodA();
+		//		obj.methodB();	Can't access child class method
+		
+			}
+		}
+
+		class AbstractClassDemo2 extends AbstractClassDemo1{
+			int y=200;
+			public void methodB(){
+				System.out.println(":methodB():");
+			}
+		}
+*************************
+07-March-2024
+*************************
+
+Interface:
+	=>	The interface in Java is a mechanism to achieve abstraction and multiple inheritance in Java.
+	=>	There can be only abstract methods in the Java interface, not method body or implementation.
+	=>	In other words ,  interface can have abstract methods and constant variables. It cannot have a method body.
+	=>	We can say an interface is fully un-implemented structure.
+
+	=>	An interface is declared by using the interface keyword. It provides total abstraction, means all the methods in an interface are declared with the empty body, and all the fields are public, static and final by default. A class that implements an interface must implement all the methods declared in the interface.
+
+	Syntax to declare interface :
 	
+	interface <interface_name>{  
+	      
+	    // declare constant fields. By default public static final
+	    // declare methods. By default public abstract  
+	  
+	}
+	
+	=>	Interface fields are public, static and final by default, and the methods are public and abstract.
+	=>	Interface fields are public, static and final by default, and the methods are public and abstract.
+	=>	Interface variables must be initialized.
+	
+	Example 1:
+		interface A{
+			float rate=4.5f;
+			String bankName="Axis";
+			
+			//int fdRate; This is not possible because we should initialize the variables in interfaces.
+			
+			void printBalance();
+			void printStatement();
+		}
+
+		class B implements A{
+			
+			public void printBalance(){
+				System.out.println(50000);
+			}
+			
+			public void printStatement(){
+				System.out.println(":rate:"+rate);
+				System.out.println(":bankName:"+bankName);
+				System.out.println("Statement");
+			}
+		}
+
+		class InterfaceTest1{
+			public static void main(String[] args){
+		//		 A a1=new A(); //We can't create the object for interface.
+				A a1;
+				a1=new B();
+				System.out.println(":rate:"+a1.rate+":bankName:"+a1.bankName);
+				a1.printBalance();
+				a1.printStatement();
+		//		 a1.rate=560;// We can't re-initialize the inteface variables because which is final variables.
+			}
+		}
+	
+		Example 2:
+			interface Address{
+				int pincode=517501;
+				String address="Hyderabad";
+				void printAddress();
+			}
+
+			class AddressImpl implements Address{
+				public void printAddress(){
+					System.out.println("Bangalore");
+				}
+			}
+
+			class InterfaceTest2{
+				public static void main(String[] args){
+					Address addr=new AddressImpl();
+					System.out.println(":pincode:"+addr.pincode+":address:"+addr.address);
+					addr.printAddress();
+				}
+			}
+			
+=>	Multiple inheritance in Java by interface
+			If a class implements multiple interfaces, or an interface extends multiple interfaces, it is known as multiple inheritance.
+
+		Example 3:
+			
+			class C implements A, Address{
+				public void printBalance(){
+					System.out.println(50000);
+				}
+				
+				public void printStatement(){
+					System.out.println(":rate:"+rate);
+					System.out.println(":bankName:"+bankName);
+					System.out.println(":pincode:"+pincode);
+				}	
+				public void printAddress(){
+					System.out.println("Bangalore");
+				}
+			}
+
+			class InterfaceTest3{
+				public static void main(String[] args){
+					A a1=new C();
+					System.out.println(":rate:"+a1.rate+":bankName:"+a1.bankName);
+					
+					a1.printBalance();
+					a1.printStatement();
+					
+					//System.out.println(":pincode:"+a1.pincode+":address:"+a1.address); This is not possible
+					//a1.printAddress();  This is not possible
+					
+					//Address addr=new AddressImpl();
+					//System.out.println(":pincode:"+addr.pincode+":address:"+addr.address);
+					//addr.printAddress();
+					
+			//		System.out.println(":rate:"+addr.rate+":bankName:"+addr.bankName); This is not possible
+			//		addr.printBalance(); This is not possible
+			//		addr.printStatement(); This is not possible
+				}
+			}
+			
+
+
+
+
+Example 4:
+			
+interface Aa{
+	int i=200;
+	void methodA1();
+}
+
+interface A2{
+	int j=500;
+	int i=200;
+	void methodA2();
+	void methodA1();
+}
+
+interface Bb extends Aa,A2{
+	int k=600;
+	int j=700;
+	int a=i;
+	int b=j;
+	//int c=super.j; This is not possible
+	void methodB1();			
+}
+
+class DD implements Aa,A2{
+	public void methodA1(){
+		System.out.println("methodA1");
+	}
+	public void methodA2(){
+		System.out.println("methodA2");
+	}
+}
+
+Aa a1=new DD();
+a1.methodA1();
+
+class Cc implements Bb{
+	public void methodA1(){
+		System.out.println("methodA1");
+	}
+	public void methodA2(){
+		System.out.println("methodA2");
+	}
+	public void methodB1(){
+		System.out.println("methodB1");
+		System.out.println(":i:"+i+":j:"+j+":k:"+k+":a:"+a+":b:"+b);
+	}
+	public void methodC1(){
+		System.out.println("methodC1");
+	}
+}
+
+class InterfaceTest4{
+	public static void main(String[] args){
+		Bb bb1=new Cc();
+		System.out.println(":i:"+bb1.i+":j:"+bb1.j+":k:"+bb1.k);
+		bb1.methodA1();
+		bb1.methodA2();
+		bb1.methodB1();
+		
+		//bb1.methodC1(); this is not possible
+	}
+}		
+	
+Q) Multiple inheritance is not supported through class in java, but it is possible by an interface, why?
+
+ Multiple inheritance is not supported in the case of class because of ambiguity. However, it is supported in case of an interface because there is no ambiguity. It is because its implementation is provided by the implementation class. 	
+			
+
+Why use Java interface?
+		There are mainly three reasons to use interface.
+			It is used to achieve abstraction.
+			By interface, we can support the functionality of multiple inheritance.
+			It can be used to achieve loose coupling.
