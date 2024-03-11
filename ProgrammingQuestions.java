@@ -187,29 +187,33 @@ Assignment :
 Question 1:
 class A {
     public A() {
+		super();
         System.out.println(":In A:");
     }
 }
-
 class B extends A {
     public B() {
     	this(10);
         System.out.println(":In B:");
     }
     B(int i){
+		super();
     	System.out.println(":i:"+i);
     }
 }
-
 class C extends B {
     public C() {
+		super();
         System.out.println(":In C:");
     }
 }
-
 public class Test1 {
     public static void main(String[] args) {
         B b = new C();
+		//:In A:
+		//:i:10
+		//:In B:
+		//:In C:
     }
 }
 Output:
@@ -219,7 +223,6 @@ Question 2:
 class D {
     public D() {
 		this("");
-		super();
         System.out.print("Base ");
     }
 
@@ -227,10 +230,8 @@ class D {
         System.out.print("Base: " + s);
     }
 }
-
 class E extends D {
     public E(String s) {
-        super(); 
         super(s);
         System.out.print("Derived ");
     }
@@ -239,6 +240,9 @@ class E extends D {
 class Test2 {
     public static void main(String[] args) {
          D base = new E("Hello ");
+
+		 //
+		 //Base Hello Derived
     }
 }
 
@@ -282,8 +286,8 @@ public class Test4
     public static void main(String[] args)
     {
         Aa a = new Bb();
-        System.out.println(a.i);
-		a.method1();
+        System.out.println(a.i); //10 
+		a.method1(); //In class Bb
 		
     }
 }
