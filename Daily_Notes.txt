@@ -4140,3 +4140,218 @@ Why use Java interface?
 			It is used to achieve abstraction.
 			By interface, we can support the functionality of multiple inheritance.
 			It can be used to achieve loose coupling.
+
+Difference between abstract classes and interfaces.
+
+				abstract class															interface
+		1.	declaration is abstract class A{...}									1.	declaration is interface A{...}
+		2.	An abstract class can have both abstract and concrete members.			2.	Interfaces can only have abstract methods and constants.
+		3.	Instantiation (or Object creation) is not possible						3.	Instantiation (or Object creation) is not possible.
+		4.	An abstract class can extend only one class								4.	An interface can extend many interfaces.
+		5.	A class can extend only one abstract class.								5.	A class can implement multiple interfaces.
+		6.	Abstract classes can have constructors.									6.	Interfaces cannot have constructors.
+		7.	Abstract classes can have access modifiers for their members.			7.	All members of an interface are implicitly public.
+
+***********************************
+11-March-2024
+***********************************		
+
+************************
+Packages
+************************
+		
+Packages In Java:
+	Package in Java is a mechanism to encapsulate a group of classes, sub packages and interfaces. All we need to do is put related classes into packages. After that, we can simply write an import class from existing packages and use it in our program. 
+	
+	Packages are used for:
+		1. Preventing naming conflicts. 
+			For example there can be two classes with name Employee in two packages, com.company.sales.Employee and com.company.marketing.Employee.
+			
+		2. Making searching/locating and usage of classes, interfaces, enumerations and annotations easier.
+		
+		3. Providing controlled access: protected and default have package level access control. A protected member is accessible by classes in the same package and its subclasses. A default member (without any access specifier) is accessible by classes in the same package only.
+		
+		4. Packages can be considered as data encapsulation (or data-hiding).
+
+	Syntax:
+		package packagename;
+		
+	=>	Accessing classes of a package:
+		
+		Syntax:
+			import packagename.classname;	// Only mentioned class of this package will be accessible.	
+		
+		Example:
+			java.util.Arrays;	// import the Arrays class from util package.
+			import java.util.*; 	// import all the classes from util package
+			import package.*;	// All the classes and interfaces of this package will be accessible but not subpackages.
+		
+		
+	Example 1:
+		package controller;
+
+		public class AController{
+			public int k=100;
+			public void method1(){
+				System.out.println(":Inside method1():");
+			}
+		}
+		
+
+		import controller.AController;
+
+		class PkgTest1{
+			public static void main(String[] args){
+				AController obj=new AController();
+				System.out.println(":obj:"+obj);
+				System.out.println(":obj.k:"+obj.k);
+				obj.method1();
+			}
+		}
+
+		
+	Example 2:
+		package controller;
+
+		public class BController{
+			public int y=500;
+			public void methodB(){
+				System.out.println(":Inside method1():");
+			}
+		}
+		
+
+		
+		import controller.*;	// All the classes and interfaces of this package will be accessible but not subpackages.
+
+		class PkgTest2{
+			public static void main(String[] args){
+				AController obj1=new AController();
+				BController obj2=new BController();
+				System.out.println(":obj:"+obj);
+				System.out.println(":obj2:"+obj2);
+			}
+		}	
+					
+				
+		Note: package declaration is the first line in java program.
+	
+	=>	Package naming conventions : 
+			->	Package names are recommended to write in small case. 
+			->	Packages are named in reverse order of domain names, 
+			->	i.e., com.grats.practice,  com.grats.controller, com.grats.service, com.grats.dao
+		
+			
+
+	=>	Adding a class to a Package : 
+			We can add more classes to a created package by using package name at the top of the program and saving it in the package directory. 
+			
+	=>	Subpackages: 
+			->	Packages that are inside another package are the subpackages. 
+			->	These are not imported by default, they have to imported explicitly. Also, they are considered as different package for protected and default access specifiers.
+			
+		Example 3:
+				package controller.impl;
+
+				public class CController{
+					public int Z=500;
+					public void methodC(){
+						System.out.println(":Inside methodC():");
+					}
+				}
+				
+
+				
+				import controller.*;	// All the classes and interfaces of this package will be accessible but not subpackages.
+
+
+				class PkgTest2{
+					public static void main(String[] args){
+						AController obj1=new AController();
+						BController obj2=new BController();
+						CController obj3=new CController();
+						System.out.println(":obj:"+obj);
+						System.out.println(":obj2:"+obj2);
+						System.out.println(":obj3:"+obj3);
+					}
+				}		
+		
+	Types of packages:
+		=>	Built-in Packages:
+		
+			These packages consist of a large number of classes which are a part of Java API. Some of the commonly used built-in packages are:
+			
+				1) java.lang: Contains language support classes(e.g classed which defines primitive data types, math operations). This package is automatically imported.
+				2)  java.io: Contains classes for supporting input / output operations.
+				3)  java.util: Contains utility classes which implement data structures like Linked List, Dictionary and support ; for Date / Time operations.
+				4)  java.applet: Contains classes for creating Applets.
+				5)  java.awt: Contain classes for implementing the components for graphical user interfaces (like button , ;menus etc).
+				6)  java.net: Contain classes for supporting networking operations.
+		
+		=>	User-defined packages:
+			These are the packages that are defined by the user. First we create a directory mypackage (name should be same as the name of the package). Then create the MyClass inside the directory with the first statement being the package names.
+			
+				/ Name of the package must be same as the directory
+				// under which this file is saved
+				package mypackage;
+
+				public class MyClass
+				{
+					public void getNames(String s)
+					{        
+						System.out.println(s);        
+					}
+				}
+	
+=>	Static Import:
+		Static import is a feature introduced in Java programming language ( versions 5 and above ) that allows members ( fields and methods ) defined in a class as public static to be used in Java code without specifying the class in which the field is defined.
+		
+		import static java.lang.System.*;
+   
+		class StaticImportDemo 
+		{ 
+		   public static void main(String args[]) 
+		   {       
+				// We don't need to use 'System.out'  
+				// as imported using static. 
+				out.println("Hello"); 
+		   } 
+		} 
+		
+		Advantage of static import:
+			Less coding is required if you have access any static member of a class often.
+			
+		Disadvantage of static import:
+			If you overuse the static import feature, it makes the program unreadable and unmaintainable.
+
+=>	Handling name conflicts
+		The only time we need to pay attention to packages is when we have a name conflict . For example both, java.util and java.sql packages have a class named Date. 
+		
+		So if we import both packages in program as follows:
+					
+			import java.util.*;
+			import java.sql.*;
+			
+			//And then use Date class, then we will get a compile-time error :
+
+			Date today ; //ERROR-- java.util.Date or java.sql.Date?
+	
+		Example:
+		
+			import java.util.*;
+			import java.sql.*;
+
+			class PkgTest3 
+			{ 
+			   public static void main(String args[]) 
+			   {       
+					//Date today=new Date();
+					//System.out.println(":today:"+today);  
+					
+					java.util.Date utilDate=new java.util.Date();
+					java.util.Date sqlDate=new java.util.Date();
+					
+					System.out.println(":utilDate:"+utilDate); 
+					System.out.println(":sqlDate:"+sqlDate);  
+			   } 
+			} 
