@@ -4,7 +4,7 @@ class Test{
 			mult(y); //y=10
 		}
 		void mult(int y){//y=10
-			this.y*=5;//this.y*=5 => this.y=0*5; 
+			this.y*=5;//this.y*=5 => this.y=this.y*5; 
 		}
 		public static void main(String[] args){
 			int y=10;
