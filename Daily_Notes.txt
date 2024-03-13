@@ -4349,9 +4349,565 @@ Packages In Java:
 					//System.out.println(":today:"+today);  
 					
 					java.util.Date utilDate=new java.util.Date();
-					java.util.Date sqlDate=new java.util.Date();
+					java.util.Date sqlDate=new java.util.Date(0);
 					
 					System.out.println(":utilDate:"+utilDate); 
 					System.out.println(":sqlDate:"+sqlDate);  
 			   } 
 			} 
+
+*****************
+12-March-2024
+*****************
+Java arrays: 
+			
+		=>	Arrays in Java are used to store multiple values of the same data type under a single variable name. Additionally, The elements of an array are stored in a contiguous memory location. It is a data structure where we store similar elements. We can store only a fixed set of elements in a Java array.
+		=>	Java array is an index-based elements storage, the first element of the array is stored at the 0th index, 2nd element is stored on 1st index and so on.
+		=>	Java array is an object which inherits the object class. We can store primitive values or objects in an array in Java.
+			
+	=>	Types of Array in java
+			1. Single Dimensional Array:
+			2. Multidimensional Array
+			
+	=>	1. Single Dimensional Array:
+			=>	Declaration: You declare an array by specifying the data type of its elements, followed by square brackets [] and the array name.
+					Syntax of array declartion:
+						datatype[] ref-name;
+						or
+						datatype ref-name[];
+						
+					Example:
+						int[] marks;
+						or
+						int marks[];
+				
+			=>	Initialization: You can initialize an array when you declare it or later in your code.			
+					Syntax of array initialization:
+						datatype[] ref-name = {value1,value2,value3....valueN}; // if knows the values. // Quick array initialization
+						or 
+						ref-name = new datatype[]{value1,value2,value3....valueN}; // if knows the values
+						or 
+						ref-name = new datatype[10]; // if we don't know the values then define a size.
+						
+					Example:
+						int[] marks={55,65,75,85};
+						or
+						marks=new int[]{55,65,75,85};
+						or
+						marks=new int[10];
+						
+						marks[0]=55;
+						marks[1]=65;
+						marks[2]=75;
+						marks[3]=85;
+
+			=>	Accessing Elements:
+					Array elements are accessed using their index. Indexing starts at 0.
+					Syntax:
+						ref-name[index];
+						
+					Example: 
+						int marks1 = marks[0];
+						int marks2 = marks[1];				
+						int marks3 = marks[2];
+						int marks4 = marks[3];
+				
+			=>	Updating Element:
+					Syntax:
+						ref-name[index]=value;
+						
+					Example:
+						marks[0]=22;
+						marks[1]=33;				
+						marks[2]=44;
+						marks[3]=55;
+				
+				Example 1:
+					class ArraysDemo1{
+						public static void main(String[] args) {
+							int[] marks={55,65,75,85};
+							
+							System.out.println(marks[0]);
+							System.out.println(marks[1]);
+							System.out.println(marks[2]);
+							System.out.println(marks[3]);
+							
+							marks[2]=77;
+							marks[4]=99;
+							System.out.println(":Array updated:");
+							
+							System.out.println(marks[0]);
+							System.out.println(marks[1]);
+							System.out.println(marks[2]);
+							System.out.println(marks[3]);		
+						}
+					}
+					
+
+			=>	Array Length:
+				The length of an array can be obtained using the length property.
+					Syntax:
+						ref-name.length;
+						
+				Example: 
+				
+					class ArraysDemo2{
+						public static void main(String[] args) {
+							int[] marks={55,65,75,85};
+							System.out.println(":length:"+marks.length);
+						}
+					}
+			
+
+			=>Iterating through Arrays:
+				You can use loops to iterate through array elements.
+				
+				class ArraysDemo3{
+					public static void main(String[] args) {
+						int[] marks={55,65,75,85};
+						for(int i=0;i<marks.length;i++){
+							System.out.println(":value:"+marks[i]);
+						}
+					}
+				}
+
+			=>	Important points with arrays.
+			
+					class ArraysDemo4{
+						public static void main(String[] args) {		
+							//	double[] marks={55.50, 66.66,77,88,100}; // Quick array initialization
+							
+							double[] marks;
+					//		marks={55.50, 66.66,77,88,100};  //This way is not possible.	
+							marks=new double[]{55.50, 66.66,77,88,100};
+							
+							for(int i=0;i<marks.length;i++){
+								System.out.println(":"+marks[i]);
+							}
+						}
+					}
+				->	Java array stores default value of its type, if don't assign values.
+				
+					class ArraysDemo5{
+						public static void main(String[] args) {		
+							short marksArr[]=new short[5];
+							for(int i=0;i<marksArr.length;i++){
+								System.out.println(":"+marksArr[i]);
+							}
+							marksArr[0]=11;
+							marksArr[1]=22;
+							marksArr[2]=33;
+							marksArr[3]=44;
+							for(int i=0;i<marksArr.length;i++){
+								System.out.println(":"+marksArr[i]);
+							}
+						}
+					}
+					
+				->	Can't define the array of size by long value
+				
+					class ArraysDemo6{
+						public static void main(String[] args) {		
+							long size=5;
+							String[] phoneNos1=new String[size]; 	 // Can't define the array of size by long value
+							
+							byte size1=3;
+							String[] companyArr=new String[size1];
+							companyArr[0]="GratsIT";
+							companyArr[1]="Wipro";
+							companyArr[2]="Infosys";
+							for(int i=0;i<companyArr.length;i++){
+								System.out.println(":"+companyArr[i]);
+							}
+						}
+					}
+					
+				->	Gets the ArrayIndexOutOfBoundsException if try to access the elements from out of its range.
+					class ArraysDemo7{
+						public static void main(String[] args) {		
+							String[] companyArr=new String[size1];
+							companyArr[0]="GratsIT";
+							companyArr[1]="Wipro";
+							companyArr[2]="Infosys";
+							for(int i=0;i<companyArr.length;i++){
+								System.out.println(":"+companyArr[i]);
+							}
+							System.out.println(":"+companyArr[5]);
+						}
+					}					
+					
+			=>	Arrays with user-defined class types:
+			
+					class A{
+						int i=100;
+						void methodA(){
+							System.out.println(":Inside methodA():");
+						}
+						
+					}
+
+					class B{
+						int j=200;
+						void methodB(){
+							System.out.println(":Inside methodB():");
+						}					
+					}
+
+					public class ArraysDemo8{
+						public static void main(String[] args) {		
+							A[] aArr=new A[3];
+							for(int i=0;i<aArr.length;i++){
+								System.out.println(":"+aArr[i]);
+							}
+							aArr[0]=new A();
+							aArr[1]=new A();
+							aArr[2]=new A();
+							for(int i=0;i<aArr.length;i++){
+								System.out.println(":"+aArr[i]);
+							}
+					//		aArr[0]=new B(); This is not possible because array is type of A, so can assign A type objects
+							
+							Object[] objArr=new Object[4]; //This array is type of Object, so can assign any class object.
+							objArr[0]=new A();
+							objArr[1]=new B();
+							objArr[2]=new String();
+							
+							for(int i=0;i<objArr.length;i++){
+								System.out.println(":"+objArr[i]);
+							}
+						}
+					}	
+					
+				=>	Arrays limitations:
+				
+					->	Size Limit: We can store only the fixed size of elements in the array. It doesn't grow its size at runtime.
+					
+					public class ArraysDemo9{
+						public static void main(String[] args) {		
+							int[] a = new int[4];
+					//		a.length = 10;         // error
+							
+							int[] a1 = {42, -7, 1, 15};
+							int[] a2 = {42, -7, 1, 15};
+							if (a1 == a2) {  
+								System.out.println(":Equals:"); 
+							} else {
+								System.out.println("Not Equals");
+							} 
+							
+							if (a1.equals(a2)){  
+								System.out.println(":Equals:"); 
+							} else {
+								System.out.println("Not Equals");
+							}   
+							
+							System.out.println(a1);   
+							System.out.println(a2); 
+						}
+					}
+
+				=>	Arrays Shallow copy or Shallow cloning:
+					public class ArraysDemo10{
+						public static void main(String[] args) {		
+							int[] arr1= {5,6,9,4};
+							int[] arr2=arr1; // Shollow copy
+							
+							System.out.print(":arr1:");
+							for(int i=0;i<arr1.length;i++) {
+								System.out.print(arr1[i]+" ");
+							}
+							
+							System.out.print("\n:arr2:");
+							for(int i=0;i<arr2.length;i++) {
+								System.out.print(arr2[i]+" ");
+							}
+							System.out.println("\n==============================");
+							arr2[2]=14;
+							System.out.print(":arr1:");
+							for(int i=0;i<arr1.length;i++) {
+								System.out.print(arr1[i]+" ");
+							}
+							System.out.print("\n:arr2:");
+							for(int i=0;i<arr2.length;i++) {
+								System.out.print(arr2[i]+" ");
+							}
+						}
+					}
+
+				=>	Arrays Deep copy or Deep cloning:
+					public class ArraysDemo11{
+						public static void main(String[] args) {		
+							char[] arr1= {'H','E','L','L','O'};
+							char[] arr2=arr1.clone(); // Deep copy
+							System.out.print(":arr1:");
+							for(int i=0;i<arr1.length;i++) {
+								System.out.print(arr1[i]+" ");
+							}
+							System.out.print("\n:arr2:");
+							for(int i=0;i<arr2.length;i++) {
+								System.out.print(arr2[i]+" ");
+							}
+							System.out.println("\n==============================");
+							arr1[2]='A';
+							arr1[3]='B';
+							System.out.print(":arr1:");
+							for(int i=0;i<arr1.length;i++) {
+								System.out.print(arr1[i]+" ");
+							}
+							System.out.print("\n:arr2:");
+							for(int i=0;i<arr2.length;i++) {
+								System.out.print(arr2[i]+" ");
+							}
+						}
+					}
+
+Q.	Write a program to find the sum of elements in an array
+		Input: {56,75,86,96}
+		Output: 313
+		
+Q.	Write a program to find the largest element in an array
+		Input: {56,75,86,96}
+		Output:  96
+		
+Q. 	Write a program to find the duplicates from an character array
+		Input:  {'H','E','L','E','L','O'}
+		Output:  {'E','L'}
+		
+Q. 	Write a program to find given character array is palindrom or not.
+	Case 1:	Input:  {'M','A','D','A','M'}
+			Output:  Given character array is a palindrom
+			
+	Case 1:	Input:  {'G','R','A','T','A','S','G'}
+			Output:  Given character array is not a palindrom
+
+
+*****************
+13-March-2024
+*****************		
+	=>	2. Multidimensional Array:
+		
+			=>	Declaration: You declare an array by specifying the data type of its elements, followed by multiple square brackets [][]..[] and the array name.
+			
+				dataType[][] arrayRefVar; (or)  
+				dataType [][]arrayRefVar; (or)  
+				dataType arrayRefVar[][]; (or)  
+				dataType []arrayRefVar[];
+				
+				Example:
+					int[][] arr=new int[3][3];
+					
+			=>	Initialization: 
+					int[][] mArr={{2,3,4},{4,5,6}};
+					or
+					mArr=new int[][]{{2,3,4},{4,5,6},{9,11,21}};
+					or
+					mArr=new int[3][3];
+					
+					mArr[0][0]=1;
+					mArr[0][1]=2;
+					mArr[0][2]=3;
+					
+					mArr[1][0]=4;
+					mArr[1][1]=5;
+					mArr[1][2]=6;
+					
+					mArr[2][0]=7;
+					mArr[2][1]=8;
+					mArr[2][2]=9;
+					
+			=>	Accessing multi dimensional array.				
+				->	Example 1:
+							public class ArraysDemo12{
+								public static void main(String[] args){
+									int[][] mArr={{2,3,4},{4,5,6}};
+									for(int i=0;i<mArr.length;i++) {
+										for(int j=0;j<mArr[i].length;j++) {
+											System.out.print("\t"+mArr[i][j]);
+										}
+										System.out.println();
+									}
+								}
+							}
+							
+				->	Example 2:
+							public class ArraysDemo13{
+								public static void main(String[] args){
+									int[][] mArr=new int[3][3];
+									
+									mArr[0][0]=1;
+									mArr[0][1]=2;
+									mArr[0][2]=3;
+									
+									mArr[1][0]=4;
+									mArr[1][1]=5;
+									mArr[1][2]=6;
+									
+									mArr[2][0]=7;
+									mArr[2][1]=8;
+									mArr[2][2]=9;
+									
+									for(int i=0;i<mArr.length;i++) {
+										for(int j=0;j<mArr[i].length;j++) {
+											System.out.print("\t"+mArr[i][j]);
+										}
+										System.out.println();
+									}
+								}
+							}	
+							
+				->	Example 3:
+							public class ArraysDemo14{
+								public static void main(String[] args){
+										Double []marks[];
+								//		Double[][] marks=new Double[5][6];
+										marks=new Double[5][6];
+										marks[0]=new Double[] {60.0, 77.0, 65.0, 58.0, 60.0, 90.0};
+										marks[1]=new Double[] {75.0, 98.0, 78.0, 90.0, 56.0, 66.0};
+										marks[2]=new Double[] {98.0, 96.0, 65.0, 54.0, 56.0, 87.0};
+										marks[3]=new Double[] {75.0, 98.0, 78.0, 90.0, 56.0, 66.0};
+										marks[4]=new Double[] {75.0, 98.0, 78.0, 90.0, 56.0, 66.0};
+										for(int i=0;i<marks.length;i++) {
+											for(int j=0;j<marks[i].length;j++) {
+												System.out.print("\t"+marks[i][j]);
+											}
+											System.out.println();
+										}
+									}
+								}
+							}
+	
+	Q. 	Write a program to sum of multimentional array.
+	
+		input : 
+			Array1:
+				10	5	7
+				8	15	9
+				5	7	6
+			Array2:
+				4	5	7
+				6	20	6
+				4	2	3
+				
+		Output:
+				14	10	14
+				14	35	15
+				9	9	9
+				
+	Q.	Write a program to compare two array elements are equal or not.
+	
+			input:	Array1: {6,8,3,6}	Array2:	{6,8,3,6}
+			
+	
+				
+	
+	=>	Arrays Types and Their Allowed Element Types:
+	
+				Array Types								Allowed Element Types
+			Primitive type arrays					It allows same type of data.
+			Object Type Arrays						Either declared type objects or it’s child class objects.
+			Abstract Class Type Arrays				Its child-class objects are allowed.
+			Interface Type Arrays					Its implementation class objects are allowed.
+		
+	=>	Advantages:
+			->	Code Optimization: It makes the code optimized, we can retrieve or sort the data efficiently.
+			->	Random access: 	We can get any data located at an index position.
+								The computational complexity for writing to and accessing an array is O(1). 
+			
+	=>	Limitations of array:
+			Size Limit: We can store only the fixed size of elements in the array. It doesn't grow its size at runtime.
+			
+			int[] a = new int[4];
+			a.length = 10;         // error
+			
+
+=>	java.util.Arrays:
+
+		Class Arrays in package java.util has useful static methods for manipulating arrays. This class provides static methods to dynamically create and access Java arrays. It consists of only static methods and the methods of Object class.
+		
+		->	Example 1:
+				class ArraysDemo15{
+					public static void main(String[] args){
+						int intArr[] = { 55,10, 20, 15, 22,0, 35,-23,-34 };
+						System.out.println(":intArr:"+intArr);
+						System.out.println(":intArr:"+Arrays.toString(intArr));
+						
+						Arrays.sort(intArr);
+						System.out.println(":intArr:"+Arrays.toString(intArr));
+					}
+				}
+				
+		->	Example 2: // searching an element.
+				class ArraysDemo16{
+					public static void main(String[] args){
+						int intArr[] = { 55,10, 20, 15, 22,0, 35,-23,-34 };
+						int eleIndex = Arrays.binarySearch(intArr, 22);
+						System.out.println(":Given element index:"+eleIndex);
+					}
+				}
+
+		->	Example 3: // comparing 2 arrays equal or not
+				class ArraysDemo17{
+					public static void main(String[] args){
+						int intArr[] = { 10, 20, 15, 22, 35 }; 
+						int intArr1[] = { 10, 20, 15, 22,35  }; 
+						
+						if(intArr==intArr1) {
+							System.out.println(":true:");
+						}else{
+							System.out.println(":false:");
+						}
+				  
+						System.out.println(":is both arrays elements same: "
+										   + Arrays.equals(intArr, intArr1)); 
+					}
+				}
+
+		->	Example 4: // Array copy
+				class ArraysDemo18{
+					public static void main(String[] args){
+						int intArr[] = { 10, 20, 15, 22, 35 }; 
+						System.out.println(Arrays.toString(intArr));
+						int[] intArr3=Arrays.copyOf(intArr,2); //no of elements has to copy.
+						System.out.println(Arrays.toString(intArr3));
+					}
+				}				
+		
+		refer ppt.
+
+Some important points on arrays.
+		
+		=>	Every array is an object in java hence we create an array by new operator.
+			int[] a=new int[3];
+		
+		=>	For every array type corresponding classes are available and these classes are part of java language and not available to the programmer level.
+				System.out.println("::"+a.getClass().getName());
+				
+				int[]		[I
+				short[]     [S
+				
+		=>	At the time of array creation compulsary we should specify the size. otherwise we will get compile time error.
+				int[] x=new int[6];
+				
+				int[] x=new int[]; // this is not possible
+				
+		=>	It is legal to have an array with size 0
+				int[] x=new int[0];
+				
+		=>	If we are trying to specify arry size with some negative int value then we will get runtime exception saying NegativeArraySizeException.
+				int[] y=new int[-3];//no compile time error.
+				
+		=>	To specify array size that allowed data types are byte,short,char and int. If we are trying to specify any other type then we will get compile time error.
+				int[] x=new int[10];
+				int[] y=new int['a'];
+				byte b=20;
+				int[] z=new int[b];
+				short s=30;
+				int[] i=new int[s];
+				
+				long val=34;
+				int[] i=new int[val];
+				
+		=>	The maximum allowed array size in java is 2147483647. which the maximum range of int type. 
+				int[] x=new int[2147483647]; // We may get run time error if sufficient memory is not available.
+				
+				int[] x=new int[2147483648];  //We will get the compile time error	
