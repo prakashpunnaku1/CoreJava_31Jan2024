@@ -5,8 +5,8 @@ class PkgTest4
 { 
    public static void main(String args[]) 
    {       
-		Date today=new Date();
-		System.out.println(":today:"+today);  
+		//Date today=new Date();
+		//System.out.println(":today:"+today);  
 		
 		java.util.Date utilDate=new java.util.Date();
 		java.sql.Date sqlDate=new java.sql.Date();

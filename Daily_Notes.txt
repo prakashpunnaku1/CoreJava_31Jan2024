@@ -4679,3 +4679,235 @@ Q. 	Write a program to find given character array is palindrom or not.
 			
 	Case 1:	Input:  {'G','R','A','T','A','S','G'}
 			Output:  Given character array is not a palindrom
+
+
+*****************
+13-March-2024
+*****************		
+	=>	2. Multidimensional Array:
+		
+			=>	Declaration: You declare an array by specifying the data type of its elements, followed by multiple square brackets [][]..[] and the array name.
+			
+				dataType[][] arrayRefVar; (or)  
+				dataType [][]arrayRefVar; (or)  
+				dataType arrayRefVar[][]; (or)  
+				dataType []arrayRefVar[];
+				
+				Example:
+					int[][] arr=new int[3][3];
+					
+			=>	Initialization: 
+					int[][] mArr={{2,3,4},{4,5,6}};
+					or
+					mArr=new int[][]{{2,3,4},{4,5,6},{9,11,21}};
+					or
+					mArr=new int[3][3];
+					
+					mArr[0][0]=1;
+					mArr[0][1]=2;
+					mArr[0][2]=3;
+					
+					mArr[1][0]=4;
+					mArr[1][1]=5;
+					mArr[1][2]=6;
+					
+					mArr[2][0]=7;
+					mArr[2][1]=8;
+					mArr[2][2]=9;
+					
+			=>	Accessing multi dimensional array.				
+				->	Example 1:
+							public class ArraysDemo12{
+								public static void main(String[] args){
+									int[][] mArr={{2,3,4},{4,5,6}};
+									for(int i=0;i<mArr.length;i++) {
+										for(int j=0;j<mArr[i].length;j++) {
+											System.out.print("\t"+mArr[i][j]);
+										}
+										System.out.println();
+									}
+								}
+							}
+							
+				->	Example 2:
+							public class ArraysDemo13{
+								public static void main(String[] args){
+									int[][] mArr=new int[3][3];
+									
+									mArr[0][0]=1;
+									mArr[0][1]=2;
+									mArr[0][2]=3;
+									
+									mArr[1][0]=4;
+									mArr[1][1]=5;
+									mArr[1][2]=6;
+									
+									mArr[2][0]=7;
+									mArr[2][1]=8;
+									mArr[2][2]=9;
+									
+									for(int i=0;i<mArr.length;i++) {
+										for(int j=0;j<mArr[i].length;j++) {
+											System.out.print("\t"+mArr[i][j]);
+										}
+										System.out.println();
+									}
+								}
+							}	
+							
+				->	Example 3:
+							public class ArraysDemo14{
+								public static void main(String[] args){
+										Double []marks[];
+								//		Double[][] marks=new Double[5][6];
+										marks=new Double[5][6];
+										marks[0]=new Double[] {60.0, 77.0, 65.0, 58.0, 60.0, 90.0};
+										marks[1]=new Double[] {75.0, 98.0, 78.0, 90.0, 56.0, 66.0};
+										marks[2]=new Double[] {98.0, 96.0, 65.0, 54.0, 56.0, 87.0};
+										marks[3]=new Double[] {75.0, 98.0, 78.0, 90.0, 56.0, 66.0};
+										marks[4]=new Double[] {75.0, 98.0, 78.0, 90.0, 56.0, 66.0};
+										for(int i=0;i<marks.length;i++) {
+											for(int j=0;j<marks[i].length;j++) {
+												System.out.print("\t"+marks[i][j]);
+											}
+											System.out.println();
+										}
+									}
+								}
+							}
+	
+	Q. 	Write a program to sum of multimentional array.
+	
+		input : 
+			Array1:
+				10	5	7
+				8	15	9
+				5	7	6
+			Array2:
+				4	5	7
+				6	20	6
+				4	2	3
+				
+		Output:
+				14	10	14
+				14	35	15
+				9	9	9
+				
+	Q.	Write a program to compare two array elements are equal or not.
+	
+			input:	Array1: {6,8,3,6}	Array2:	{6,8,3,6}
+			
+	
+				
+	
+	=>	Arrays Types and Their Allowed Element Types:
+	
+				Array Types								Allowed Element Types
+			Primitive type arrays					It allows same type of data.
+			Object Type Arrays						Either declared type objects or it’s child class objects.
+			Abstract Class Type Arrays				Its child-class objects are allowed.
+			Interface Type Arrays					Its implementation class objects are allowed.
+		
+	=>	Advantages:
+			->	Code Optimization: It makes the code optimized, we can retrieve or sort the data efficiently.
+			->	Random access: 	We can get any data located at an index position.
+								The computational complexity for writing to and accessing an array is O(1). 
+			
+	=>	Limitations of array:
+			Size Limit: We can store only the fixed size of elements in the array. It doesn't grow its size at runtime.
+			
+			int[] a = new int[4];
+			a.length = 10;         // error
+			
+
+=>	java.util.Arrays:
+
+		Class Arrays in package java.util has useful static methods for manipulating arrays. This class provides static methods to dynamically create and access Java arrays. It consists of only static methods and the methods of Object class.
+		
+		->	Example 1:
+				class ArraysDemo15{
+					public static void main(String[] args){
+						int intArr[] = { 55,10, 20, 15, 22,0, 35,-23,-34 };
+						System.out.println(":intArr:"+intArr);
+						System.out.println(":intArr:"+Arrays.toString(intArr));
+						
+						Arrays.sort(intArr);
+						System.out.println(":intArr:"+Arrays.toString(intArr));
+					}
+				}
+				
+		->	Example 2: // searching an element.
+				class ArraysDemo16{
+					public static void main(String[] args){
+						int intArr[] = { 55,10, 20, 15, 22,0, 35,-23,-34 };
+						int eleIndex = Arrays.binarySearch(intArr, 22);
+						System.out.println(":Given element index:"+eleIndex);
+					}
+				}
+
+		->	Example 3: // comparing 2 arrays equal or not
+				class ArraysDemo17{
+					public static void main(String[] args){
+						int intArr[] = { 10, 20, 15, 22, 35 }; 
+						int intArr1[] = { 10, 20, 15, 22,35  }; 
+						
+						if(intArr==intArr1) {
+							System.out.println(":true:");
+						}else{
+							System.out.println(":false:");
+						}
+				  
+						System.out.println(":is both arrays elements same: "
+										   + Arrays.equals(intArr, intArr1)); 
+					}
+				}
+
+		->	Example 4: // Array copy
+				class ArraysDemo18{
+					public static void main(String[] args){
+						int intArr[] = { 10, 20, 15, 22, 35 }; 
+						System.out.println(Arrays.toString(intArr));
+						int[] intArr3=Arrays.copyOf(intArr,2); //no of elements has to copy.
+						System.out.println(Arrays.toString(intArr3));
+					}
+				}				
+		
+		refer ppt.
+
+Some important points on arrays.
+		
+		=>	Every array is an object in java hence we create an array by new operator.
+			int[] a=new int[3];
+		
+		=>	For every array type corresponding classes are available and these classes are part of java language and not available to the programmer level.
+				System.out.println("::"+a.getClass().getName());
+				
+				int[]		[I
+				short[]     [S
+				
+		=>	At the time of array creation compulsary we should specify the size. otherwise we will get compile time error.
+				int[] x=new int[6];
+				
+				int[] x=new int[]; // this is not possible
+				
+		=>	It is legal to have an array with size 0
+				int[] x=new int[0];
+				
+		=>	If we are trying to specify arry size with some negative int value then we will get runtime exception saying NegativeArraySizeException.
+				int[] y=new int[-3];//no compile time error.
+				
+		=>	To specify array size that allowed data types are byte,short,char and int. If we are trying to specify any other type then we will get compile time error.
+				int[] x=new int[10];
+				int[] y=new int['a'];
+				byte b=20;
+				int[] z=new int[b];
+				short s=30;
+				int[] i=new int[s];
+				
+				long val=34;
+				int[] i=new int[val];
+				
+		=>	The maximum allowed array size in java is 2147483647. which the maximum range of int type. 
+				int[] x=new int[2147483647]; // We may get run time error if sufficient memory is not available.
+				
+				int[] x=new int[2147483648];  //We will get the compile time error	
