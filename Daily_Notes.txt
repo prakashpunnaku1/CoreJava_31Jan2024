@@ -4911,3 +4911,328 @@ Some important points on arrays.
 				int[] x=new int[2147483647]; // We may get run time error if sufficient memory is not available.
 				
 				int[] x=new int[2147483648];  //We will get the compile time error	
+
+******************
+14-MAR-2024
+******************
+=>	Variable Arguments (Varargs) in Java :
+
+		Variable Arguments (Varargs) were introduced in JDK 5. From JDK 5 onwards, we can declare a method with a variable number of arguments. Such types of methods are called Varargs methods. The varargs feature offers a simpler, better option.
+
+		public void fun(int... args) 
+		{
+		   // method body
+		} 
+
+		There can be only one variable argument in a method.
+		Variable argument (Varargs) must be the last argument.
+		
+		Example 1:
+		public class VarArgsDemo1 {
+						public int sum(int a,int b){
+							return a+b;
+						}
+						public static void main(String[] args) {
+						
+							VarArgsDemo1 obj=new VarArgsDemo1();
+							int sum1=obj.sum(2,3);
+							System.out.println(sum1);	
+							
+							int sum2=obj.sum(2,3,50,60); // This is not possible because sum method have 2 parameters only, but here passing 3 arguments.
+							System.out.println(sum2);
+
+						}
+				}
+
+		Example 1:
+		public class VarArgsDemo2 {
+						public int sum(int a,int b){
+							System.out.println(":sum1:");	
+							return a+b;
+						}
+						
+						public int sum(int... args){
+							System.out.println(":sum2:");
+							int sum=0;
+							for(int i=0;i<args.length;i++) {
+								sum+=args[i];
+							}
+							return sum;
+						}
+						
+						public static void main(String[] args) {
+						
+							VarArgsDemo2 obj=new VarArgsDemo2();
+							int sum1=obj.sum(2,3);
+							System.out.println(sum1);	
+							
+							int sum2=obj.sum(2,3,50); 
+							System.out.println(sum2);
+							
+							int[] arr={15,25};
+							int sum3=obj.sum(arr); 
+							System.out.println(sum3);
+
+						}
+				}				
+				
+		
+		Example 1:
+				public class VarArgsDemo3 {
+
+						public int sum(String name,int... args) {
+							System.out.println("name:"+name);
+							int sum=0;
+							for(int i=0;i<args.length;i++) {
+								sum+=args[i];
+							}
+							return sum;
+						}
+						
+						public int sum(String name,int[] args) {
+							System.out.println("name:"+name);
+							int sum=0;
+							for(int i=0;i<args.length;i++) {
+								sum+=args[i];
+							}
+							return sum;
+						}
+
+						public int sum(int... args,String name) {
+							System.out.println("name:"+name);
+							int sum=0;
+							for(int i=0;i<args.length;i++) {
+								sum+=args[i];
+							}
+							return sum;
+						}						
+			
+						public static void main(String[] args) {
+							// TODO Auto-generated method stub
+							int[] nums= {24,345,4,2,};
+							
+							VarArgsDemo3 obj=new VarArgsDemo3();
+							int sum1=obj.sum("sum",23,34,45,2234);
+							int sum2=obj.sum("sum",new int[] {23,24,3634,324});
+							System.out.println(sum1);
+							System.out.println(sum2);
+							int sum3=obj.sum("sum",nums);
+							System.out.println(sum3);
+						}
+				}
+
+=>	Enhanced for loop :
+		Enhanced for loop is introduced since J2SE 5.0. It provides an alternative approach to traverse the array or collection in Java. It is mainly used to traverse the array or collection elements.
+		
+		Syntax:
+			for(declaration : expression) {
+				// Statements
+			}
+			
+		Declaration − The newly declared block variable is of a type compatible with the elements of the array you are accessing.
+		Expression − This evaluates to the array you need to loop through. The expression can be an array variable or method call that returns an array.
+		
+		Eample:
+				int [] numbers = {10, 20, 30, 40, 50};
+				for(int x : numbers ) {
+						System.out.print( x );
+						System.out.print(" ");
+				}	
+
+
+Mutable Object:
+	=>	An mutable object is an object whose state can be modified after it has been created. This means that the values of its attributes or properties can be changed.
+	
+	class A{
+	   private int num;
+	   A(int num){
+		   this.num=num;
+	   }
+	   public void setNum(int num){
+		   this.num=num;
+		   // return new A(a);
+	   }
+	   public int getNum() {
+		   return num;
+	   }
+	}
+
+	public class MutableDemo1 {
+
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			A a1=new A(100);
+			System.out.println("::"+a1.getNum());
+			a1.setNum(300);
+			System.out.println("::"+a1.getNum());
+		}
+	}
+
+Immutable Object:
+	=>	An immutable object is an object whose state cannot be changed after it has been created. Once an immutable object is created, its state remains constant for the lifetime of the object.
+	
+	class B{
+	   private int num;
+	   B(int num){
+		   this.num=num;
+	   }
+	   public void setNum(int num){
+		   return new B(num);
+	   }
+	   public int getNum() {
+		   return num;
+	   }
+	}
+
+	public class ImmutableDemo2 {
+
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			B b1=new B(100);
+			System.out.println("::"+b1.getNum());
+			a1.setNum(300);
+			System.out.println("::"+b1.getNum());
+		}
+	}
+
+
+*************************************
+String, StringBuffer & StringBuilder:
+*************************************
+	Java provides 3 classes to represent a sequence of characters namely, String, StringBuffer and StringBuilder.
+	
+	It is very important for us as developers to know when to use which class.	
+
+
+java.lang.String: 
+
+	=>	The String class in Java is a fundamental class that represents a sequence of characters. It is part of the java.lang package and is extensively used in Java programming for storing and manipulating textual data. Strings in Java are immutable, meaning once created, their values cannot be changed.
+	
+	=>	In Java, objects of String are immutable which means a constant and cannot be changed object state once created.
+
+There are multiple ways can create a String object. Broadly can say 3 ways
+
+	1) By new keyword:	Strings can be constructed using various constructors
+					
+			String s1=new String("Grats"); 	// In this case creates object in Heap memory.
+			String s2=new String("Grats");	// In this case creates object in Heap memory.
+		
+		Example 1:
+			public class StringDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					String s1=new String("Grats"); 	// In this case creates object in Heap memory.
+					String s2=new String("Grats");	// In this case creates object in Heap memory.
+					
+					System.out.println(":s1:"+s1); //Grats
+					System.out.println(":s2:"+s2); //Grats
+					
+					System.out.println(s1==s2);//false
+				}
+			}
+				
+		
+	2) By string literal: Strings can be created using string literals enclosed in double quotes. For example:
+		
+		String s1="Grats"; // In this case a new object created in String constant pool and referred with reference s1 variable.
+		String s2="Grats"; // In this case since object with same content already available in String constant pool will return the same reference.
+		
+		Example 2:
+			public class StringDemo2 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					String s1="Grats"; 
+					String s2="Grats";
+					String s3="Grats";
+					String s4="Software";
+					
+					System.out.println(":s1:"+s1); //Grats
+					System.out.println(":s2:"+s2); //Grats
+					System.out.println(s1==s2);    //true
+				}
+			}
+			
+		String Pool: 
+					=>	Java maintains a string pool (or string constant pool) to store unique string literals. When a string literal is encountered, Java checks if it already exists in the pool. If it does, the existing reference is returned; otherwise, a new string object is created and added to the pool.
+					
+					=>	Each time a string literal is created, the JVM checks the string literal pool first. If the string already exists in the string pool, a reference to the pooled instance returns. If the string does not exist in the pool, a new String object initializes and is placed in the pool.
+					
+	3)	By using the + operator:
+	
+		Example 3:
+			public class StringDemo3 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					String s1="Grats"; 
+					String s2=s1+" IT Solutions";
+					
+					System.out.println(":s1:"+s1); //Grats
+					System.out.println(":s2:"+s2); //Grats IT Solutions
+					System.out.println(s1==s2);
+					
+				}
+			}
+
+	Example 4:
+			public class StringDemo4 {
+				public static void main(String[] args) {
+					
+					String s1="GratsIT"; 
+					System.out.println(":Before concat:s1:"+s1);//GratsIT
+					
+					s1.concat("Solutions");
+					
+					System.out.println(":After concat::s1:"+s1);
+					
+					String s2=s1.concat("Software");
+					
+										System.out.println(":s1:"+s1);//
+
+					System.out.println(":s2:"+s2);//
+					
+					System.out.println(s1==s2);
+				}
+			}	
+
+	Example 5:
+			public class StringDemo5 {
+				public static void main(String[] args) {
+					String s1="GratsIT"; 
+					String s2 = s1.concat("");
+					System.out.println(s1==s2);
+					
+					String s3=new String("Infosys"); 
+					String s4 = s3.concat("");
+					System.out.println(s3==s4);
+				}
+			}			
+		
+	Example 6:
+		class StringDemo6{
+				public static void main(String[] args){
+					String s1=new String("Wipro Technologies");
+					String s2=new String("Wipro Technologies");
+					
+					System.out.println(s1==s2); //false
+					
+					String s3="Wipro Technologies";
+					System.out.println(s1==s3); //false
+					String s4="Wipro Technologies";
+					System.out.println(s1==s4); //false
+					
+					System.out.println(s3==s4); //true
+					
+					String s5="Wipro"+" Technologies";
+					System.out.println(s1==s5); //false
+					System.out.println(s3==s5); //true
+					
+					String s6="Wipro";
+					String s7=s6+" Technologies";	//false
+					System.out.println(s4==s7);
+					final String s8="Wipro";
+					String s9=s8+" Technologies";	//true
+					System.out.println(s4==s9);
+				}
+			}
+	
+	
