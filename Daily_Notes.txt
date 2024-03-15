@@ -5234,5 +5234,230 @@ There are multiple ways can create a String object. Broadly can say 3 ways
 					System.out.println(s4==s9);
 				}
 			}
+
+******************
+15-MAR-2024
+******************
+	
+equals(): String class is overriding the equals() method from Object class. Which compares the content of both the objects are same or not.
+	Example 7:
+	
+		class C{
+			private int x=100;
+			C(int x){
+				this.x=x;
+			}
+			public int getX() {
+				return this.x;
+			}
+			public boolean equals(Object obj) {
+				if(this==obj) {
+					return true;
+				}
+				if(obj==null || this.getClass()!=obj.getClass()) {
+					return false;
+				}
+				if(this.getX()==((C)obj).getX()) {
+					return true;
+				}
+				return false;
+			}
+		}
+	
+		public class StringDemo7{
+				public static void main(String[] args){
+				
+					C a1=new C(10);
+					C a2=new C(10);
+					System.out.println(a1==a2);
+					System.out.println(a1.equals(a2));
+				
+					String s1=new String("Bangalore"); 	
+					String s2=new String("Bangalore");	
+					String s3="Bangalore"; 
+					String s4="Bangalore";
+					
+					System.out.println(s1==s2);
+					System.out.println(s1==s3);
+					System.out.println(s1==s4);
+					
+					System.out.println(s1.equals(s2));
+					System.out.println(s1.equals(s3));
+					System.out.println(s1.equals(s4));
+					
+					System.out.println(s3==s4);
+					System.out.println(s3.equals(s4));			
+				}		
+		}
+		
+		
+toLowerCase():	the toLowerCase() method is used to convert all characters in a string to lowercase
+trim(): 		the trim() method is used to remove leading and trailing whitespace (spaces, tabs, newlines) from a string	
+	Example 8:
+		class StringDemo8{
+				public static void main(String[] args){
+					Scanner sc = new Scanner(System.in);
+					System.out.println(":Please Enter your city:");
+					String city = sc.nextLine();
+					String message;
+					switch (city) {
+						case "hyderabad":
+							message = "Hyderabad is famous for biriyani";
+							break;
+						case "bangalore":
+							message = "Bangalore is famous for malls";
+							break;
+						case "chennai":
+							message = "Chennai is famous for beaches";
+							break;
+						default:
+							message = "Please enter valid city";
+							break;
+					}
+					System.out.println(message);
+				}		
+		}
+
+split(): the split() method is used to split a string into an array of substrings based on a specified delimiter. Here's how you can use it:
+	
+	Example 9:
+		class StringDemo9{
+				public static void main(String[] args){
+					String fruits = "apple,orange,banana,graps";
+					String[] fruitsArr = fruits.split(",");
+					for(String fruit:fruitsArr) {
+						System.out.println(fruit);
+					}
+					System.out.println("=============================");
+					String[] messageArr = "Hi Hello World".split(" ");
+					for(String str:messageArr) {
+						System.out.println(str);
+					}
+				}		
+		}
+	
+
+=>	String class constructors:	String class have many useful constructors to create object of string. 
+
+			String():
+						String s1=new String();//Creates empty String object.
+						
+			String(String literal):
+						String s2=new String("Java");
+						
+			String(StringBuffer sb):
+						String s3=new String(new StringBuffer("Java"));
+						
+			String(StringBuilder sb):
+						String s3=new String(new StringBuilder("Java"));
+						
+			String(char[] ch):
+			
+						String s3=new String(new char[]{'G','R','A','T','S'});
+						
+						
+			String(byte[] b):
+						 =>	This constructor is used to create a new string by decoding the bytes in the specified byte array using the platform's default charset.
+						 
+						String s3=new String(new byte[]{65,66,67,68,69});
+				
+
+=>	String class methods:
+
+String class have many useful methods to perform operations on sequence of characters. 
+
+	=>	public boolean isEmpty():	
+		->	Returns true if, and only if, length() is 0.
+				String s="";
+				sop(s.isEmpty());
+				String s1="abc";
+				sop(s1.isEmpty());
+		
+	=>	public boolean length():	
+		->Returns the length of this string.
+			sop(s1.length());
+		
+		-> sop(s1.length);// Here it will give compiliation error, because length variable applicable for arrays. length() applicable for Strings.
+		
+	=>	public String replace(char target,char replacement):	
+		=>	Replaces each character of this string that matches the literal target character with the specified literal replacement character.
+		
+			String s2="afswagesagd";
+			sop(s2.replace('a','x'));
+	
+	=>	public String substring(int begin):	
+		->	Returns a new string that is a substring of this string. 
+		->	Which return the string from begin index to end of the string.
+		
+			String s2="afswagesagd"; 
+			sop(s2.substring(5));	//gesagd
+			
+	=>	public String substring(int begin,int end): 
+		->	Returns a new string that is a substring of this string. 
+		->	Which returns from begin index to end-1 index.
+					
+			String s2="afswagesagd"; 
+			sop(s2.substring(5,9));	//from 5th index to 8 th (9-1) //gesa
+			
+	=>	public int indexOf(char ch):
+		->	Returns the index within this string of the first occurrence of the specified character.
+		->	Which searchs the specified character from starting index and returns the index of first occurance of that . If not found returns -1
+	
+			String s2="afswagesagd"; 
+			sop(s2.indexOf('g')); //5
+			sop(s2.indexOf('c')); //-1
+			sop(s2.indexOf('s')); //2
+			
+	=>	public int lastIndexOf(char ch):
+		->	Returns the index within this string of the last occurrence of the specified character.
+		
+			String s2="afswagesagd"; 
+			sop(s2.lastIndexOf('a')); //8
+			sop(s2.lastIndexOf('c')); //-1
+			
+	=>	public String toLowerCase(): 
+		->	Converts all of the characters in this String to lower case
+					
+	
+	=>	public String toUpperCase(): 
+		->	Converts all of the characters in this String to upper case
+
+	=>	boolean equalsIgnoreCase(String s)
+		->	Compares this String to another String, ignoring case considerations.
+
+
+	Method Name										Description
+	
+		int length()										
+		String concate(String str)                  	Concatenates the specified string to the end of this string.
+		char charAt(int index)							Returns the char value at the specified index.
+		int compareTo(String s)							Compares two strings lexicographically
+		int compareToIgnoreCase(String s)				Compares two strings lexicographically, ignoring case differences.
+		boolean equals(Object another)                  Compares this string to the specified object.
+		boolean startsWith(String s)					Tests if this string starts with the specified prefix.
+		boolean endsWith(String s)						Tests if this string ends with the specified suffix.
+		int indexOf(String s)							Returns the index within this string of the first occurrence of the specified substring.
+		int lastIndexOf(String s)						Returns the index within this string of the last occurrence of the specified character.
+		String replace(CharSequence target, CharSequence replacement)					
+														Replaces each substring of this string that matches the literal target sequence with the specified literal replacement sequence.
+		String trim()									Returns a copy of the string, with leading and trailing whitespace omitted.
+		String[] split(String regex)					Splits this string around matches of the given regular expression.
+	
+	
+Can we create our own immutable class?
+	=> Assignment.
+	
+	
+Question:
+
+1. Print a first non-repeated character from a String.
+
+	Example : String is "Hello Hi"
+			  Out put is: e
+			  
+2. Given string is a Palindrom or not
+	Example : String is "madam"
+				out put is: Given string is a palindrom
+	
 	
 	
