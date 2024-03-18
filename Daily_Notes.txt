@@ -5460,4 +5460,126 @@ Question:
 				out put is: Given string is a palindrom
 	
 	
+******************
+18-MAR-2024
+******************
+
+public class StringDemo12 {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str="GratsIT";
+		System.out.println(sb.charAt(5));
+		System.out.println(str.charAt(10));
+		
+		String str1="Hi How are you? where are you going";
+		System.out.println(":str1:"+str1);
+		str1.replace("you","abc");
+	}
+}
 	
+When should go to StringBuffer?
+	=>	If the content of the string is changing frequently that time should go for StringBuffer instead String. 
+	=>	If try to modify the String object it always creates the new object so uses more memory and also performance issue arises.
+	
+java.lang.StringBuffer:	
+		StringBuffer is a class in Java that represents a mutable sequence of characters. It provides an alternative to the immutable String class, allowing you to modify the contents of a string without creating a new object every time.
+						
+		StringBuffer objects are thread-safe, which means multiple threads can access it simultaneously.
+						
+						
+						Syntax:
+								StringBuffer sb=new StringBuffer(); 
+								Or
+								StringBuffer sb=new StringBuffer(50);
+								Or
+								StringBuffer sb=new StringBuffer("Java");
+								
+=>	StringBuffer class constructors:	StringBuffer class have below useful constructors to create object of string. 
+
+	->	StringBuffer():
+			->	StringBuffer sb=new StringBuffer();
+			->	By default initial capacity is 16
+		
+			class SBDemo1{
+					public static void main(String[] args){
+						StringBuffer sb=new StringBuffer();
+						System.out.println(sb.length());
+						System.out.println(sb.capacity());
+						StringBuffer sb=new StringBuffer();
+						sb.append("1234567890123456");
+						System.out.println(sb.length());
+						System.out.println(sb.capacity());
+						sb.append("7"); (currentCapacity + 1)*2
+						System.out.println(sb.length());
+						System.out.println(sb.capacity());
+					}
+			}	
+
+	->	StringBuffer(int capacity):
+			->	StringBuffer sb=new StringBuffer(100);
+			->	If we know the capacity of the string then can define it at the time of object creation.	
+			class SBDemo2{
+					public static void main(String[] args){
+						StringBuffer sb=new StringBuffer(100);
+						System.out.println(sb.length());
+						System.out.println(sb.capacity());
+					}
+			}
+
+	->	StringBuffer(String str):
+		->	StringBuffer sb=new StringBuffer("GratsIT");
+		->	Here initial capacity is (string length + 16)
+				class SBDemo3{
+						public static void main(String[] args){
+							StringBuffer sb=new StringBuffer("GratsIT");
+							System.out.println(sb.length());
+							System.out.println(sb.capacity());
+						}
+				}
+							
+=>	methods:
+		StringBuffer sb=new StringBuffer("GratsIT");
+	->	public int length():	
+		->Returns the length of this string.
+			sop(sb.length());
+	->	public int capacity():
+			The capacity() method of the StringBuffer class returns the current capacity of the buffer. The default capacity of the buffer is 16. If the number of characters increases from its current capacity, it increases the capacity by (oldcapacity+1)*2.
+			For instance, if your current capacity is 16, it will be (16+1)*2=34.
+			
+	->	public char charAt(int index):
+				Returns the char value at the specified index. 
+				sop(sb.charAt(1));
+				sop(sb.charAt(10));
+					
+	->	public void setCharAt(int index,char newChar):
+				sb.setCharAt(1,'Y');
+		
+	->	public StringBuffer append(String str):	
+				-> The append() method concatenates the given argument with this string.
+				-> There are many overloaded methods of append is present.
+					append(StringBuffer sb),append(byte b),append(int i),....etc.
+					
+	->	public StringBuffer insert(int index, String str):				
+				->	The insert() method inserts the given string with this string at the given position.
+				-> 	There are many overloaded methods of insert is present.
+	->	public StringBuffer delete(int begin, int end):	
+		->	This deletes the string from the specified beginIndex to endIndex-1.
+		
+	->	public StringBuffer delteCharAt(int begin):
+		->	This deletes the character at specified index.
+		
+	->	public StringBuffer reverse():
+		->	The reverse() method of the StringBuilder class reverses the current string. 
+	
+	->	public StringBuffer replace(int start,int end,String str):	
+		->	The replace() method replaces the given string from the specified beginIndex and endIndex-1.
+		
+	->	public void setLength(int length):
+
+	->	public void ensureCapacity(int capacity):
+			->	Can increase the capacity dynamically by this method.
+				
+	->	public void trimToSize():
+			->	remove the capacity to its actual length.
+			
+	->	Every method present inside the StringBuffer is synchronized.	
