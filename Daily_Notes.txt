@@ -5657,6 +5657,7 @@ Questions & Important concept with Strings:
 	=>	Whenever creating a String object by literal, java checks whether any object present with the same content then it refers to the same object rather than creating new.
 	=>	Its saves memory.
 	=>	Performance gets improved.
+	=>	String Constant Pool objects are not eligible for garbage collection.
 	
 Why are String objects immutable?
 	=> In Java, the String literal Objects are created in String Constant Pool where one object has multiple references, if the object state changes then it affects all references so that's why java makes String object immutable.
@@ -5766,4 +5767,509 @@ Wrapper Classes:
 							System.out.println(":number1:"+number1);
 						}
 					}		
+*******************
+20-March-2024
+*******************
 
+Question 1:
+
+	String s = "Grats IT Software";
+	System.out.println(s.charAt(s.toUpperCase().length()));
+	
+
+Question 2:
+	String s = "Grats IT Software";
+	System.out.println(s.substring(5,3));
+
+
+Question 3:
+	Select all valid methods of String class.
+		A. trim()
+		B. intern()
+		C. toLower()
+		D. split()
+		
+Question 4:
+		String s1 = 5+6+"A"+1+2+"B"+""+3+4;
+		System.out.println(s1);
+		
+Question 5:
+		String s2 = "A"+(1+2)+"B"+""+3+4;
+		System.out.println(s2);
+		
+Question 6:
+		String s1 = new String("abcd"); // statement 2
+		String s2 = s1.intern();
+		String s3 = "abcd";
+		System.out.println(s2==s3);
+		
+Question 7:
+	How many String objects created in below statements?
+		String s = "GratsIT"; // statement 1
+		String s1 = new String("GratsIT"); // statement 2
+		
+Question 8:
+		String s1 = "abc";
+		String s2 = new String("abc");
+		System.out.print(s1==s2);
+		System.out.println(s1==s2.intern());
+		
+Question 9:
+		String s1 = "abc";
+		StringBuffer s2 = new StringBuffer(s1);
+		System.out.println(s1.equals(s2));
+		
+Question 10:
+		String s1 = "abc";
+		String s2 = new String("abc");
+		s2=s2.intern();
+		System.out.println(s1 == s2);
+		
+		
+Assignment :
+       String str="hi how are you hh aa bb cc";
+	   
+Q1. Write a program to tind the count of vowels and consonents.
+Q2. Write a program to tind the maximum times repeating character from a string.
+
+Modifiers
+*******************
+In Java there are 2 types of modifiers:
+	
+	1.	Access Modifiers
+	2.	Non-Access Modifiers
+
+
+	=>	1.	Access Modifiers:
+				Access Modifiers in Java are used to control the visibility of fields, methods, classes and constructors.
+			
+				Public: 
+							The access level of a public modifier is everywhere. It can be accessed from within the class, outside the class, within the package and outside the package.
+							Which uses for variables, methods, constructor, class & interface etc.
+				Protected: 
+							The access level of a protected modifier is within the package and outside the package through child class. If you do not make the child class, it cannot be accessed from outside the package.
+							Which uses for variables, methods and constructor.
+							
+				Default: 
+							The access level of a default modifier is only within the package. It cannot be accessed from outside the package. If you do not specify any access level, it will be the default.
+							
+							Which uses for variables, methods, constructor & class etc.
+				Private: 
+							The access level of a private modifier is only within the class. It cannot be accessed from outside the class.
+							Which uses for variables, methods and constructor.
+							
+
+				Note: 
+						Access specifiers can't applicable to local variables.
+						We can't mention a class as a private or protected, if it is an outer class.
+						
+				Can we mention a class as private or protected?
+					We can mention a class as private or protected if it is an inner class.
+
+
+
+Access Modifiers Examples with variables:
+*****************************************
+
+		Example 1:
+		
+			package com.grats.am.variables;
+
+			public class Employee {
+
+				public int id=1001;
+				protected String name="Sachin";
+				String profession="Cricket";
+				private String city="Mumbai";
+				public void updateEmployee() {
+					System.out.println(":id:"+id);
+					System.out.println(":name:"+name);
+					System.out.println(":profession:"+profession);
+					System.out.println(":city:"+city);
+					id=1002;
+					name="Sehwag";
+					profession="Cricket";
+					city="Delhi";
+				}
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Employee emp=new Employee();
+					emp.updateEmployee();
+					System.out.println("=======================");
+					System.out.println(":id:"+emp.id);
+					System.out.println(":name:"+emp.name);
+					System.out.println(":profession:"+emp.profession);
+					System.out.println(":city:"+emp.city);
+				}
+			}
+
+		Example 2:
+			package com.grats.am.variables;
+
+			public class EmployeeSamePkg {
+				public static void main(String[] args) {
+					Employee emp=new Employee();
+					emp.id=1002;
+					emp.name="Sehwag";
+					emp.profession="Cricket";
+			//		emp.city="Delhi";
+					System.out.println(":id:"+emp.id);
+					System.out.println(":name:"+emp.name);
+					System.out.println(":profession:"+emp.profession);
+			//		System.out.println(":city:"+emp.city);
+				}
+			}
+			
+		Example 3:
+		
+			package com.grats.am.variables.otherpkg;
+
+			import com.grats.am.variables.Employee;
+			
+			public class EmployeeOtherPkg {
+				public static void main(String[] args) {
+					Employee emp=new Employee();
+					System.out.println(":id:"+emp.id);
+			//		System.out.println(":name:"+emp.name);
+			//		System.out.println(":profession:"+emp.profession);
+			//		System.out.println(":city:"+emp.city);
+					emp.id=1002;
+			//		emp.name="Sehwag";
+			//		emp.profession="Cricket";
+			//		emp.city="Delhi";
+					System.out.println(":id:"+emp.id);
+				}
+			}
+			
+		Example 4:
+
+			package com.gratsit.am.variables;
+
+			public class EmployeeImplSamePkg extends Employee{
+				public void displayEmployee() {
+					System.out.println(":id:"+id);
+					System.out.println(":name:"+name);
+					System.out.println(":profession:"+profession);
+			//		System.out.println(":city:"+city);
+					id=1002;
+					name="Sehwag";
+					profession="Cricket";
+			//		city="Delhi";
+				}
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					EmployeeImplSamePkg emp=new EmployeeImplSamePkg();
+					emp.displayEmployee();
+					System.out.println(":=========================:");
+					System.out.println(":id:"+emp.id);
+					System.out.println(":name:"+emp.name);
+					System.out.println(":profession:"+emp.profession);
+			//		System.out.println(":city:"+emp.city);
+				}
+			}
+
+		Example 5:
+		
+			package com.grats.am.variables.otherpkg;
+
+			import com.grats.am.variables.Employee;
+
+			public class EmployeeImplOtherPkg extends Employee{
+				public void displayEmployee() {
+					System.out.println(":id:"+id+":name:"+name);
+			//		System.out.println(":profession:"+profession+":city:"+city);
+					id=1002;
+					name="Shehwag";
+			//		profession="Cricket";
+			//		city="Delhi";
+				}
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					EmployeeImplOtherPkg emp=new EmployeeImplOtherPkg();
+					emp.displayEmployee();
+					System.out.println(":=========================:");
+					System.out.println(":id:"+emp.id+":name:"+emp.name);
+			//		System.out.println(":profession:"+emp.profession+":city:"+emp.city);		
+				}
+			}
+
+
+Access Modifiers Examples with methods:
+*****************************************
+
+		Example 1:
+			package com.grats.am.methods;
+
+			public class Student {
+			
+				public void printRollNo() {
+					int rollNo=2001;
+					System.out.println(":rollNo:"+rollNo);
+				}
+				
+				protected void printName() {
+					String name="Prakash";
+					System.out.println(":name:"+name);
+				}
+				
+				void printSubject() {
+					String subject="Mathematics";
+					System.out.println(":subject:"+subject);
+				}
+				
+				private void printMarks() {
+					int marks=80;
+					System.out.println(":marks:"+marks);
+				}
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Student std = new Student();
+					std.printRollNo();
+					std.printName();
+					std.printSubject();
+					std.printMarks();
+				}
+			}
+			
+		Example 2:
+			package com.grats.am.methods;
+
+			public class StudentSamePkg {
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Student std = new Student();
+					std.printRollNo();
+					std.printName();
+					std.printSubject();
+			//		std.printMarks();
+				}
+			}				
+
+		Example 3:
+			package com.grats.am.methods.otherpkg;
+
+			import com.grats.am.methods.Student;
+
+			public class StudentOtherPkg {
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Student std = new Student();
+					std.printRollNo();
+			//		std.printName();
+			//		std.printSubject();
+			//		std.printMarks();
+				}
+			}
+	
+
+		Example 4:
+			public class StudentImplSamePkg extends Student {
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					StudentImplSamePkg std = new StudentImplSamePkg();
+					std.printRollNo();
+					std.printName();
+					std.printSubject();
+			//		std.printMarks();
+				}
+			}
+
+		Example 5:
+			package com.grats.am.methods.otherpkg;
+
+			import com.grats.am.methods.Student;
+
+			public class StudentImplOtherPkg extends Student {
+
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					StudentImplOtherPkg std = new StudentImplOtherPkg();
+					std.printRollNo();
+					std.printName();
+			//		std.printSubject();
+			//		std.printMarks();
+				}
+			}
+
+Access Modifiers Examples with constructors:
+*****************************************
+
+		Example 1:
+			package com.gratsit.am.constructors;
+
+			public class Company {
+				
+				public String cmpName="Wipro";
+				public String address="Bangalore";
+				public int noOfEmployees=1000;
+				
+				public Company() {
+				}
+				
+				protected Company(String cmpName){
+					this.cmpName=cmpName;
+				}
+				
+				Company(int noOfEmployees){
+					this.noOfEmployees=noOfEmployees;
+				}
+
+				private Company(String cmpName,String address,int noOfEmployees) {
+					this.cmpName=cmpName;
+					this.address=address;
+					this.noOfEmployees=noOfEmployees;
+				}
+				
+				public static void main(String[] args) {
+					Company comp1=new Company();
+					System.out.println(":comp1:"+comp1);
+					
+					Company comp2=new Company("Infosys");
+					System.out.println(":comp2:"+comp2);
+					
+					Company comp3=new Company(20000);
+					System.out.println(":comp3:"+comp3);
+					
+					Company comp4=new Company("Grats","Bangalore",2000);
+					System.out.println(":comp4:"+comp4);
+				}
+			}
+			
+		Example 2:
+			package com.gratsit.am.constructors;
+
+			
+			public class CompanySamePkg {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Company comp1=new Company();
+					System.out.println(":comp1:"+comp1);
+			//		
+					Company comp2=new Company("Infosys");
+					System.out.println(":comp2:"+comp2);
+			//		
+					Company comp3=new Company(20000);
+					System.out.println(":comp3:"+comp3);
+					
+			//		Company comp4=new Company("Grats","Bangalore",2000);
+			//		System.out.println(":comp4:"+comp4);		
+				}
+			}
+
+		Example 3:
+			package com.gratsit.am.constructors.otherpkg;
+
+
+			import com.gratsit.am.constructors.Company;
+
+			public class CompanyOtherPkg {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Company comp1=new Company();
+					System.out.println(":comp1:"+comp1);
+					
+					Company comp2=new Company("Infosys");
+					System.out.println(":comp2:"+comp2);
+					
+					Company comp3=new Company(20000);
+					System.out.println(":comp3:"+comp3);
+					
+					Company comp4=new Company("Grats","Bangalore",2000);
+					System.out.println(":comp4:"+comp4);
+				}
+			}
+	
+
+		Example 4:
+				public class CompanyImplSamePkg extends Company {
+					CompanyImplSamePkg(){
+				//		super();
+				//		super("Infosys");
+				//		super(5000);
+				//		super("Wipro","Chennai",5000);
+					}
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						CompanyImplSamePkg obj=new CompanyImplSamePkg();
+						System.out.println(":obj:"+obj);
+					}
+				}
+
+		Example 5:
+			package com.grats.am.constructors.otherpkg;
+
+				import com.gratsit.am.constructors.Company;
+
+				public class CompanyImplOtherPkg extends Company {
+					
+					CompanyImplOtherPkg(){
+				//		super();
+				//		super("Infosys");
+				//		super(5000);
+				//		super("Wipro","Chennai",5000);
+					}
+
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						CompanyImplOtherPkg obj=new CompanyImplOtherPkg();
+						System.out.println(":obj:"+obj);
+					}
+				}
+
+Access Modifiers Examples with constructors:
+*****************************************
+
+		Example 1:
+		
+					package com.gratsit.am.cls;
+					
+					public class A{
+					
+					}
+					
+
+					protected class B{
+					
+					}// protected can't used at class level if it is not an inner class.
+					
+
+					class C{
+					
+					}
+					
+					
+					private class D{
+					
+					}// private can't used at class level if it is not an inner class.
+					
+			public class AmClsDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					A a1=new A();
+					System.out.println(":a1:"+a1);
+					C c1=new C();
+					System.out.println(":c1:"+c1);
+				}
+			}
+
+	Example 2:
+
+		package com.gratsit.am.cls.otherpkg;
+
+		import com.gratsit.am.cls.A;
+		//import com.gratsit.am.cls.C; 
+
+		public class AmClsDemo2 {
+
+			public static void main(String[] args) {
+				// TODO Auto-generated method stub
+				A a1=new A();
+				System.out.println(":a1:"+a1);
+				//C c1=new C();
+				//System.out.println(":c1:"+c1);
+			}
+		}
