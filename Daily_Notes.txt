@@ -6536,3 +6536,191 @@ Features of static keyword:
 
 	Can be overloaded, but not overridden: 
 			->	Static methods can be overloaded, which means that you can define multiple methods with the same name but different parameters. However, they cannot be overridden, as they are associated with the class rather than with a particular instance of the class.
+
+**********************
+22-MAR-2024
+**********************
+**********************	 
+Inner Class in Java:
+**********************
+	Java inner class or nested class is a class that is declared inside the class or interface. We use inner classes to logically group classes and interfaces in one place to be more readable and maintainable. Additionally, it can access all the members of the outer class, including private data members and methods.
+		
+		
+	
+	When should we go to Inner classes?
+		Without existing one type of object there is no chance of existing another type of object then should go for Inner classes.
+			
+		class University{
+			class Department{
+			
+			}
+		}
+		
+		class Car{
+			class Engine{
+			
+			}
+		}
+		
+		interface Map{
+			interface Entry{
+			
+			}
+		}
+
+	The relation between Outer class and inner class is a has-a relation. (Note : This is not a is-a relation).
+
+Based on positon of declaration and behaviour all inner classes are devided into 4 types.
+
+	1. Normal or Regular Innerclasses
+	2. Method local Innerclassess
+	3. Anonymous Inner classes.
+	4. Static Nested classes.
+	
+1. Normal or Regular Innerclasses:
+		If we are declaring any named class directly inside a class without static modifier such type of inner class is called normal or regular inner class.
+		
+		Syntax:
+		
+			class Outer{  
+			 //code  
+			 class Inner{  
+			  //code  
+			 }  
+			}  
+			
+		=>	Two class files generates when compile this code
+			Outer.class and Outer$Inner.class
+			
+		Example 1:		
+			case 1:	Accessing inner class code from static methods of outer class. 
+			
+				public class Outer{
+					public class Inner{
+						public void m1(){
+							System.out.println("Inside inner m1():");
+						}
+					}
+					public static void main(String[] args){
+						System.out.println(":Inside Outer class main:");
+						Outer outer1=new Outer();
+						Outer.Inner inner1=outer1.new Inner();
+						inner1.m1();
+						//or
+						Outer.Inner inner2=new Outer().new Inner();
+						inner2.m1();
+						//or
+						new Outer().new Inner().m1();
+					}
+				}
+			
+			case 2:	Accessing inner class code from instance methods of outer class. 
+			
+				public class Outer1{
+					public class Inner1{
+						public void m1(){
+							System.out.println("Inside inner m1():");
+						}
+					}
+					public void m2(){
+						Inner1 i1=new Inner1();
+						i1.m1();
+					}
+					
+					public static void main(String[] args){
+						Outer1 outerObj=new Outer1();
+						outerObj.m2();
+					}
+				}
+
+		Example 2:		
+		=>Inside inner class can't declare any static members hence we can't declare main method and we can't run directly.
+		=>Inner classes can't have static declaration.
+		
+			public class Outer2 {
+				public class Inner2 {
+					static int x = 100; // static variable can't declare inside inner class
+					public void m1() {
+						System.out.println("Inside inner m1():");
+					}
+					public static void main(String[] args) { // static method can't declare inside inner class, even main method
+																// also not possible.
+					}
+					public static void m3() { // static method can't declare inside inner class
+					}
+				}
+				public static void main(String[] args) {
+					System.out.println(":Inside Outer class main:");
+				}
+			}
+		
+		Example 3:		
+			=>	In normal or regular inner classes can access instance or static memebers directly from outer class.
+			
+				class Outer3{
+					int x=10;
+					static int y=20;
+					class Inner3{
+						public void method1(){
+							System.out.println(x);
+							System.out.println(y);
+						}
+					}
+				}
+
+				public class InnerClsDemo3{
+					public static void main(String[] args) {
+						Outer3.Inner3 obj=new Outer3().new Inner3();
+						obj.method1();
+					}				
+				}		
+			
+		Example 4:		
+			class Outer4 {
+				int x = 10;
+				class Inner4 {
+					int x = 100;
+					public void method1() {
+						int x = 1000;
+						System.out.println(x);
+						System.out.println(this.x);
+						System.out.println(Outer4.this.x);
+					}
+				}
+			}
+			public class InnerClsDemo4 {
+				public static void main(String[] args) {
+					Outer4.Inner4 obj = new Outer4().new Inner4();
+					obj.method1();
+				}
+			}
+								
+	Note: 	=>	The applicable modifiers of Outer class are public default final abstract stricfp
+			=>	The applicable modifiers of Inner class are public default final abstract stricfp and private protected static.
+	Example 5:
+	
+			class University {
+				 String address="Bangalore";
+				 String name="ABC";
+				 private class Department{
+					int deptId=1001;
+					String deptName="Sales";
+					void printDetl() {
+						System.out.println(":name:"+name+":address:"+address+":deptId:"+deptId+":deptName:"+deptName);
+					}
+				}
+				public void method1() {
+					Department dept = new Department();
+					dept.printDetl();
+				}
+			}
+
+			public class InnerClsDemo5{
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					University obj=new University();
+			//		University.Department dept=obj.new Department(); This is not possible because Departmet is a private class
+				}
+			}
+						
+
