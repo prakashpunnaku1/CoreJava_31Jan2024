@@ -1,7 +1,6 @@
 package com.grats.innercls;
 
-
-public class Outer{
+ public class Outer{
 	public class Inner{
 		int x=100;
 		public void m1(){
