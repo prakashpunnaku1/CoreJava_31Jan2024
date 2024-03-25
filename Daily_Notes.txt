@@ -6724,3 +6724,428 @@ Based on positon of declaration and behaviour all inner classes are devided into
 			}
 						
 
+**********************
+25-MAR-2024
+**********************						
+
+2. Method Local inner class:
+		
+		A class, created inside a method is called Method local inner class in java. 
+		
+		Syntax:
+			class Java_Outer_class{  
+			 //code  
+				void methodA(){
+					class Java_Inner_class{  
+						//code  
+					}	
+				}
+  			} 
+		=> The main purpose of method inner class is to define method specific repeated functionality.
+		
+		=> we can access method local inner classes only with in the method where we declare and outside of that method can't access.
+		
+		=> Method local inner classes are rarely used inner classes.
+	
+		Example 1:
+			class Outer6 {
+				public void method1() {
+					class Inner6 {
+						public int sum(int a, int b) {
+							return a + b;
+						}
+					}
+					Inner6 i1 = new Inner6();
+					System.out.println(i1.sum(10, 100));
+					System.out.println(i1.sum(10, 200));
+					System.out.println(i1.sum(100, 300));
+					System.out.println(i1.sum(100, 400));
+				}
+			}
+			public class InnerClsDemo6 {
+				public static void main(String[] args) {
+					Outer6 obj = new Outer6();
+					obj.method1();
+				}
+			}
+			
+
+			
+		
+3. Anonymous inner class:
+		Java anonymous inner class is an inner class without a name and for which only a single object is created.
+
+	Example 1:
+	
+		interface Employee{
+			public abstract void showEmployee();
+		}
+		
+		public class InnerClsDemo7 {
+			public static void main(String[] args) {
+				Employee emp=new Employee(){
+					public void showEmployee(){
+						System.out.println("showEmployee()");
+					}
+				};
+			}
+		}
+		
+	Example 2:
+		class Student {
+			int stdId=1001;
+			String stdName="XYZ";
+			public void printStudent() {
+				System.out.println(stdId+":"+stdName);
+			}
+			
+		}
+
+		public class InnerClsDemo8 {
+			public static void main(String[] args) {
+				Student std=new Student(){
+					public void printStudent(){
+						System.out.println("printStudent()");
+					}
+				};
+				std.printStudent();
+				Student std1=new Student();
+				std1.printStudent();
+			}
+		}	
+
+	Example 3:
+	
+		abstract class Person {
+			int personId=1001;
+			String personName="XYZ";
+			public abstract void printPersonDetl();
+			public void showDetl() {
+				System.out.println(":showDetl():");
+			}
+		}
+
+		public class InnerClsDemo9 {
+			public static void main(String[] args) {
+				Person std=new Person(){
+					public void printPersonDetl(){
+						System.out.println(personId+":"+personName);
+					}
+				};
+				std.printPersonDetl();
+				std.showDetl();
+			}
+		}
+		
+	
+Static nested class:
+	A static inner class is a nested class which is a static member of the outer class. It can be accessed without instantiating the outer class, using other static members. Just like static members, a static nested class does not have access to the instance variables and methods of the outer class. The syntax of static nested class is as follows −
+
+
+
+Syntax:
+	
+	class MyOuter {
+	   static class Nested_Demo {
+	   }
+	}
+	
+Example:
+		class College {
+			 static String name="KMM";
+			 String address="Tiruptahi";
+			 College(){
+				 System.out.println(":College:");
+			 }
+			 static class Student{
+				int stdId=1001;
+				String stdName="Rajesh";
+				Student(){
+					System.out.println(":Student:");
+				}
+				void printDetl() {
+		//			System.out.println(":address:"+address); Outer class non-static variables can't access from static inner class.
+					System.out.println(":name:"+name+":stdId:"+stdId+":stdName:"+stdName);
+				}
+			}
+		}
+
+		public class InnerClsDemo10{
+			public static void main(String[] args) {
+				// TODO Auto-generated method stub
+				College.Student obj=new College.Student();
+				obj.printDetl();
+			}
+		}
+
+**********************	 
+final:
+**********************
+	=>	the final keyword can be used with  variable, method and class. 
+	=>	final is a non-access modifier.
+	=>	the final keyword is used to apply restrictions on classes, methods, and variables. When applied to different elements, it implies different meanings.
+	
+final variables:
+****************
+	=>	final keyword can apply for following variables.
+		
+		->	instance variables
+		->	class level variables or static variables
+		->	local variables or block level variables
+		
+	Note: Once final variables are initialized can't re-initialize it again.
+		
+	=>	final instance variables:
+	
+			=>	We can declare instance variables as final.
+				syntax:
+						final int x;
+				
+			=> 	JVM doesn't provide default initialization for final instance variables.
+	
+				public class FinalVarDemo{
+					final int x; // Here gets the compilation error.
+					public static void main(String[] args){
+						FinalVarDemo obj=new FinalVarDemo();
+						System.out.println(obj.x);
+					}
+				}
+			=> Should provide the initialization for final instance variables before constructor execution is completed.
+
+				The following three places can initialise the final instance variables. If we try to perform initialization in any other places then we will get the compilation error.
+			
+					1. At the time of declaration
+					2. Inside instance block
+					3. Inside constructor
+					
+				
+		
+		1. At the time of declaration:
+		
+			Example1:
+			
+				public class FinalVarDemo1{
+					final int x=100; 
+					public static void main(String[] args){
+						FinalVarDemo1 obj=new FinalVarDemo1();
+						System.out.println(obj.x);
+					}
+				}
+		2. Inside instance block:
+		
+			Example2:
+			
+				public class FinalVarDemo2{
+					final int x;
+					
+					{
+						x=200;
+					}
+					
+					public static void main(String[] args){
+						FinalVarDemo2 obj=new FinalVarDemo2();
+						System.out.println(obj.x);
+					}
+				}
+		
+		3. Inside constructor
+
+			Example3:
+			
+				public class FinalVarDemo3{
+					final int x;
+					FinalVarDemo3(){
+						x=300;
+					}
+					public static void main(String[] args){
+						FinalVarDemo3 obj=new FinalVarDemo3();
+						System.out.println(obj.x);
+					}
+				}
+				
+	=>	final static variables:
+	
+			=>	We can declare static instance variables as final.
+				syntax:
+						final static int x;
+				
+			=> 	JVM doesn't provide default initialization for final static instance variables.
+	
+				public class FinalStVarDemo{
+					static final int x; // Here gets the compilation error.
+					public static void main(String[] args){
+						FinalStVarDemo obj=new FinalStVarDemo();
+						System.out.println(obj.x);
+					}
+				}
+
+			=> Should provide the initialization for final static instance variables before class loading is completed.
+
+				The following two places can initialise the final static instance variables. If we try to perform initialization in any other places then we will get the compilation error.
+			
+					1. At the time of declaration
+					2. Inside static block
+
+		1. At the time of declaration:
+		
+			Example1:
+			
+				public class FinalStVarDemo1{
+					final static int x=100; 
+					public static void main(String[] args){
+						FinalStVarDemo1 obj=new FinalStVarDemo1();
+						System.out.println(obj.x);
+					}
+				}
+		2. Inside static block:
+		
+			Example2:
+			
+				public class FinalStVarDemo2{
+					static final int x;
+					static{
+						x=200;
+					}
+					public static void main(String[] args){
+						FinalStVarDemo2 obj=new FinalStVarDemo2();
+						System.out.println(obj.x);
+					}
+				}
+
+	=>	final local variables:
+
+			=>	Local variables are the variables which declare inside methods or blocks or constructors. The scope of the local variables are within that block only.
+			
+			=>	We can declare local variables as final.
+					syntax:
+							void m1(){
+								final int x;
+							}
+			=>	JVM doesn't provide default initialization for final local variables.
+			
+				public class FinalLocVarDemo{
+					public static void main(String[] args){
+						final int x;
+						System.out.println(":Inside main:");
+					}
+				}
+				
+				public class FinalLocVarDemo1{
+					public static void main(String[] args){
+						final int x;
+						System.out.println(":x:"+x); // Compilation Error: The local variable x may not have been initialized
+					}
+				}
+
+			=>	Should provide the initialization for final local variables before its utilisation.
+
+				public class FinalLocVarDemo2{
+					public static void main(String[] args){
+						final int x;
+						x=500;
+						System.out.println(":x:"+x); 
+						//or
+						final int y=600;
+						System.out.println(":y:"+y); 
+						y=700;
+					}
+				}
+
+			=>	final with method parameters.
+			
+				public class FinalLocVarDemo3{
+					
+					int sum(final int x,final int y){
+						x=400;//Compilation error
+						y=600;//Compilation error
+						return x+y;
+					}
+					
+					public static void main(String[] args){
+						FinalLocVarDemo3 obj=new FinalLocVarDemo3();
+						int sum=obj.sum(10,20);
+						System.out.println(":sum:"+sum); 
+					}
+				}				
+					
+
+		NOTE: The only applicable modifier for the local variable is final. If we try to apply any other modifier we will get a compile time error.
+
+				public class FinalLocVarDemo4{
+					public static void main(String[] args){
+						public int x1=10;
+						private int x2=20;
+						protected int x3=30;
+						static int x4=40;
+						transient int x5=50;
+						volatile int x6=60;
+						
+						final int x7=70;
+					}
+				}
+
+final methods:
+****************
+	=>	When a method is declared as a final, it means that the method cannot be overridden by subclasses. This is often used to prevent modification of a method's behavior in a subclass.
+	
+	syntax:
+			final void m1(){
+			
+			}
+			
+	Example:
+	
+		class Employee {
+			String name="Prakash";
+			int empId=1001;
+
+			public final void printName() {
+				System.out.println(":Employee:name:"+name);
+			}
+			
+			public void printEmpId(){
+				System.out.println(":Employee:empId:"+empId);
+			}
+		}
+		
+		public class EmployeeImpl extends Employee {
+			public void printName() { // Cannot override the final method from Employee
+				System.out.println(":EmployeeImpl:printName:"+name);
+			}
+			public void printEmpId(){
+				System.out.println(":EmployeeImpl:printEmpId:"+empId);
+			}
+			public static void main(String[] args) {
+				// TODO Auto-generated method stub
+				Employee emp=new EmployeeImpl();
+				emp.printName();
+				emp.printEmpId();
+			}
+		}
+
+final classes:
+****************
+
+	 =>	When a class is declared as a final, it means that the class cannot be subclassed. This is typically done when you want to ensure that a class's implementation cannot be altered or extended.
+	 =>	final classes are not extended by another class.
+	 
+		syntax:
+				final class A{
+				
+				}
+				
+		Example:
+			final class Student{
+				
+			}
+
+			class StudentImpl extends Student{ // This is not possible will get the compilation error because final classes can't extend
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Student emp=new StudentImpl();
+					System.out.println(":emp:"+emp);
+				}				
+			}
+
+final Keyword: Also refer PPT.
+
