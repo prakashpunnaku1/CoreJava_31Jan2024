@@ -5,6 +5,7 @@ class Outer6 {
 		class Inner6 {
 			public int sum(int a, int b) {
 				return a + b;
+				
 			}
 		}
 		Inner6 i1 = new Inner6();
