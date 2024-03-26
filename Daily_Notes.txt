@@ -7149,3 +7149,161 @@ final classes:
 
 final Keyword: Also refer PPT.
 
+*************
+26-March-2024:
+*************
+Exception and Exception Handling:
+
+Introduction:
+
+	What is an Exception?
+		=> An unexpected or unwanted event that disrupts the normal flow of the program which leads to termination of the program in the middle of its execution is known as an exception.
+
+	The purpose of Exception Handling?
+		=> If anything goes wrong in the middle of the program we should not stop the program and should continue.
+
+	What is the meaning of exception handling?
+		=> Defining the alternative way to continue your program is nothing but exception handling.
+
+	Runtime Stack Mechanism:
+		public class RuntimeStackDemo1{
+			public static void main(String[] args) {
+				System.out.println(":main:start:");
+				System.out.println(":main:end:");
+			}
+			public static void m1(){
+				System.out.println(":m1:start:");
+				System.out.println(":m1:end:");
+			}
+			public static void m2(){
+				System.out.println(":m2:start:");
+				System.out.println(":m2:end:");
+			}
+			public static void m3(){
+				System.out.println(":m3:start:");
+				int i=10;
+				int j=0;
+				System.out.println(":i:"+i+":j:"+j);
+				int d=i/j;
+				System.out.println(":d:"+d);
+				System.out.println(":m3:end:");
+			}
+		}
+
+Types of Errors:
+	1. Compile Time Error
+	2. Runtime Error
+	
+1. Compile Time Error:
+	
+		Any error that occurs at the time of compilation then we call that as a Compile Time Error.
+
+		Compile Time Errors are those errors which prevent the code from running because of following reasons:
+
+			i) It can occur because of wrong syntax.
+			
+				Example:
+					public class CompileTimeErrorDemo1 {
+						m1 void(){
+						}
+						public static void main(String[] args) {
+							// TODO Auto-generated method stub
+							int 234;
+							xyz double;
+							m1();
+						}
+					}
+			
+			ii) It can occur because the environment required for executing a statement is not existing.
+					class Employee{
+						
+					}
+					public class CompileTimeErrorDemo2 {
+						public static void main(String[] args) {
+							// TODO Auto-generated method stub
+							Employee emp=new Employee();
+							Connection conn;
+						}
+					}			
+			iii)It may occur because of the checked exceptions.
+					public class CompileTimeErrorDemo3 {
+						public static void main(String[] args) {
+							// TODO Auto-generated method stub
+							Class.forName("com.gratsit.saticc.Employee");
+						}
+					}			
+
+2. Logical and Runtime Error:
+	Any error that occurs at the time of execution of the program then we call it as a Runtime error.
+
+	=> Runtime errors may occur because of logical errors or wrong logic.
+		Example:
+			public class RuntimeErrorDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					int i=10;
+					int j=0;
+					System.out.println(":i:"+i+":j:"+j);
+					int d=i/j;//10/0
+					System.out.println(":d:"+d);
+				}
+			}				
+					
+	=> Any wrong logic which leads to wrong outputs can be called a logical error.
+		Example:
+			public class RuntimeErrorDemo2 {
+				public static boolean isLeapYear(int year) {
+					return year%4==0;
+				}
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					System.out.println(":Is 2024 Leap year:"+isLeapYear(2024));
+					System.out.println(":Is 1700  Leap year:"+isLeapYear(1700));
+				}
+			}
+	
+	
+	=> A Runtime error occurs only because of the logical errors. But every logical error would not lead to a runtime error.
+	
+	=> When JVM enters into the state of ambiguity (i.e., confusion) is known as runtime error.
+	
+			public class RuntimeErrorDemo3 {
+				public static void main(String[] args) {
+					String str=null;
+					String str1=str.concat("Hello");
+					System.out.println(":str1:"+str1);//
+				}
+			}
+	
+	=> A Runtime error leads to an abnormal termination of the program.
+		What is abnormal termination?
+		The concept of termination of the program in the middle of its execution without executing the remaining statements of the program is known as abnormal termination.
+		
+		statement 1;
+		statement 2;
+		statement 3;
+		statement 4;//If any errors occurs then terminate the program here.
+		statement 5;
+		statement 6;
+		
+	=> In order to represent each and every logical error there would be a corresponding exception class.
+	
+		Exception classes: The set of classes which are exclusively designed for representing logical errors are known as exception classes.
+		
+		Exception Hierarchy :
+		
+	What is an Exception?
+	
+		=> An exception is an event that occurs during the execution of a program that disrupts the normal flow of the program's instructions. In Java, exceptions are objects that describe an exceptional (error) condition that has occurred in a piece of code.
+		=> It is an object which is thrown at runtime.
+		=> Exceptions are the objects representing the corresponding logical and runtime errors.
+		=> Any object created by the jvm for representing the corresponding logical or runtime error can be called as an Exception.
+		
+
+	=> An exception is a problem that arises during the execution of a program. It can occur for various reasons:
+		-> A user has entered a invalid data.
+		-> If trying to read a file but which is not present then we get the FileNotFoundException.
+		-> A network connection has been lost in the middle of communications. Then we get the SocketException
+		-> The JVM has run out of memory. Then we get the OutOfMemoryError
+
+	So if an exception is not handled, it may lead to a system failure. That is why handling an exception is very very important.
