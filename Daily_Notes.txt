@@ -7307,3 +7307,281 @@ Types of Errors:
 		-> The JVM has run out of memory. Then we get the OutOfMemoryError
 
 	So if an exception is not handled, it may lead to a system failure. That is why handling an exception is very very important.
+
+*************
+27-March-2024:
+*************	
+Exception Hierarchy :
+	Please refer the diagram or ppt.
+	
+	All exception and error types are subclasses of class Throwable, which is the base class of hierarchy.
+	One branch is headed by Error which occurs at run-time and other by Exception that can happen either at compile time or runtime.
+
+	Exception :
+		All the classes represent simple logical errors.
+		
+		We have 2 types of Exceptions under Exception
+			1. Checked Exception:
+				->	The exceptions which are checked by the compiler whether the program is handling are not for smooth execution of the program at runtime are known as Checked exceptions.
+				->	In simple words, Java Compiler checks at the time of compilation whether checked exceptions are handled or not.
+				
+				->	All subclasses of Exception class but which are not subclasses of Runtime Exception are Checked Exception classes.
+				
+				Example classes: ClassNotFoundException, IOException, SQLException ...
+				
+				Examples: 
+				
+					public class CheckedExceptionDemo1{
+						public static void main(String[] args) {
+							// TODO Auto-generated method stub
+							Class.forName("com.gratsit.saticc.Employee"); //ClassNotFoundException
+						}				
+					}
+					
+					public class CheckedExceptionDemo2{
+						public static void main(String[] args) {
+							PrintWriter pw=new PrintWriter("abc.txt"); //FileNotFoundException
+							pw.write("Hello");
+							pw.close();
+						}				
+					}
+					
+					public class CheckedExceptionDemo3{
+						public static void main(String[] args) {
+							Thread.sleep(1000); //InterruptedException
+						}				
+					}
+
+			2. Unchecked Exception:
+				->	Java Compiler doesn't check at the time of compilation whether these exceptions are handled or not.
+				->	It is an exception that occurs at the time of execution. These are called Runtime exceptions.
+				->	RuntimeException and all its subclasses are unchecked exceptions.
+		
+				Example: ArithmeticException, NullpointerException, NumberFormatException ...
+				
+				Examples: 
+				
+					public class UnCheckedExceptionDemo1 {
+						public static void main(String[] args) {
+							// TODO Auto-generated method stub
+							String num1="123";
+							String num2="10yd";
+							int sum=Integer.parseInt(num1)+Integer.parseInt(num2);
+							System.out.println(":sum:"+sum);
+						}
+					}
+					
+					public class UnCheckedExceptionDemo2 {
+						public static void main(String[] args) {
+							int[] arr={50,45,48};
+							System.out.println(":arr[3]:"+arr[3]);
+						}
+					}				
+
+	Error : 
+		
+		An Error is used by the Java run-time system (JVM) to indicate errors that are associated with the run-time environment (JRE).
+		All the classes represent serious logical errors.
+		
+		->	Error and all its subclasses are unchecked exceptions.
+		
+		Examples for it. VirtualMemoryError, OutOfMemoryError and StackOverflowError
+
+	Difference between Exceptions and Errors:
+		Exceptions:
+			=>	Exceptions can be either checked or unchecked exceptions
+			=>	Most of the times Exceptions are caused by our program so which can be recoverable by handling.
+			=> 	Possible to recover from Exceptions.
+			=> 	Caused by the application itself.
+
+		Errors:
+			=> Errors are of type unchecked.
+			=> 	Errors are not caused by our program and which are non recoverable. Errors are caused due to lack of system resources
+					OutOfMemory Error.	
+			=> Impossible to recover from an error.
+			=> Can occur at run time.
+			=> Caused by the application running environment.
+
+Exception Handling:
+	
+		=>	Abnormal termination: An abnormal termination refers to the unexpected termination of a program due to an error or exception
+		
+				public class ExceptionHndlDemo1 {
+						public static void main(String[] args) {
+							System.out.println(":Start:");
+							int[] arr={50,45,48};
+							System.out.println(":arr[3]:"+arr[3]);
+							System.out.println(":End:");
+						}
+					}
+			As a developer we should make sure that handle the abnormal termination programs.
+					
+		=>	Normal termination:
+		
+					public class ExceptionHndlDemo2 {
+						public static void main(String[] args) {
+							System.out.println(":Start:");
+
+							int[] arr={50,45,48};
+							try{
+								System.out.println(":arr[3]:"+arr[3]);
+							}catch(ArrayIndexOutOfBoundsException ex){
+								System.out.println(":arr[2]:"+arr[2]);
+							}
+							System.out.println(":End:");
+						}
+					}		
+		
+		=> The Exception Handling in Java is one of the powerful mechanisms to handle the runtime errors so that normal flow of the application can be maintained.
+		
+		=> The code which is prone to exceptions is placed in the try block. When an exception occurs, that exception is handled by the catch block associated with it.
+		
+		Every try block should be immediately followed either by a catch block or finally block.
+
+		Syntax:
+			try { //try block
+			  //  Protected  Code or Risky code 
+			} catch (ExceptionName e1) { //Catch block
+			  // Handling Code 
+			}
+		
+		or 
+			try {
+			  //  Protected  Code or Risky code 
+			} finally {
+			  // finally block 
+			}
+		
+
+		try:
+			The functionality of the try keyword is only to identify a logical error or an exception and transfer the control along with the exception identified to the catch block by suspending the execution of try block.
+			A try block must follow catch blocks or finally blocks or both.
+			
+			
+
+		catch:
+			The functionality of the catch is to receive an exception that is identified by the try and assign that exception object to the reference of the corresponding exception class and handle it.
+			
+			This block must have the try block.
+
+Control flow inside try-catch:
+
+	p s v m(){
+		try{
+			//Statement1;
+			//Statement2;
+			//Statement3;
+		}catch(Exception e){
+			//Statement4;
+		}
+			//Statement5
+	}
+	
+	Case 1: Exception is raised at statement 1: then Statement2 and Statement3 ignored. Run the catch block so Statement4 prints and continue the program so prints Statment5.
+	
+	Case 2: Exception is raised at statement 2: Statement1 prints because which present before Statement 2 and Statement3 ignored. Run the catch block so Statement4 prints and continue the program so prints Statment5.
+	
+	Case 3: Exception is raised at statement 3: Statement1 & Statement 2 prints because which present before Statement 3. Run the catch block so Statement4 prints and continue the program so prints Statment5.
+	
+	Case 4: No Exception : Statement1, Statement 2 and Statement 3 prints because there is no exception. Don't run the catch block so don't print Statement4. Then continue the program so it prints Statment5.
+	
+	Example:
+		public class ExceptionHndlDemo3 {
+			public static void main(String[] args) {
+				try{
+					System.out.println(":Statement1:");
+					System.out.println(":Statement2:");
+					System.out.println(":Statement3:");
+				}catch(ArithmeticException aex){
+					System.out.println(":Statement4:");
+				}
+				System.out.println(":Statement5:");
+			}
+		}
+		
+	=>	Methods to print exception information:
+			
+			The following methods are present inside the Throwable class.
+
+				printStackTrace();
+				toString();
+				getMessage();
+		
+				public class ExceptionHndlDemo4 {
+					public static void main(String[] args) {
+						try{
+							System.out.println((10/0));
+						}catch(ArithmeticException aex){
+							aex.printStackTrace();
+							System.out.println(":aex1:"+aex);
+							System.out.println(":aex2:"+aex.toString());
+							System.out.println(":aex3:"+aex.getMessage());
+						}
+					}
+				}	
+
+	Nested try block:
+				try block within a try block is known as nested try block in java.
+				
+				public class ExceptionHndlDemo5 {
+					public static void main(String[] args) {
+						int a = 100,b=6,c;
+						String msg;
+						int[] arr = new int[5];
+						try {
+							c = a / b;
+							System.out.println(":c:" + c);
+							try {
+								System.out.println(arr[7]);
+							} catch (Exception ex) {
+								System.out.println("Invalid index used to read array");
+							}
+						} catch (Exception e) {
+							System.out.println("Calculation Error");
+						} 
+					}
+				}
+				
+	Multiple Catch Blocks
+			=> A try block can be followed by multiple catch blocks. The syntax for multiple catch blocks looks like the following −
+			try {
+			  // Protected code
+			} catch (ExceptionType1 e1) {
+			  // Catch block
+			} catch (ExceptionType2 e2) {
+			  // Catch block
+			} catch (ExceptionType3 e3) {
+			  // Catch block
+			}
+			
+			public class ExceptionHndlDemo6 {
+				public static void main(String[] args) {
+					int a=100;
+					int[] arr= {3,2,23,434};
+					try {
+						int b=a/100;
+						int c=arr[1];
+						Class.forName("com.grats.st.variable.Company");
+					}catch(ArithmeticException ex) {
+						System.out.println("===>ArithmeticException");
+					}catch(ArrayIndexOutOfBoundsException ex1) {
+						System.out.println("====?ArrayIndexOutOfBoundsException");
+					}catch(ClassNotFoundException ex) {
+						System.out.println("====?ClassNotFoundException ");
+					}
+				}
+			}
+			
+			public class ExceptionHndlDemo7 {
+				public static void main(String[] args) {
+					int a=100;
+					int[] arr= {3,2,23,434};
+					try {
+						int b=a/100;
+						int c=arr[1];
+						Class.forName("com.grats.st.variable.Company");
+					}catch(Exception ex) {
+						System.out.println("===>Exception");
+					}
+				}
+			}
