@@ -7585,3 +7585,355 @@ Control flow inside try-catch:
 					}
 				}
 			}
+
+
+*******************
+28-MAR-2024
+*******************			
+			
+finally:
+
+		=> Assume we are doing the DB Operations
+
+			Open DB Connection.
+			Database Operations.
+			Close DB Connection. --> Resource release, cleanup code.
+			
+				void m1(){
+					try{
+						Open DB Connection
+						Database Operations.
+						Close DB Connection --> Here cleanup code is not recomended, Because if any exception comes before this it could not execute.
+					}catch(Exception ex){
+					}
+				}
+			
+				void m2(){
+					try{
+						Open DB Connection
+						Database Operations.
+					}catch(){
+						Close DB Connection --> Here also cleanup code is not recomended, Because if no exception this would not execute.
+					}
+				}
+				
+				void m3(){
+					try{
+						Open DB Connection
+						Database Operations.
+					}catch(){ 
+						
+					}
+					Close DB Connection --> Here also cleanup code is not recomended, Because if suppose we are not handling exception properly then there is a chance of Abnormal Termination of a program
+				}
+			
+			So we can maintain this type of cleanup or resource release code inside finally block which will be executing always whether exception raised or not raised or exception handled or not handled.
+			
+			=>	A finally block contains all the crucial statements that must be executed whether an exception occurs or not. The statements present in this block will always execute, regardless if an exception occurs in the try block or not such as closing a connection, stream etc.
+			
+			=>	The finally block is used in exception handling along with try and catch blocks. It's used to execute cleanup code that should be run regardless of whether an exception is thrown or not or handled or not handled. Here's the basic structure:
+			
+			Syntax:
+			
+				try {
+					// Code that may throw an exception
+				} catch (SomeException e) {
+					// Code to handle the exception
+				} finally {
+					// Code that always executes, regardless of whether an exception occurred
+					// This is typically used for cleanup tasks like closing resources
+				}
+			
+			Example 1:	
+				Case 1: If there is no exception
+			
+					public class FinallyDemo1 {
+						public static void main(String[] args) {
+							int[] arr= {3,2,23,434};
+							try {
+								System.out.println(":try:");
+								int c=arr[1];
+								System.out.println(":c:"+c);
+							}catch(ArrayIndexOutOfBoundsException ex) {
+								System.out.println(":catch:");
+							}finally{
+								System.out.println(":finally:");
+							}	
+							System.out.println(":End:");
+						}
+					}
+				
+				Case 2: If there is an exception
+			
+					public class FinallyDemo2 {
+						public static void main(String[] args) {
+							int[] arr= {3,2,23,434};
+							try {
+								System.out.println(":try:");
+								int c=arr[5];
+								System.out.println(":c:"+c);
+							}catch(ArrayIndexOutOfBoundsException ex) {
+								System.out.println(":catch:");
+							}finally{
+								System.out.println(":finally:");
+							}	
+							System.out.println(":End:");
+						}
+					}
+					
+				Case 3: If the exception is not handled properly
+			
+					public class FinallyDemo3 {
+						public static void main(String[] args) {
+							int[] arr= {3,2,23,434};
+							try {
+								System.out.println(":try:");
+								int c=arr[5];
+								System.out.println(":c:"+c);
+							}catch(ArithmeticException ex) {
+								System.out.println(":catch:");
+							}finally{
+								System.out.println(":finally:");
+							}	
+							System.out.println(":End:");
+						}
+					}
+					
+				Case 4: If anything return inside try
+			
+					public class FinallyDemo4 {
+						public static void main(String[] args) {
+							int[] arr= {3,2,23,434};
+							try {
+								System.out.println(":try:");
+								int c=arr[3];
+								if(c%2==0){
+									System.out.println(c+" is Even");
+									return;
+								}else{
+									System.out.println(c+" Odd");
+								}
+							}catch(Exception ex) {
+								System.out.println(":catch:");
+							}finally{
+								System.out.println(":finally:");
+							}	
+							System.out.println(":End:");
+						}
+					}
+			
+				public class FinallyDemo1 {
+
+					public Boolean isEven(int num) {
+						System.out.println(":isEven:Start:");
+						try {
+							System.out.println(":try block start:");
+							if (num % 2 == 0) {
+								System.exit(0);
+								return true;
+							}
+							System.out.println(":try block end:");
+						} catch (Exception e) {
+							System.out.println(":Inside catch:");
+						} finally {
+							System.out.println(":Inside finally block:");
+						}
+						System.out.println(":isEven:End:");
+						return false;
+					}
+
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						FinallyDemo1 obj = new FinallyDemo1();
+						Boolean flag = obj.isEven(10);
+				//		System.out.println(flag);
+						if (flag) {
+							System.out.println("Given number is an even number");
+						} else {
+							System.out.println("Given number is not an even number");
+						}
+					}
+				}
+
+System.exit(0):			
+			=>	System.exit(0) method terminates JVM. which results in termination of the currently running program too. Status is the single parameter that the method takes. If the status is 0, it indicates the Normal termination. If exit(1) or exit(-1) or any non-zero value – indicates that Abnormal termination.
+			
+			The finally block will be executed even after a return statement in a method. 
+			
+			If we call the System.exit(0) or System.exit(5) or System.exit(-10) explicitly then finally block will not be executed.
+	
+			Example:
+				public class FinallyDemo5 {
+					public static void main(String[] args) {
+						try {
+							System.out.println(":try:");
+							System.exit(0);
+							System.out.println(":1:");
+						}catch(Exception ex) {
+							System.out.println(":catch:");
+						}finally{
+							System.out.println(":finally:");
+						}	
+						System.out.println(":End:");
+					}
+				}	
+			
+			NOTE: There are few situations where the finally will not be executed like JVM crash, power failure, software crash and etc. Other than these conditions, the finally block will be always executed.
+			
+Can try block exist without catch block?
+	=>	Yes, if it has the finally block.
+		syntax:
+				try{
+				
+				}finally{
+				
+				}
+				
+		Example:
+			public class FinallyDemo6 {
+				public static void main(String[] args) {
+					try {
+						System.out.println(":try:");
+					} finally {
+						System.out.println(":finally:");
+					}
+					System.out.println(":End:");
+				}
+			}
+				
+Can finally block exist without try block?
+	=>	No,try block is mandatory to write finally block.
+	
+			
+Unreachable block:
+		The block of statements which are not going to get executed at any given point of time under any case are known as unreachable blocks.
+		Unreachable blocks are not supported by Java.
+		
+		The catch block mentioned with the reference of the Exception class should and must always be the last catch block because Exception is the superclass of all exceptions.
+		
+		try {
+			// Code 
+		}catch(Exception e) {
+			// exception handling.
+		}catch(NullPointerException e) {
+			// Unreachable block. 
+		}
+		
+		Example:
+			public class UnreachableBlockDemo1 {
+				public static void main(String[] args) {
+					int a=100;
+					int[] arr= {3,2,23,434};
+					try {
+						int b=a/100;
+						int c=arr[1];
+						Class.forName("com.grats.st.variable.Company");
+					}catch(ArithmeticException ex) {
+						System.out.println("ArithmeticException");
+					}catch(Exception ex1) {
+						System.out.println("ArrayIndexOutOfBoundsException");
+					}catch(ClassNotFoundException ex) {
+						System.out.println("ClassNotFoundException ");
+					}catch(ArrayIndexOutOfBoundsException ex1) {
+						System.out.println("ArrayIndexOutOfBoundsException");
+					}
+				}
+			}				
+
+throws:
+		throws is a keyword in Java that is used in the signature of a method to indicate that this method might throw one of the listed type exceptions. The caller to these methods has to handle the exception using a try-catch block. 
+		
+		Syntax:
+				public void method1() throws IOException,SQLException{
+					// code.
+				}
+		
+		=> by using throws keyword can avoid try & catch block.
+		=> throws keyword is required only for checked exceptions and usage of the throws keyword for unchecked exceptions is meaningless.
+		=> With the help of the throws keyword, we can provide information to the caller of the method about the exception.
+		
+		Example 1:
+				public class ThrowsDemo1 {
+					public void printMsg() throws ClassNotFoundException, FileNotFoundException {
+						System.out.println("Inside printMsg():");
+				//		try { // instead of try catch can throws the exception but called should handle it.
+							Class.forName("com.grats.st.variable.Company");
+							PrintWriter pw = new PrintWriter("abc.txt"); // FileNotFoundException
+							pw.write("Hello");
+							pw.close();
+				//		}catch(ClassNotFoundException e) {
+				//			e.printStackTrace();
+				//		}
+					}
+
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						System.out.println(":main:start:");
+						ThrowsDemo1 obj = new ThrowsDemo1();
+						try {
+							obj.printMsg();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.out.println(":main:end:");
+					}
+				}
+		Example 2:	
+			public class ThrowsDemo2 {
+				public void printMsg() throws Exception {
+					System.out.println("Inside printMsg():");
+					Class.forName("com.grats.st.variable.Company");
+					PrintWriter pw = new PrintWriter("abc.txt"); // FileNotFoundException
+					pw.write("Hello");
+					pw.close();
+				}
+				public static void main(String[] args) throws Exception {
+					// TODO Auto-generated method stub
+					System.out.println(":main:start:");
+					ThrowsDemo1 obj = new ThrowsDemo1();
+					obj.printMsg();
+					System.out.println(":main:end:");
+				}
+			}
+			
+
+throw keyword:
+			=>	throw is a keyword which used to handover the exception to the caller.
+			=>	The throw keyword is used to explicitly throw an exception. It can be used to signal that an exceptional condition has occurred in your code and the normal flow of execution cannot continue. When throw is used, it must be followed by an instance of an exception or a subclass of Throwable.
+			
+			syntax:
+					throw exception-object;
+			
+			Example 1:
+					public class ThrowDemo1 {
+						public static void main(String[] args)throws ArithmeticException{
+							int a=10,b=5,c;
+							if(b!=0){
+								c=a/b;
+							}else{
+								throw new ArithmeticException("You can't divide a number by zero. Please correct value."); //exception is handing over to caller(i.e., JVM).
+							}	
+						}
+					}
+					
+			Example 1:
+					public class ThrowDemo2 {
+					
+						public void loadClass(String clsName){
+							try{
+								Class.forName(clsName);
+							}catch(ClassNotFoundException ex){
+								throw new ClassNotFoundException("Please class check your class name which is not available to load");
+							}
+						}
+					
+						public static void main(String[] args)throws ArithmeticException{
+							ThrowDemo2 obj = new ThrowDemo2();
+							obj.loadClass("com.grats.st.variable.Company");
+						}
+					}					
+				
