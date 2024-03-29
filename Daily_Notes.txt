@@ -7937,3 +7937,416 @@ throw keyword:
 						}
 					}					
 				
+******************
+29-Mar-2024
+******************
+User-Defined Exception:
+	Sometimes, the built in exceptions in Java are not able to describe a certain situation. In such cases, a user also can create exceptions which are called User-Defined exceptions.
+	
+	=> A user-defined exception must extend the Exception or RuntimeException class.
+	=> The exception is thrown by using the throw keyword.
+	
+
+			
+	
+	=>	Syntax for user defined checked exception:
+			public class MyCheckedException extends Exception{
+				public MyCheckedException(String errMsg){
+					super(errMsg);
+					//super();
+				}
+			}
+
+		->	Syntax for throw an exception explicitly:
+	
+			throw new MyCheckedException("User-defined checked exception raised");
+
+	=>	Syntax for user defined unchecked exception:
+	
+			public class MyUnCheckedException extends RuntimeException {
+				public MyException(String errMsg){
+					super(errMsg);
+				}
+			}
+
+			->	Syntax for throw an exception explicitly:
+	
+			throw new MyUnCheckedException("User-defined unchecked exception raised");
+			
+	Example 1:
+				class InsufficientBalanceException extends Exception{
+					public InsufficientBalanceException(String errMsg){
+						super(errMsg);
+					}
+				}
+				public class CustomCheckedExceptionDemo1 {
+					private double balance=10000.00;
+					public void withdraw(double amount)throws InsufficientBalanceException {
+						if(amount>balance) {
+							throw new InsufficientBalanceException("You don't have sufficient funds in your account. Please check.");
+						}else {
+							balance-=amount;
+						}
+					}
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						System.out.println(":main:start:");
+						CustomCheckedExceptionDemo1 obj=new CustomCheckedExceptionDemo1();
+						try {
+							obj.withdraw(20000);
+						} catch (InsufficientBalanceException e) {
+							// TODO Auto-generated catch block
+							System.out.println(e.getMessage());
+						}
+						System.out.println(":balance:"+obj.balance);
+						System.out.println(":main:end:");
+					}
+				}
+				
+		==>There is a concept in spring that Global ExceptionHandler which uses in real time aplication. 
+				
+	Example 2:
+				class AgeLimitException extends RuntimeException{
+					public AgeLimitException(String errMsg){
+						super(errMsg);
+					}
+				}
+				public class CustomUncheckedExceptionDemo2 {
+					private byte minAge=6;
+					public void joinSchool(byte age) {
+						if(minAge>age) {
+							throw new AgeLimitException("You haven't meet the minimum Age criteria. Please come next year.");
+						}else {
+							System.out.println(":School Admission completed:");
+						}
+					}
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						System.out.println(":main:start:");
+						CustomUncheckedExceptionDemo2 obj=new CustomUncheckedExceptionDemo2();
+						obj.joinSchool(5);
+						System.out.println(":main:end:");
+					}
+				}		
+				
+
+	
+		
+	Difference between throw & throws:
+	
+			throw															throws
+			
+	1. Java throw keyword is used to explicitly throw an exception 		1. Java throws keyword is used to declare an exception.
+	2. checked exceptions can't be propagated using throw only.			2. checked exceptions can be propagated with throws.
+	3. throw is followed by instance.									3. throws is followed by class.
+	4. throw is used within the method.									4. throws is used with the method signature.
+	5. We can't throw multiple exceptions.								5. We can declare multiple exceptions with throws in 
+																			method signature.
+																			Ex: public void myMethod() throws IOException,SQLException
+																			
+
+Difference between final, finally and finalize:
+
+	Definition:	
+				final: 	final is a keyword and access modifier that is used to restrict access to a class, method, or variable.
+				finally: finally, block in Java Exception Handling executes the critical function whether or not the exception occurs or handled.
+				finalize():	In Java, the finalize method is used to do cleanup procedure immediately before an object is garbage collected.
+	
+	Applicable to: 
+				final: With classes, methods, and variables, the final keyword is utilized.
+				finally:	In exception handling, the finally block is usually associated with the try and catch block or with try only.
+				finalize():	The finalize() method is applied to objects.
+				
+	Functionality:
+				final: 	(1) Once declared and assigend a value, the final variable is fixed and cannot be changed.
+						(2) A subclass cannot override the final method.
+						(3) The final class is not inheritable.
+						
+				finally:	
+						(1) The finally block executes the critical code whether or not an exception occurs.
+						(2) The finally block cleans up all of the resources that were used in the try block.
+						
+				finalize():	
+							Before an item is destroyed, cleaning tasks are carried out using the finalize method.
+							
+	Execution:
+				final method: Only when we call the final method.
+				finally:	After the try-catch block, the finally block is carried out.
+				finalize():	Just before the object is destroyed, the finalize method is called.
+
+
+
+**********************
+Garbage Collection:
+**********************
+		Garbage Collection is a process of reclaiming the runtime unused memory automatically. In other words, garbage collector finds the unused objects and deletes them to free up memory.
+		
+		In C/C++, a programmer is responsible to clean up the objects. But, in java it is performed automatically. So, java provides better memory management.
+		
+			
+		Important Concepts Related to Garbage Collection in Java:
+		
+			1. Unreachable objects: 
+					An object is said to be unreachable if it doesn’t contain any reference to it. 
+					A a1 = new A(); // the new A object is reachable  via the reference in 'a1' 
+					a1 = null;
+					// the A object is no longer reachable. 
+				
+			2. Eligibility for garbage collection: 
+					An object is said to be eligible for GC(garbage collection) if it is unreachable. After a1 = null, integer object 4 in the heap area is suitable for garbage collection in the above image.
+							
+		Ways to make an object eligible for Garbage Collector:
+			1. Nullifying the reference variable
+			
+				class Student{
+					int i=100;
+				}
+				
+				public class GCDemo1{
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						System.out.println(":main:Start:");
+						Student s1=new Student();
+						Student s2=new Student();
+						//st
+						//st
+						//st
+						s1=null;
+						//st
+						//st
+						//st
+						s2=null;	
+						System.out.println(":main:End:");
+					}
+				}
+				
+			2. Re-assigning the reference variable
+
+				public class GCDemo2{
+					public static void main(String[] args) {
+						System.out.println(":main:Start:");
+						// TODO Auto-generated method stub
+						Student s1=new Student();
+						Student s2=new Student();
+						//st
+						//st
+						//st
+						s1=new Student();
+						//st
+						//st
+						//st
+						s2=s1;	
+						System.out.println(":main:End:");						
+					}
+				}			
+
+			3. An object created inside the method
+			
+				public class GCDemo3{
+					
+					public  static void m1(){
+						System.out.println(":m1:Start:");	
+						Student s1=new Student();
+						Student s2=new Student();
+						//st
+						//st
+						//st
+						System.out.println(":m1:End:");						
+					}
+				
+					public static void main(String[] args) {
+						System.out.println(":main:Start:");
+						m1();
+						System.out.println(":main:End:");
+					}
+				}
+
+				public class GCDemo4{	
+					public static Student m2(){
+						System.out.println(":m2:Start:");
+						Student s1=new Student();
+						Student s2=new Student();
+						//st
+						//st
+						//st	
+						System.out.println(":m2:End:");
+						return s1;
+					}
+				
+					public static void main(String[] args) {
+						System.out.println(":main:Start:");
+						Student s=m1();
+						//st
+						//st
+						//st
+						System.out.println(":main:End:");						
+					}
+				}
+				
+				public class GCDemo5{
+					
+					public static Student m2(){
+						Student s1=new Student();
+						Student s2=new Student();
+						//st
+						//st
+						//st	
+						return s1;
+					}
+				
+					public static void main(String[] args) {
+						m1();
+						//st
+						//st
+						//st							
+					}
+				}
+			
+		Ways for requesting JVM to run Garbage Collector
+				Once we make an object eligible for garbage collection, it may not destroy immediately by the garbage collector. Whenever JVM runs the Garbage Collector program, then only the object will be destroyed. But when JVM runs Garbage Collector, we can not expect.
+			
+			Two ways can request the Garabage Collector to cllean up the object.
+			
+				1. Using System.gc() method: System class contain static method gc() for requesting JVM to run Garbage Collector.
+				
+					public class GCSystemDemo1{
+						public static void main(String[] args) {
+							System.out.println(":main:Start:");
+							Student st1=new Student();
+							st1=null;
+							System.gc();
+							System.out.println(":main:End:");
+						}
+					}
+				
+				2. Using Runtime.getRuntime().gc() method: Runtime class allows the application to interface with the JVM in which the application is running. Hence by using its gc() method, we can request JVM to run Garbage Collector.
+
+					public class GCRuntimeDemo1{
+						public static void main(String[] args) {
+							System.out.println(":main:Start:");
+								Runtime runtime=Runtime.getRuntime();
+								System.out.println(":1:freeMemory:"+runtime.freeMemory());
+					//			System.out.println(":totalMemory:"+runtime.totalMemory());
+								for(int i=0;i<10000;i++) {
+									Date dt=new Date();
+					//				dt=null;
+								}
+								System.out.println(":2:freeMemory:"+runtime.freeMemory());
+					//			runtime.gc();	
+								System.out.println(":3:freeMemory:"+runtime.freeMemory());
+					//			System.out.println(":totalMemory:"+runtime.totalMemory());			
+								System.out.println(":main:End:");							
+						}
+					}			
+						
+			
+		Finalization:
+			=> Just before destroying an object, Garbage Collector calls finalize() method on the object to perform cleanup activities. Once finalize() method completes, Garbage Collector destroys that object.
+			
+			=> finalize() method is present in Object class with the following prototype.
+			
+				protected void finalize() throws Throwable
+			
+			Based on our requirement, we can override finalize() method for performing our cleanup activities like close the resources or closing connection from the database.
+			
+			=>The finalize() method is called by Garbage Collector, not JVM. However, Garbage Collector is one of the modules of JVM.
+			=>Object class finalize() method has an empty implementation. 
+			=>The finalize() method is never invoked more than once for any object.
+			=>If an uncaught exception is thrown by the finalize() method, the exception is ignored, and the finalization of that object terminates.
+			
+				class Employee {
+					int empId=1001;
+					String name=new String("Hi");
+					protected void finalize(){
+						System.out.println(":finalize:");	
+					}
+				}
+				public class GCRuntimeDemo2{
+					public static void main(String[] args) {
+						System.out.println(":main:Start:");
+							Runtime runtime=Runtime.getRuntime();
+							System.out.println(":1:freeMemory:"+runtime.freeMemory());
+				//			System.out.println(":totalMemory:"+runtime.totalMemory());
+							for(int i=0;i<10;i++) {
+								Employee emp=new Employee();
+								emp=null;
+							}
+							System.out.println(":2:freeMemory:"+runtime.freeMemory());
+							runtime.gc();
+							Thread.sleep(10000);
+							System.out.println(":3:freeMemory:"+runtime.freeMemory());
+				//			System.out.println(":totalMemory:"+runtime.totalMemory());			
+							System.out.println(":main:End:");							
+					}
+				}
+		
+		Advantages of Garbage Collection in Java
+			It makes java memory-efficient because the garbage collector removes the unreferenced objects from heap memory.
+			It is automatically done by the garbage collector(a part of JVM), so we don’t need extra effort.
+
+**********************************
+Command-line arguments
+**********************************
+
+Command-line arguments in Java allow you to pass parameters to your Java program when you run it from the command line. Here's how you can access command-line arguments in a Java program:
+
+javac CommandLineArgsDemo1.java
+
+java CommandLineArgsDemo1 ravi hari abc adf 
+
+
+public class CommandLineArgsDemo1 {
+    public static void main(String[] args) {
+        // args is an array containing command-line arguments
+        // args[0] is the first command-line argument, args[1] is the second, and so on
+        System.out.println("Number of arguments: " + args.length);
+        
+        // Printing all command-line arguments
+        for (int i = 0; i < args.length; i++) {
+            System.out.println("Argument " + i + ": " + args[i]);
+        }
+    }
+}
+
+java CommandLineArgsDemo1 apple mango banana
+
+*****************		
+SimpleDateFormat:
+*****************
+SimpleDateFormat is a class in Java that is used to format and parse dates in a specific pattern. It is part of the java.text package. 
+
+public class SimpleDateFormatDemo1 {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Date dt=new Date();
+		System.out.println(":dt:"+dt);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		String formattedDate = sdf.format(dt);
+		System.out.println("Formatted Date: " + formattedDate);
+	}
+}
+
+The patterns used in SimpleDateFormat dictate how the date and time components are formatted or parsed. Some common pattern letters include:
+
+y: Year
+M: Month in year
+d: Day in month
+H: Hour in day (0-23)
+m: Minute in hour
+s: Second in minute
+
+
+Output:
+
+	String str = null;
+	String str1="abc";
+
+	System.out.println(str1.equals(str)); // false
+	System.out.println(str.equals(str1)); //  NullpointerException
+
+
+	How do you find the second largest number in an array in Java?
+
+	Write Java program that checks if two arrays contain the same elements?
+
+	How do you shuffle an array in Java?
