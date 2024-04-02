@@ -8350,3 +8350,256 @@ Output:
 	Write Java program that checks if two arrays contain the same elements?
 
 	How do you shuffle an array in Java?
+
+******************
+02-APR-2024
+******************	
+
+Object class:
+	Object class is present in java.lang package. Every class in Java is directly or indirectly derived from the Object class. If a class does not extend any other class then it is a direct child class of Object and if extends another class then it is indirectly derived. 
+	Therefore the Object class methods are available to all Java classes. Hence Object class acts as a root of the inheritance hierarchy in any Java Program.
+	
+	1. tostring() 
+	2. equals(Object obj)
+	3. hashCode()
+	4. getClass()
+	5. clone()
+	6. finalize()
+	7. wait()
+	8. notify()
+	9. notifyAll()
+	
+	1. toString():
+		// Default behavior of toString() is to print class name, then
+		// @, then unsigned hexadecimal representation of the hash code of the object
+				
+		Object class defined toString() method like this:
+				
+			public String toString()
+			{
+				return getClass().getName() + "@" + Integer.toHexString(hashCode());
+			}
+			
+			If we want to represent an object state as a string then we should override this method.
+			
+		Example 1: Without implementing toString()
+		
+			class Employee{
+				String name;
+				int empId;
+				String dept;
+				public Employee(String name, int empId, String dept) {
+					super();
+					this.name = name;
+					this.empId = empId;
+					this.dept = dept;
+				}
+			}
+			public class ToStringDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Employee emp1=new Employee("Ramesh",1001,"Sales");
+					Employee emp2=new Employee("Rajesh",1002,"Accounts");
+					System.out.println(":emp1:"+emp1);
+					System.out.println(":emp2:"+emp2);
+					
+					System.out.println(":emp1.toString():"+emp1.toString());
+					System.out.println(":emp2.toString():"+emp2.toString());
+				}
+			}	
+			
+	Example 2:	With toString() override:
+	
+		class Student{
+		int stdId;
+		String name;
+		String college;
+		public Student(int stdId, String name, String college) {
+			super();
+			this.stdId = stdId;
+			this.name = name;
+			this.college = college;
+		}
+		@Override
+		public String toString() {
+			return "Student [stdId=" + stdId + ", name=" + name + ", college=" + college + "]";
+		}
+		}
+		public class ToStringDemo2 {
+			public static void main(String[] args) {
+				// TODO Auto-generated method stub
+				Student std1=new Student(2001,"Hampi","KMM");
+				Student std2=new Student(2002,"Naga","SVArts");
+				System.out.println(":std1:"+std1);
+				System.out.println(":std2:"+std2);
+			}
+		}
+	
+				
+	2. equals(Object obj): 
+		Object class defined equals() method like this:
+		
+			public boolean equals(Object obj) {
+				return (this == obj);
+			}
+			
+			So Object class equals() method implementation returns true only when both the references are pointing to same object.
+			
+		Example 1: Without implementing equals()
+		
+			public class EqualsDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Employee emp1=new Employee("Ramesh",1001,"Sales");
+					Employee emp2=new Employee("Ramesh",1001,"Sales");
+					System.out.println(":1:"+emp1.equals(emp2));
+					Employee emp3=emp2;
+					System.out.println(":2:"+emp3.equals(emp2));
+				}
+			}
+		
+		Example 2: With implementing equals()
+				class Bank{
+					int bankId;
+					String name;
+					String branch;
+					public Bank(int bankId, String name, String branch) {
+						super();
+						this.bankId = bankId;
+						this.name = name;
+						this.branch = branch;
+					}
+					
+					public int getBankId() {
+						return bankId;
+					}
+
+					public String getName() {
+						return name;
+					}
+
+					public String getBranch() {
+						return branch;
+					}
+
+					public boolean equals(Object obj) {
+						if(this==obj) {
+							return true;
+						}
+						if(obj==null || this.getClass()!=obj.getClass()) {
+							return false;
+						}
+						Bank bnk=(Bank)obj;
+						if(this.getBankId()==bnk.getBankId() && this.getName().equals(bnk.getName()) && this.getBranch().equals(bnk.getBranch())) {
+							return true;
+						}
+						return false;
+					}
+				}
+				public class EqualsDemo2 {
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						Bank bank1=new Bank(3001,"SBI","Bangalore");
+						Bank bank2=new Bank(3001,"SBI","Bangalore");
+						System.out.println(":bank1:"+bank1.equals(bank2));
+						Bank bank3=bank2;
+						System.out.println(":bank1:"+bank3.equals(bank2));
+					}
+				}
+			
+	3. hashCode():
+		
+		=>	Java Object hashCode() is a native method and returns the integer hash code value of the object. 
+		
+		=>	The hashCode() is a method provided by the Object class, which serves the purpose of generating a hash code for an object. A hash code is a numerical value that is typically used for improving the performance of certain operations, such as searching, storing, and retrieving objects in collections like HashMap, HashSet, etc.
+		
+		=>	The hashCode() method computes and returns an integer hash code value for an object. It is commonly overridden in classes that need to be used in hash-based collections. When implementing hashCode(), it's essential to ensure that objects that are considered equal according to the equals() method have the same hash code. This property is necessary for the correct functioning of hash-based collections.
+		
+		The general contract of hashCode() method is:
+
+			=>Multiple invocations of hashCode() should return the same integer value, unless the object property is modified that is being used in the equals() method.
+			=>An object hash code value can change in multiple executions of the same application.
+			=>If two objects are equal according to equals() method, then their hash code must be same.
+			=>If two objects are unequal according to equals() method, their hash code are not required to be different. Their hash code value may or may-not be equal.
+	
+		When to override equals() and hashCode() methods?
+			When we override equals() method, it’s almost necessary to override the hashCode() method too so that their contract is not violated by our implementation.
+			Note that your program will not throw any exceptions if the equals() and hashCode() contract is violated, if you are not planning to use the class as Hash table key, then it will not create any problem.
+			If you are planning to use a class as Hash table key, then it’s must to override both equals() and hashCode() methods. 
+			
+		Example 1:
+			public class HashCodeDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Employee emp1=new Employee("Ramesh",1001,"Sales");
+					Employee emp2=new Employee("Ramesh",1001,"Sales");
+					System.out.println(":1:"+emp1.hashCode());
+					System.out.println(":2:"+emp2.hashCode());
+					String str1=new String("Grats");
+					String str2=new String("Grats");
+					System.out.println(":3:"+str1.hashCode());
+					System.out.println(":4:"+str2.hashCode());
+				}
+			}
+			
+		Example 2:
+			class Company{
+				int compId;
+				String compName;
+				String address;
+				public Company(int compId, String compName, String address) {
+					super();
+					this.compId = compId;
+					this.compName = compName;
+					this.address = address;
+				}
+				public int hashCode() {
+					int results=17;
+					final int prime =31;//Multiplying the hash code by a prime number, such as 31, is a commonly used technique in Java for generating hash codes. The choice of 31 is not mandatory; it has some benefits that make it a popular choice
+					results = prime * results + this.compId;
+					results = prime * results + this.compName.hashCode();
+					results = prime * results + this.address.hashCode();
+					return results;
+				}
+			}
+
+			public class HashCodeDemo2 {
+				public static void main(String[] args) {
+					Company comp1=new Company(5001,"Wipro","Bangalore");
+					Company comp2=new Company(5001,"Wipro","Bangalore");
+					System.out.println(":1:"+comp1.hashCode());
+					System.out.println(":2:"+comp2.hashCode());
+					comp1.address="Hyderabad";
+					System.out.println(":3:"+comp1.hashCode());
+					System.out.println(":4:"+comp2.hashCode());
+					comp1.address="Bangalore";
+					System.out.println(":5:"+comp1.hashCode());
+					System.out.println(":6:"+comp2.hashCode());
+					
+					comp1.compName="TCS";
+					System.out.println(":7:"+comp1.hashCode());
+					System.out.println(":8:"+comp2.hashCode());
+				}
+			}			
+			
+	4. getClass():
+			It returns the Class objects that represent the runtime class of this object.
+			
+			public class GetClassDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Employee emp1=new Employee("Ramesh",1001,"Sales");
+					System.out.println(emp1.getClass());
+					Class cls=emp1.getClass();
+					System.out.println(":cls:"+cls);
+					System.out.println(":cls.getConstructors():"+cls.getConstructors());
+					for(Constructor constr:cls.getConstructors()) {
+						System.out.println(":constr:"+constr);
+					}
+					System.out.println(":cls.getFields():"+cls.getFields());
+					for(Field fd:cls.getFields()) {
+						System.out.println(":fd:"+fd);
+					}
+				}
+			}
+
