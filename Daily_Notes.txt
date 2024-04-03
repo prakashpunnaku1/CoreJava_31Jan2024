@@ -8603,3 +8603,163 @@ Object class:
 				}
 			}
 
+
+******************
+03-APR-2024
+******************
+			
+	5. clone():
+			Cloning is the process of creating a copy of an Object. Java Object class comes with native clone() method that returns the copy of the existing instance. Since Object is the base class in Java, all objects by default support cloning.
+			
+			If you want to use Java Object clone() method, you have to implement the java.lang.Cloneable marker interface. Otherwise, it will throw CloneNotSupportedException at runtime. 
+			
+			Also Object clone is a protected method, so you will have to override it.
+
+	6. finalize() : 
+	
+	The following methods will discuss as part of threads concepts :
+	
+	7. wait()
+	8. notify()
+	9. notifyAll()
+
+
+Marker interface in Java:
+	It is an empty interface (no field or methods). Examples of marker interface are Serializable, Cloneable and Remote interface. All these interfaces are empty interfaces. 
+	
+	public interface Serializable 
+	{
+		// nothing here
+	}
+	
+	Cloneable interface:
+		Cloneable interface is present in java.lang package. There is a method clone() in Object class. A class that implements the Cloneable interface indicates that it is legal for clone() method to make a field-to-field copy of instances of that class. 
+		 
+		Invoking Object’s clone method on an instance of the class that does not implement the Cloneable interface results in an exception CloneNotSupportedException being thrown. 
+		
+	Example 1: 
+	
+	class A {
+		protected Object clone() throws CloneNotSupportedException {
+			return super.clone();
+		}
+	}
+
+	public class CloneDemo1 {
+		public static void main(String[] args) throws CloneNotSupportedException {
+			A a1 = new A();
+			A a2 = (A) a1.clone();
+		}
+	}
+		
+	Example 2: implementing Cloneable.
+	
+		class Employee{
+			public String name;
+		}
+		class Student implements Cloneable {
+			private int id;
+			public String name;
+			private String address;
+			public Employee emp1;
+			public Student() {
+			}
+			public Student(int id, String name, String address) {
+				this.id = id;
+				this.name = name;
+				this.address = address;
+			}
+			public int getId() {
+				return id;
+			}
+			public void setId(int id) {
+				this.id = id;
+			}
+			public String getName() {
+				return name;
+			}
+			public void setName(String name) {
+				this.name = name;
+			}
+			public String getAddress() {
+				return address;
+			}
+			public void setAddress(String address) {
+				this.address = address;
+			}
+			@Override
+			public String toString() {
+				return "Student [id=" + id + ", name=" + name + ", address=" + address + "]";
+			}
+			protected Object clone() throws CloneNotSupportedException {
+				return super.clone();
+			}
+		}
+
+		public class CloneDemo2 {
+
+			public static void main(String[] args) throws CloneNotSupportedException {
+				// TODO Auto-generated method stub
+				Student std1=new Student(1001,"Prakash P","Bangalore");
+				Student std2=std1; //Shallow copy, here 2 references are pointing to same object
+				System.out.println(":std1==std2:"+(std1==std2));
+				System.out.println("std1:"+std1);
+				System.out.println("std1:"+std2);
+				std2.setName("Rakesh"); //
+				System.out.println("std1:"+std1);
+				System.out.println("std1:"+std2);
+				
+				std1.emp1=new Employee();
+				Student std4 = (Student)std1.clone();  //Here created a new duplicate object, Deep copy
+				System.out.println(":std1==std4:"+(std1==std4));
+				System.out.println("std1:"+std1);
+				System.out.println("std4:"+std4);
+				System.out.println("=============================");
+				std4.setName("Rajesh");
+				System.out.println("std1:"+std1);
+				System.out.println("std4:"+std4);
+				
+				System.out.println(std1.emp1==std4.emp1); //Internal references are shallow copied
+				System.out.println(std1.emp1.name);
+				System.out.println(std4.emp1.name);
+				std1.emp1.name="Hi";
+				System.out.println(std1.emp1.name);
+				System.out.println(std4.emp1.name);
+			}
+		}
+		
+	Serializable interface:
+		Serializable interface is present in java.io package. 
+		Classes that do not implement this interface will not have any of their object state serialized or deserialized. All subtypes of a serializable class are themselves serializable.
+				
+		Serialization and Deserialization:
+			Serialization: 
+							
+							=>	The process of writing state of an object to a file is called Serialization. 
+							=>	It is the process of converting an Object from Java Supported form to either file supported form or Network supported form.
+							=>	It is a mechanism of converting the state of an object into a byte stream.
+							=>	By using FileOutputStream and ObjectOutputStream classes we can achieve Serialization.
+							
+			Deserialization:
+							=>	The process of reading state of an object from a file is called Deserialization. 
+							=>	It is the process of converting an object from Either File or Network supported form into java supported form.
+							=>	It is the reverse process where the byte stream is used to recreate the actual Java object in memory.
+							=>	By using FileInputStream and ObjectInputStream classes we can achieve Deserialization.
+			
+		Advantages of Serialization 
+			To save/persist state of an object. 
+			To travel an object state across a network.
+			
+		SerialVersionUID: The Serialization runtime associates a version number with each Serializable class called a SerialVersionUID, which is used during Deserialization to verify that sender and receiver of a serialized object have loaded classes for that object which are compatible with respect to serialization. If the receiver has loaded a class for the object that has different UID than that of corresponding sender’s class, the Deserialization will result in an InvalidClassException. 
+			
+		
+		Points to remember:
+			1. If a parent class has implemented Serializable interface then child class doesn’t need to implement it but vice-versa is not true. 
+			2. Only non-static data members are saved via Serialization process. 
+			3. Static data members and transient data members are not saved via Serialization process. So, if you don’t want to save value of a 	non-static data member then make it transient. 
+			4. Constructor of object is never called when an object is deserialized. 
+		
+	Remote interface : 
+		Remote interface is present in java.rmi package. A remote object is an object which is stored at one machine and accessed from another machine. So, to make an object a remote object, we need to flag it with Remote interface. 
+		Here, Remote interface serves to identify interfaces whose methods may be invoked from a non-local virtual machine.Any object that is a remote object must directly or indirectly implement this interface.
+		
