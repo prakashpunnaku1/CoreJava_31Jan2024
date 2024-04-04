@@ -8763,3 +8763,287 @@ Marker interface in Java:
 		Remote interface is present in java.rmi package. A remote object is an object which is stored at one machine and accessed from another machine. So, to make an object a remote object, we need to flag it with Remote interface. 
 		Here, Remote interface serves to identify interfaces whose methods may be invoked from a non-local virtual machine.Any object that is a remote object must directly or indirectly implement this interface.
 		
+*****************
+04-APR-2024	
+
+******************
+
+What is Collection?
+	->	A Collection is a group of individual objects as a single entity.
+	
+What is Collection Framework?
+	->	Collection Framework define several interfaces and classes which can be used to represet a group of objects as single entity.
+
+Difference between arrays and collections:
+
+			Collections 													Arrays
+	
+		1. Collections are used to represent a group of elements. 		1. Arrays are used to represent a group of elements.
+		2. Collections are growable in nature.					 		2. Arrays are fixed in size, so it can't change at runtime.
+			The size of the collection can change at runtime.
+			Thus the size of the collection is always dynamic.
+		3. With respect to memory Collections are recommended to use.	3. With respect to memory arrays are not recommended to use,	
+																		   If not aware the size exactly.
+		4. With respect to performance Collections are not recommended	4. With respect to performance Arrays are recommended.
+		5. Collecions support homogeneous and heterogeneous elements	5. Arrays support homogeneous elements.
+		6. Every Collection class follows some data structure.          6. There is no underying data structure for arrays, so there is no 
+		    So in-built methods available.									in-built methods available for simple operations.
+		7. Collections support only objects 							7. Arrays support both objects and primitive data type values.
+			and don't support the primitive data type value.		
+		8. There are many library classes representing different 		8. Arrays are predefined structures of jvm.
+			kinds of collections.
+			
+
+Collections & Collection Framework:
+
+	-> The Java Collections Framework is a library of classes and interfaces for working with collections of objects.
+	-> The java.util.*; package contains all the classes and interfaces for the Collection framework.
+	-> A collection is an object which can store other objects, called elements. Collections provide methods for adding and removing elements, and for searching for a particular element within the collection.
+	-> Collection means group of elements
+	-> Collection supports only objects.
+	-> Collections don't support primitive data types.
+	-> Collection changes dynamically.
+	-> It has many library classes to represent or support a group of elements.
+	-> Collection classes follow data structure.
+	-> Any data structure contains a group of elements
+	-> The way of arranging elements changes from data structure to data structure.
+			
+
+	
+
+Collections:
+	-> Collection can hold homogeneous as well as heterogeneous data elements.
+	-> Collections represent the data structures as we have many data structures and we also have many collection classes.
+	-> Using objects of any collection class we can represent the group of elements.
+	-> The procedure followed to maintain the group of elements is to arrange the group of elements within the collection object changes from collection class to collection class.
+	->	Usually we can use Collections to hold and transfer Objects from one place to another place, to provide support for this requirement every collection already implements Serializable and Cloneable interface.
+	
+	-> All the collection classes are divided into three different types and there are:
+
+	1. List collections
+	2. Map collections
+	3. Set collections
+
+	-> All the collection classes would be supporting certain basic and fundamental operations like adding an element, accessing an element, removing an element and getting the size of the collection
+		All these functionalities that are supposed to be supported by the collection classes are defined in an interface by name "Collection".
+
+																Collection 
+																	|
+									___________________________________________________________________
+									|								|								   |
+									List 						  Queue		  						  Set 	
+
+
+	Collection (Interface): 
+			=>	To maintain group of elements.
+			=> 	Most common methods present.
+				boolean add(Object c)
+				boolean addAll(Collection c)
+				boolean remove(Object o)
+				boolean removeAll(Collection c)
+				void clear()
+				boolean retainAll(Collection c)
+				boolean isEmpty()
+				int size()
+				boolean contains(Object o)
+				boolean containsAll(Collection c)
+				Object[] toArray()
+				Iterator iterator()									
+
+	ArrayList: 
+				=>	The ArrayList class implements the List interface.
+				=>	The ArrayList class maintains the insertion order and is non-synchronized.
+				=>	The ArrayList class maintains the duplicate elements.
+				=>	Underlying data structure is resizable array or growable array.
+				=>	It allows Heterogeneous objects.
+				=>	Null insertion is possible.
+				=>	ArrayList and Vector classes implements RandomAccess interface, so that we can access any random element with the same speed. Hence if our frequent operation is retrieval operation then ArrayList is the best choice.
+				=>	RandomAccess is a marker interface and present in java.util package.	
+				=>	If our frequent operation is insertion or deletion an element in the middle then ArrayList is the worst choise. Because so many shift operations has to perform.
+				
+				constructors:
+					ArrayList():
+					
+						=>	Creates an empty array object with default initial capacity 10.
+							Once it reaches to its max capacity then new capacity is = (current capacity * 3/2) + 1
+							ArrayList al=new ArrayList();
+					
+					ArrayList(int initialcapacity):
+						=>	If we know the capacity of the collection in advance can use this constructor.
+							ArrayList al=new ArrayList(1000);
+						
+					ArrayList(Collection c):
+						=>	With any collection object if we want to create the equilant ArrayList object then use this.
+							ArrayList al=new ArrayList(Collection c);
+				
+				methods:
+					add(element), add(index,element), size(), clear(), isEmpty(),ensureCapacity(newcapacity),remove(index),remove(element), contains(element)
+				
+		Example 1: All Heterogeneous elements.
+
+			public class ArrayListDemo1 {
+				public static void main(String[] args) {
+					ArrayList al = new ArrayList();
+					al.add(1001);
+					al.add("Grats");
+					al.add(5000.00);
+					al.add(null);
+					al.add("Grats");
+					System.out.println(":al:"+al); //[1001,Grats,5000.00,null,Grats]
+				}
+			}
+			
+		Example 2: All Heterogeneous elements.
+
+			public class ArrayListDemo2 {
+				public static void main(String[] args) {
+					ArrayList al = new ArrayList();
+					al.add(1001);
+					al.add("Grats");
+					al.add(5000.00);
+					al.add(null);
+					al.add("Grats");
+					System.out.println(":al:"+al); 
+				}
+			}
+			
+		Example 2:  Follow the insertion order
+			public class ArrayListDemo2 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					List<Integer> idsList=new ArrayList<>();
+					idsList.add(1001);
+					idsList.add(1002);
+					idsList.add(1003);
+					idsList.add(1004);
+					idsList.add(1001);
+					for(Integer ids:idsList) {
+						System.out.println(":ids:"+ids);
+					}
+				}
+			}
+		Example 3: Allows duplicate elements.			
+			public class ArrayListDemo5 {
+				public static void main(String[] args) {
+					ArrayList<String> namesList=new ArrayList<>(100);
+					namesList.add("Sachin");
+					namesList.add("Sehwag");
+					namesList.add("Dhoni");
+					namesList.add("Rohit Sharma");
+					namesList.add("Sehwag");
+					namesList.add("Ganguly");
+					namesList.add("Jadeja");
+					namesList.add("Sachin");
+					namesList.add("Kohli");
+					System.out.println(":size:"+namesList.size());
+					System.out.println(":namesList:"+namesList);
+					System.out.println(":namesList:"+namesList);
+					ArrayList<String> namesList2=new ArrayList<>(namesList);
+					System.out.println(":namesList2:"+namesList2);
+					ArrayList<String> professionList=new ArrayList<>();
+					professionList.add("Sales");
+					professionList.add("Sales");
+					professionList.add("Sales");
+					namesList2.addAll(professionList);
+					System.out.println(":namesList2:"+namesList2);
+				}
+			}	
+
+		Example 4:			
+			public class ArrayListDemo6 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					ArrayList<String> namesList=new ArrayList<>();
+					namesList.add("Sachin");
+					namesList.add("Kohli");
+					namesList.add("sehwag");
+					namesList.add("Dhoni");
+					namesList.add("RohitSharma");
+					namesList.add("Ganguly");
+					System.out.println(":namesList:"+namesList);
+					namesList.add(2, "Dravid");
+					System.out.println(":namesList:"+namesList);
+			//		namesList.clear();
+					System.out.println(":namesList:"+namesList);
+					namesList.ensureCapacity(200);
+					System.out.println(":namesList:"+namesList);
+					namesList.remove("sehwag");
+					System.out.println(":namesList:"+namesList);
+					
+					//is Sachin presen in collection
+					if(namesList.contains("Sachin")) {
+						System.out.println(":Present:");
+					}else {
+						System.out.println(":Not Present:");
+					}
+					namesList.clear();
+					System.out.println(":namesList:"+namesList);
+					if(namesList.isEmpty()) {
+						System.out.println(":Empty:");
+					}else {
+						System.out.println(":Not Empty:");
+					}
+				}
+			}			
+				
+
+		Example 5:
+			public class ArrayListDemo7 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					ArrayList<String> namesList=new ArrayList<>();
+					namesList.add("Sachin");
+					namesList.add("Kohli");
+					namesList.add("sehwag");
+					namesList.add("Dhoni");
+					namesList.add("RohitSharma");
+					namesList.add("Ganguly");
+					namesList.add(2, "Dravid");
+					namesList.remove("sehwag");
+					System.out.println(":namesList:"+namesList);
+					Iterator iterator=namesList.iterator();
+			//			iterator.remove();
+					while(iterator.hasNext()) {
+			//			iterator.remove();
+						String name=(String)iterator.next();
+						System.out.println(":element:"+name);
+						if(name.equals("Dhoni")) {
+							iterator.remove();
+						}
+					}
+					System.out.println(":namesList:"+namesList);
+				}
+			}
+		Example 6:
+				public class ArrayListDemo6 {
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						ArrayList<String> namesList=new ArrayList<>();
+						namesList.add("Sachin");
+						namesList.add("Kohli");
+						namesList.add("sehwag");
+						namesList.add("Dhoni");
+						namesList.add("RohitSharma");
+						namesList.add("Ganguly");
+						namesList.add(2, "Dravid");
+						System.out.println(":namesList:"+namesList);
+						ListIterator listIterator=namesList.listIterator();
+						System.out.println(":hasPrevious:"+listIterator.hasPrevious());
+						while(listIterator.hasNext()) {
+							String name=(String)listIterator.next();
+							System.out.println(":element:"+name);
+							if(name.equals("Dhoni")) {
+								listIterator.remove();
+								listIterator.add("Samson");
+								System.out.println(":prev index:"+listIterator.previousIndex()+":prev element:"+listIterator.previous());
+							}
+							
+							if(name.equals("RohitSharma")) {
+								listIterator.set("asdfasdf");
+							}
+				//			System.out.println(":hasPrevious:"+listIterator.hasPrevious());
+							System.out.println(":next index:"+listIterator.nextIndex());
+						}
+						System.out.println(":namesList:"+namesList);
+					}
+				}	
