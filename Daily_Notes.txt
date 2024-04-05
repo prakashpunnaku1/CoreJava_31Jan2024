@@ -9047,3 +9047,302 @@ Collections:
 						System.out.println(":namesList:"+namesList);
 					}
 				}	
+
+				
+**********************
+05-APR-2024
+**********************
+				
+--> Accessing collection elements:
+	=>	If we want to retrieve elements one by one from the collection, then we should go for cursors.	
+	=>	There are 3 types of cursors are avaiable in java.
+		1. Enumeration
+		2. Iterator
+		3. ListIterator
+
+	1. Enumeration:
+		->	Introduced in 1.0 version (This is Legacy).
+		->	We can use Enumeration to get Objects one by one from the old Collection Objects (Legacy Collections).
+		->	We can create Enumeration Object by using elements method of Vector class.
+				public Enumeration elements();
+			Example:
+				Enumeration e=v.elements();
+		->	Enumeration defines the following two methods.
+				public boolean hasMoreElements();
+				public Object nextElement();
+				
+		Limitations of Enumeration:
+			=>	Enumeration concept is applicable only for legacy classes and it is not a universal cursor.
+			=>	By using Enumeration we can perform only read access and can't perform remove operation.
+				Note: To Overcome these limitations we can go for Iterator or ListIterator.
+				
+		Example:
+			public class EnumerationDemo {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Vector v=new Vector();
+					for(int i=0;i<20;i++) {
+						v.add(i*10);
+					}
+			//		System.out.println(v);
+					Enumeration e=v.elements();
+					while(e.hasMoreElements()) {
+						Integer i=(Integer)e.nextElement();
+						System.out.println(i);
+					}
+				}
+			}
+				
+	2. Iterator:
+			=>	We can apply Iterator to any Collection object so it is universal cursor.
+			=>	By using Iterator we can perform both read and remove operations.
+			=>	We can get the Iterator cursor by using the iterator() method of any Collection object.
+					public Iterator iterator():
+					
+					Example : 
+							Iterator itr=c.itrator(); // Here c is any collection object.
+							
+			=>	Iterator interface defines following three methods.
+					public boolean hashNext()	:	return true if it has the next element otherwise false.
+					public Object next()		:	returns the next element.
+					public void remove()		:	remove the element.
+					
+			Example:
+					public class IteratorDemo1 {
+						public static void main(String[] args) {
+							ArrayList al=new ArrayList();
+							for(int i=0;i<20;i++) {
+								al.add(i);
+							}
+					//		System.out.println(al);
+					//		Iterator itr=al.iterator();
+					//		while(itr.hasNext()) {
+					//			Integer i=(Integer)itr.next();
+					//			System.out.print(i+" ");
+					//		}
+					//		
+							//remove the odd numbers from list.
+							Iterator itr=al.iterator();
+							while(itr.hasNext()) {
+								Integer i=(Integer)itr.next();
+								if(i%2!=0)
+									itr.remove();
+							}
+							System.out.println(al);
+						}
+					}
+					
+			=>	Limitations:
+					->	By using Enumeration and Iterator can move only forward direction and can't move to the backward direction, and these are single direction cursors.
+					->	By Iterator we can perform only read and remove operations and can't perform replacement of a new element.
+						Note: To overcome these limitations should go for ListIterator.
+					
+	2. ListIterator:
+			=>	By using ListIterator we can move either to the forward direction or to the backward direction, and hence ListIterator is bi-directional cursor.
+			=>	By using ListIterator we can perform replacement and addition of new objects in addition to read and remove operations.
+			=>	We can get the ListIterator cursor by using the listIterator() method of any List interface.
+					public ListIterator listIterator():				
+					
+					ListIterator lstItr=l.listIterator(); // Here l is any list object.
+			=>	ListIterator is the child interface of Iterator and hence all methods of Iterator by default available to ListIterator.
+			=>	ListIterator defines following 9 methods.
+					
+					forward direction:
+						public boolean hashNext()	:	return true if it has the next element otherwise false.
+						public Object next()		:	returns the next element.
+						public int nextIndex()	  	: 	It returns the next index value.
+
+					backward direction:
+						public boolean hasPrevious() : return true if the cursor having the previous element otherwise false.
+						public Object previous()	: returns the previous element from the list. If the iterator at the beginning of the list then it throws NoSuchElementException.
+						public int previousIndex()	: returns previous index.
+						
+					other capabilities:
+						public void remove()		:	remove the element.
+						public void add(Object obj) : 	adds the element to the list at the position just before the element that will be returned by the next call to the next() method.
+						public void set(Object obj)	: replaces the element returned by the last call.
+			Note:ListIterator is the most powerful cursor but its limitation is, it is applicable only for List implemented class objects and it is not a universal cursor.
+
+			Example:
+					public class ListIteratorDemo1 {
+						public static void main(String[] args) {
+							// TODO Auto-generated method stub
+							ArrayList namesList=new ArrayList();
+							namesList.add("Sachin");
+							namesList.add("Sehwag");
+							namesList.add("Ganguly");
+							namesList.add("Dravid");
+							namesList.add("Yuvaraj");
+							System.out.println(namesList);
+							ListIterator lstItr=namesList.listIterator();
+							while(lstItr.hasNext()) {
+								String name=(String)lstItr.next();
+								System.out.println("1:name:"+name+":nextIndex:"+lstItr.nextIndex());
+								if(name.equals("Dravid")) {
+									lstItr.add("Dhoni");
+									System.out.println(":previousIndex:"+lstItr.previousIndex());
+									System.out.println(":previous:"+lstItr.previous());
+									System.out.println(":hasPrevious:"+lstItr.hasPrevious());
+								}
+								if(name.equals("Sehwag")) {
+									lstItr.set("RohitSharma");
+								}
+								if(name.equals("Yuvaraj")) {
+									lstItr.remove();
+								}
+							}
+							System.out.println(namesList);
+						}
+					}
+
+	=>	Implementation classes of cursors:
+		
+			public class CursorsDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					Vector vector=new Vector();
+					Enumeration e=vector.elements();
+					Iterator itr=vector.iterator();
+					ListIterator lstItr=vector.listIterator();
+					System.out.println(":Enumeration Impl Class:"+e.getClass().getName());
+					System.out.println(":Iterator Impl Class:"+itr.getClass().getName());
+					System.out.println(":ListIterator Impl Class:"+lstItr.getClass().getName());
+				}
+			}
+			
+						
+	LinkedList:
+	
+			=>	Underlying data structure is double linked list.
+			=>	The LinkedList class maintains the insertion order
+			=>	The LinkedList class maintains the duplicate elements.
+			=>	It allows Heterogeneous objects.
+			=>	Null insertion is possible.
+			=>	Implements Serializable and Cloneable interface.
+			=>	The LinkedList class not implements RandomAccess interface.
+			=>	Best choise, If frequent operation is insertion or deletion an element in the middle.
+			=>	Worst choise, If frequest operation is retrieval.
+			=>	It is not synchronized.
+			=>	Usually uses LinkedList to implement stacks and queues. 
+				
+				constructors:
+					LinkedList();
+					LinkedList(Collection);
+				
+				methods: The below methods are linked list specific methods
+					void addFirst(element);
+					void addLast(element);
+					Object getFirst();
+					Object getLast();
+					Object removeFirst();
+					Object removeLast();
+				
+				Other:
+					add(element), add(index,element), size(), clear(), isEmpty(),remove(index),remove(element), contains(element)
+			
+				Exmple:
+					public class LinkedListDemo {
+						public static void main(String[] args) {
+							// TODO Auto-generated method stub
+							LinkedList<String> linkedListObj=new LinkedList<>();
+							linkedListObj.add("Sachin");
+							linkedListObj.add("Kohli");
+							linkedListObj.add("sehwag");
+							linkedListObj.add("Dhoni");
+							linkedListObj.add("RohitSharma");
+							linkedListObj.add("Ganguly");
+							linkedListObj.add(2, "Dravid");
+							System.out.println(":linkedListObj:"+linkedListObj);
+							linkedListObj.addFirst("XYZ");
+							linkedListObj.addLast("ABC");
+							System.out.println(":linkedListObj:"+linkedListObj);
+							linkedListObj.removeFirst();
+							linkedListObj.removeLast();
+							System.out.println(":linkedListObj:"+linkedListObj);
+						}
+					}
+				
+	Difference between ArrayList & LinkedList:
+	
+								ArrayList																	LinkedList
+					
+	1. This class uses a dynamic array to store the elements in it. 				1. This class uses a doubly linked list to store the elements in it.
+	2. Manipulation with ArrayList is slow because it internally uses an array. 	2. Manipulation with LinkedList is faster than ArrayList 
+		If any element is removed from the array, 										because it uses a doubly linked list, so no shifting is required in memory.
+		all the other elements are shifted in memory.
+	3. An ArrayList class can act as a list only because it implements List only.	3. LinkedList class can act as a list and queue both 
+																						because it implements List and Deque interfaces.	
+	4. ArrayList is better for storing and accessing data.							4. LinkedList is better for manipulating data.
+	5. Generally, when an ArrayList is initialized, 
+		a default capacity of 10 is assigned to the ArrayList.						5. There is no case of default capacity in a LinkedList. 
+																						In LinkedList, an empty list is created when a LinkedList is initialized.
+																						
+																						
+	Vector:
+	
+			=>	The Vector class implements the List interface.
+			=>	Underlying data structure is resizable array or growable array.
+			=>	The Vector class maintains the insertion order
+			=>	The Vector class maintains the duplicate elements.
+			=>	It allows Heterogeneous objects.
+			=>	Null insertion is possible.
+			=>	ArrayList and Vector classes implements RandomAccess interface, so that we can access any random element with the same speed. Hence if our frequent operation is retrieval operation then ArrayList is the best choice.
+			=>	Most of the methods present in Vector are synchronized. Hence Vector object is thread-safe.
+			=>	Best choise is if frequent operation is retrieval.
+			=>	Implements Serializable and Cloneable interface.
+			
+
+			It is recommended to use the Vector class in the thread-safe implementation only. If you don't need to use the thread-safe implementation, you should use the ArrayList, the ArrayList will perform better in such case.
+
+			Vector is fail-safe when uses the Enumeration.
+
+			The Iterators returned by the Vector class are fail-fast. In case of concurrent modification, it fails and throws the ConcurrentModificationException.	
+
+			constructors:
+				Vector()	:	default capacity 10. once it reaches new capacity is: 2 * currentCapacity.
+				Vector(int initialCapacity)
+				Vector(int initialCapacity,int incrementCapacity)
+				Vector(Collection c)
+			methods:
+				to add an element:
+					addElement(Object o);
+				
+				To remove elements:
+					removeElement(element),removeElementAt(index),removeAllElements()
+					
+				To Retrieve elements:
+					elementAt(int index);
+					firstElement();
+					lastElement();
+					
+				other methods:
+					int size();
+					int capacity();
+					Enumeration elements();
+				
+		Example:
+			public class VectorDemo1 {
+				public static void main(String[] args) {
+					Vector vector=new Vector();
+					System.out.println(":capacity:"+vector.capacity());
+					for(int i=1;i<=10;i++) {
+						vector.addElement(i);
+					}
+					System.out.println(":capacity:"+vector.capacity());
+					vector.add("P");
+					System.out.println(":capacity:"+vector.capacity());
+					System.out.println(":vector:"+vector);
+				}
+			}		
+				
+
+	It is similar to the ArrayList, but there are some differences-
+		
+
+								ArrayList																		Vector
+	1. ArrayList is not synchronized.												1. Vector is synchronized.
+	2. ArrayList increments 50% of current array size 								2. Vector increments 100% means doubles the array size 
+		if the number of elements exceeds from its capacity.							if the total number of elements exceeds than its capacity.
+	3. ArrayList is not a legacy class. It is introduced in JDK 1.2.				3. Vector is a legacy class. It is introduced in 1.0
+	4. ArrayList is fast because it is non-synchronized.							4. Vector is slow because it is synchronized, 
+	5. ArrayList uses the Iterator interface to traverse the elements.				5. A Vector can use the Iterator interface or Enumeration interface to traverse the elements.
