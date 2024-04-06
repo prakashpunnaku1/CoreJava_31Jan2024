@@ -9346,3 +9346,291 @@ Collections:
 	3. ArrayList is not a legacy class. It is introduced in JDK 1.2.				3. Vector is a legacy class. It is introduced in 1.0
 	4. ArrayList is fast because it is non-synchronized.							4. Vector is slow because it is synchronized, 
 	5. ArrayList uses the Iterator interface to traverse the elements.				5. A Vector can use the Iterator interface or Enumeration interface to traverse the elements.
+
+*********************
+06-APR-2024
+*********************
+
+Stack:
+			It is a child class of Vector
+			It is specially designed class for Last In First Out order(LIFO).
+			
+			Constructor:
+				Stack s=new Stack();
+				
+			methods:
+				Object push(Object obj):	For inserting an object to the stack.
+				Object pop(): 				To removes and returns top of the stack.	
+				Object peek(): 				To return the top of the stack without removal of object.
+				boolean empty():			returns true if stack empty otherwise false.					
+				int search(Object obj):					
+							->	If the specified object is available it returns its offset from top of the stack.
+							->	If the object is not available then it returns -1.
+								
+			Example:
+				class StackDemo{
+					public static void main(String[] args) {
+						Stack s=new Stack();
+						s.push("Z");
+						s.push("A");
+						s.push("X");
+						s.push("P");
+						System.out.println(":s:"+s);
+						System.out.println(":s:"+s.search("V"));//-1
+						System.out.println(":s:"+s.search("Z"));//4
+						System.out.println(":s:"+s.search("A"));//3
+						System.out.println(":s:"+s.search("X"));//2
+						System.out.println(":s:"+s.search("P"));//1
+						System.out.println(":empty:"+s.empty());
+						System.out.println(":peek:"+s.peek());
+						System.out.println(":s:"+s);
+						System.out.println(":pop:"+s.pop());
+						System.out.println(":s:"+s);
+						System.out.println(":pop:"+s.pop());
+						System.out.println(":s:"+s);
+						System.out.println(":pop:"+s.pop());
+						System.out.println(":s:"+s);
+						System.out.println(":pop:"+s.pop());
+						System.out.println(":s:"+s);
+						
+				//		System.out.println(":pop:"+s.pop());
+				//		System.out.println(":peek:"+s.peek());
+					}				
+				}
+				
+				
+Assignment: Remove duplicate elements from ArrayList collection.
+Assigment : Implement Your own Stack class.
+Assignment: Implement Your own ArrayList class.
+Assignment: Implement Your own LinkedList class.
+	
+Set Collection:
+	
+	=>	The Set interface is present in java.util package and extends the Collection interface. So Set is the child interface of Collection.
+	=>	If we want to represent a group of individual objects as a single entity, where duplicates are not allowed and insertion order is not preserved then we should go for Set.
+	=>	Set interface not contains any new methods so we can use Collection interface methods.
+	
+	=>	It is an unordered collection of objects in which duplicate values cannot be stored.
+	
+	There are implementation classes for Set interface.
+		-> HashSet
+		-> LinkedHashSet
+		-> TreeSet
+		
+	HashSet:
+		Java HashSet class implements the Set interface,
+		
+		->	The underlying datastructure is Hashtable.
+		->	Duplicates are not allowed. 
+			If we are trying to add duplicates we don't get any compile time or runtime errors, but add() method return false when try to add duplicate.
+		->	HashSet contains unique elements only.
+		-> 	HashSet doesn't maintain the insertion order. When iterating through a HashSet the order is unpredictable.
+		->	Insertion order is not preserved and all the objects will be inserted based on hashcode of objects. 
+		-> 	HashSet stores the elements by using a mechanism called hashing.
+		->	Heterogeneous objects are allowed.
+		->	null insertion is possible.
+		-> 	HashSet class is non synchronized.
+		->	Implements Serializable and Cloneable interface but not RandomAccess interface.
+		->	Hashset is the best choise if our frequent operation is search.
+		-> 	The initial default capacity of HashSet is 16, and the load factor is 0.75.
+		
+		constructors:
+			-> HashSet()		: Constructs a new, empty set; the default initial capacity (16) and load factor (0.75).
+			-> HashSet(Collection c)	:	Constructs a new set containing the elements in the specified collection.
+			-> HashSet(int initialCapacity)	:	Constructs a new, empty set; It has the specified initial capacity and default load factor (0.75).
+			-> HashSet(int initialCapacity, float loadFactor): Constructs a new, empty set; It has the specified initial capacity and the specified load factor.
+			
+		methods:
+			-> add(element), clear(), 	contains(Object o), isEmpty(), iterator(), remove(Object o), size()
+	
+		Example 1:
+		
+			public class HashSetDemo1 {
+				public static void main(String[] args) {
+					HashSet<String> hashSetObj=new HashSet<>();
+					hashSetObj.add("Grates IT Services");
+					hashSetObj.add("HCL");
+					hashSetObj.add(14);
+					hashSetObj.add("Infosys");
+					hashSetObj.add(14);
+					hashSetObj.add("Wipro");
+					System.out.println(":hashSetObj:"+hashSetObj);
+					boolean flag=hashSetObj.add("Infosys");
+					System.out.println(":flag:"+flag);
+					boolean flag1=hashSetObj.add("TCS");
+					System.out.println(":flag1:"+flag1);
+					hashSetObj.add(null);
+					hashSetObj.add(null);
+					System.out.println(":hashSetObj:"+hashSetObj);
+				}
+			}
+		Example 2:
+			public class HashSetDemo2 {
+				public static void main(String[] args) {
+					ArrayList namesList=new ArrayList();
+					namesList.add("Sachin");
+					namesList.add("Kohli");
+					namesList.add(14);
+					namesList.add("sehwag");
+					namesList.add("Dhoni");
+					namesList.add(14);
+					namesList.add("RohitSharma");
+					namesList.add("Ganguly");
+					namesList.add(2, "Dravid");
+					namesList.remove("sehwag");
+					namesList.add("Dhoni");
+					namesList.add("Sachin");
+					System.out.println(":namesList:"+namesList);
+					HashSet uniqueELements=new HashSet(namesList);
+					System.out.println(":uniqueELements:"+uniqueELements);
+				}
+			}
+			
+	
+		
+	LinkedHashSet:
+		Java LinkedHashSet extends the HashSet class and implements the Set interface. 
+		
+		->	It is the child class of HashSet.
+		->	Introduced in 1.4 version.
+		->	It is exactly same as the HashSet except the following differences.
+		
+						Hashset										LinkedHashSet
+			
+			->	The underlying datastructure is Hashtable.		->	The underlying datastructure is Hashtable + Linked List( Hybrid datastructure)
+			->	Insertion order is not preserved.				->	Insertion order is preserved.
+			->	Introduced in 1.2 version						->	Introduced in 1.4 version.
+		
+		-> LinkedHashSet contains unique elements only like HashSet.
+		-> LinkedHashSet maintains insertion order.
+		-> LinkedHashSet using an iterator, the elements will be returned in the order in which they were inserted.
+		-> LinkedHashSet provides all optional set operations and permits null elements.
+		-> LinkedHashSet is non-synchronized.
+		
+		Note:	LinkedHashSet is the best choice to develop cache based applications, where duplicate are not allowed and insertion order must be preserved.
+		
+		constructors:
+			-> LinkedHashSet()		: Constructs a new, empty set; the default initial capacity (16) and load factor (0.75).
+			-> LinkedHashSet(Collection c)	:	Constructs a new set containing the elements in the specified collection.
+			-> LinkedHashSet(int initialCapacity)	:	Constructs a new, empty set; It has the specified initial capacity and default load factor (0.75).
+			-> LinkedHashSet(int initialCapacity, float loadFactor): Constructs a new, empty set; It has the specified initial capacity and the specified load.
+			
+		methods:
+			-> add(element), clear(), 	contains(Object o), isEmpty(), iterator(), remove(Object o), size()
+			
+	Example:
+			
+		public class LinkedHashSetDemo1 {
+			public static void main(String[] args) {
+				LinkedHashSet linkedHashSetObj=new LinkedHashSet();
+				linkedHashSetObj.add("Grates IT Services");
+				linkedHashSetObj.add("HCL");
+				linkedHashSetObj.add(null);
+				linkedHashSetObj.add(24234);
+				linkedHashSetObj.add("Infosys");
+				linkedHashSetObj.add("Wipro");
+				System.out.println(":linkedHashSetObj:"+linkedHashSetObj);
+				boolean flag=linkedHashSetObj.add("Infosys");
+				System.out.println(":flag:"+flag);
+				boolean flag1=linkedHashSetObj.add("TCS");
+				System.out.println(":flag1:"+flag1);
+				linkedHashSetObj.add(null);
+				linkedHashSetObj.add(null);
+				System.out.println(":linkedHashSetObj:"+linkedHashSetObj);
+			}
+		}
+		
+	SortedSet(I):
+		->	It is the child interface of Set.
+		->	If we want to represent a group of individual objects according to some sorting order and duplicates are not allowed then we should go for SortedSet.
+		
+		SortedSet specific methods: 
+		
+			Object first()					:	returns first element of the SortedSet.
+			Object last()					:	returns last element of the SortedSet.
+			SortedSet headSet(Object obj)	:	returns the SortedSet whose elements are < obj
+			SortedSet tailSet(Object obj)	:	returns the SortedSet whose elements are >= obj		
+			SortedSet subSet(Object obj1,Object obj2)	:	returns the SortedSet whose elements are >= obj1 and < obj2
+			comparator()					:	returns Comparator object that describes the underlying sorting technique. 
+												If we are using default natural sorting order then it returns null.
+		
+			Suppose sample elements:	{100,101,103,104,107,110,115}
+				
+			first():			100
+			last():				115
+			headSet(104):		[100,101,103]
+			tailSet(104):		[104,107,110,115]
+			subSet(103,110):	[103,104,107]
+			
+			
+			Default natural sorting order:
+				->	For numbers ascending.
+				->	For strings alphabetical order.
+				
+				
+			
+	TreeSet:
+		TreeSet is the implementations of the SortedSet interface.
+		
+		->	The underlying datastructure is Balanced tree. (self-balancing binary search tree)
+		->	Duplicates objects are not allowed.So contains unique elements only like HashSet.
+		->	Insertion order is not preserved, but all objects are inserted according to some natural sorting order.
+		->	Heterogeneous objects are not allowed. If we try to insert then will get the runtime exception ClassCastException.
+		-> 	TreeSet class access and retrieval times are quiet fast.
+		-> 	TreeSet class is non synchronized.
+		-> 	TreeSet class maintains ascending order.
+		->	NullPointerException get when try to add null.
+		
+		constructors:
+			TreeSet()				: Constructs a new, empty tree set.
+			TreeSet(Collection c)	: Constructs a new tree set containing the elements in the specified collection, sorted according to the natural ordering of its elements.
+			TreeSet(Comparator comparator)	:	Constructs a new empty tree set, according to the specified comparator (customized sorting order).
+			TreeSet(SortedSet s)	:	Constructs a new tree set containing the same elements and using the same ordering as the specified sorted set.
+			
+		methods:
+			-> add(element),  clear(), first(), last(), tailSet()
+		
+		Example 1:
+			public class TreeSetDemo1 {
+				public static void main(String[] args) {
+					TreeSet t=new TreeSet();
+					t.add("K");
+					t.add("X");
+					t.add("R");
+					t.add("r");
+					t.add("X");
+					t.add("a");
+					t.add("Z");
+					t.add("V");
+					System.out.println(t);
+			//		t.add(14);	//ClassCastException
+					t.add(null);	//NullPointerException
+				}
+			}
+
+		Example 2:
+			public class TreeSetDemo2 {
+				public static void main(String[] args) {
+					TreeSet t=new TreeSet();
+					t.add(new StringBuffer("K"));
+					t.add(new StringBuffer("R"));
+					t.add(new StringBuffer("r"));
+					t.add(new StringBuffer("a"));
+					t.add(new StringBuffer("Z"));
+					t.add(new StringBuffer("V"));
+					System.out.println(t);
+				}
+			}
+			
+			=>	Here we will get the run time exception because StringBuffer is not implemented the Comparable interface.
+			=>	The objects which we are add to TreeSet should implement the Comparable interface.
+			=>	String and all wrapper classes implements the java.lang.Comparable interface.	
+		
+Difference between List & Set:
+	
+					List															Set
+		1. The List is an indexed sequence.										1. The Set is an non-indexed sequence.
+		2. List allows duplicate elements.										2. Set doesn’t allow duplicate elements.
+		3. Elements by their position can be accessed.							3. Position access to elements is not allowed.
+		4. Multiple null elements can be stored.								4. Null element can store only once.
+		5. List implementations are ArrayList, LinkedList, Vector, Stack		5. Set implementations are HashSet, LinkedHashSet, TreeSet.
