@@ -9634,3 +9634,363 @@ Difference between List & Set:
 		3. Elements by their position can be accessed.							3. Position access to elements is not allowed.
 		4. Multiple null elements can be stored.								4. Null element can store only once.
 		5. List implementations are ArrayList, LinkedList, Vector, Stack		5. Set implementations are HashSet, LinkedHashSet, TreeSet.
+
+********************
+08-APR-2024
+********************
+
+Map:
+*****
+		Map in an interface available in java.util package and it stores the data in key and value pairs. It does not allow duplicate keys.	
+		
+		=>	Map is not the child interface of Collection.
+		=>	If we want to represent group of individual objects as key value pairs then should go for Map.
+		
+		Example:
+					RolleNo			Name
+					1001			Rajesh
+					1002			Charan
+					1003			Hampi
+					1004			Koti
+					
+		=>	Both key and value are objects, duplicate keys are not allowed but values can be duplicated.
+		=>	Here, key and value pair is called Entry hence map is considered as a collection of Entry objects.
+		=>	Map interface methods:
+				-->	Object put(Object key,Object value):	To add one key value pair to the Map, if the key already present then old value will be replaced with new value and returns the old value.
+				
+				Example:
+							m.put(1001,"Charan");		returns null
+							m.put(1002,"Rakesh");		returns null
+							m.put(1003,"Hampi");		returns null
+							m.put(1002,"Ravi");			returns "Rakesh"
+							
+				->	Map putAll(Map m)
+				->	Object get(Object key):				Returns the value associated with specified key
+				->	Object remove(Object key):			Removes the entry associated with specified key.
+				->	boolean containsKey(Object key):	
+				->	boolean containsValue(Object value):
+				->	boolean isEmpty()
+				->	int size()
+				->	void clear()
+			
+			=>	The below 3 methods are Collection view of Map:
+				->	Set keySet()
+				->	Collection values()
+				->	Set entrySet()
+				
+		Entry(I):
+				A Map is a group of key value pair and each key value pair is called an Entry, hence Map is considered as a Collection of Entry objects, without existing Map object there is no chance of existing Entry object, hence Entry(I) interface is defined inside Map(I) interface.
+				
+				interface Map{
+					interface Entry{
+						Object getKey();
+						Object getValue();
+						Object setValue();    
+					}		// These methods are Entry specific methods which can apply only on Entry object.	
+				}
+						
+	There are implementation classes for Map interface.
+		-> 	HashMap 
+		-> 	LinkedHashMap
+		->	IdentityHashMap
+		->	WeakHashMap
+		-> 	TreeMap
+		-> 	Hashtable
+		
+	HashMap:
+	********
+			HashMap class implements the Map interface which allows to store data in key and value pair, where keys should be unique. If you try to insert the duplicate key, it will replace the element of the corresponding key.
+			
+			To successfully store and retrieve objects from a HashMap, the objects used as keys must implement the hashCode method and the equals method.  
+			
+			->	The Underlying datastructure is Hashtable.
+			-> 	HashMap doesn't maintains any order and is based on Hashcode of keys.
+			-> 	HashMap contains values based on the key.
+			-> 	HashMap contains only unique keys(duplicate keys are not allowed). But values can be duplicated.		
+			->	Heterogeneous objects are allowed for both keys and values.
+			-> 	HashMap may have one null key and multiple null values.
+			-> 	HashMap uses the Hashing technique.
+			-> 	HashMap is non synchronized.
+			->	HashMap implements Serializable and Cloneable interface.
+			->	Wich is the best choice, if our frequent operation is Search operation.	
+			-> 	The initial default capacity of Java HashMap class is 16 with a load factor of 0.75.
+			
+			constructors:
+				HashMap()		:			It is used to construct a empty HashMap with default initial capacity 16 and default load factor 0.75	
+				HashMap(Map m)	:			Constructs a new HashMap with specified Map.
+				HashMap(int capacity)	:	Constructs a new, empty HashMap. It has the specified initial capacity and default load factor 0.75.
+				HashMap(int capacity, float loadFactor)	:	Constructs a new, empty HashMap. It has the specified initial capacity and specified load factor.
+				
+			methods:
+				put(key,value), get(key), containsKey(key), containsValue(value), isEmpty(), remove(key), replace(key,value),entrySet(),keySet()
+				
+		Example 1:
+				public class HashMapDemo1 {
+					public static void main(String[] args) {
+						HashMap hashMapObj=new HashMap();
+						System.out.println(":hashMapObj:"+hashMapObj);
+						hashMapObj.put(1001, "TCS");
+						hashMapObj.put(1002, "Wipro");
+						hashMapObj.put(null, null);
+						hashMapObj.put(1003, "HCL");
+						hashMapObj.put(1004, "Grats");
+						hashMapObj.put(1005, "Accenture");
+						System.out.println(":hashMapObj:"+hashMapObj);
+						hashMapObj.put(1006, "JKT");
+						hashMapObj.put(null, "Infosys");
+						hashMapObj.put(1007, null);
+						hashMapObj.put(1008, null);
+						System.out.println(":hashMapObj:"+hashMapObj);
+						Object obj = hashMapObj.put(1009, "Oracle");
+						System.out.println(":obj:"+obj);
+						obj = hashMapObj.put(1009, "PRK Software");
+						System.out.println(":obj:"+obj);
+					}
+				}	
+
+		Example 2:
+			public class HashMapDemo2 {
+				public static void main(String[] args) {
+					HashMap hashMapObj = new HashMap();
+					hashMapObj.put(1001, "TCS");
+					hashMapObj.put(1002, "Wipro");
+					hashMapObj.put(null, null);
+					hashMapObj.put(1003, "HCL");
+					hashMapObj.put(1004, "Grats");
+					hashMapObj.put(1005, "Accenture");
+					hashMapObj.put(1006, "JKT");
+					hashMapObj.put(null, "Infosys");
+					hashMapObj.put(1007, null);
+					hashMapObj.put(1008, null);
+					hashMapObj.put(1009, "Oracle");
+					System.out.println(":hashMapObj:" + hashMapObj);
+
+					Set keys = hashMapObj.keySet();
+					System.out.println(":keys:" + keys);
+					Collection values = hashMapObj.values();
+					System.out.println(":values:" + values);
+					Set entrySet = hashMapObj.entrySet();
+					System.out.println(":entrySet:" + entrySet);
+					Iterator itr = entrySet.iterator();
+					while (itr.hasNext()) {
+						Map.Entry entry = (Map.Entry) itr.next();
+						System.out.println(":key:" + entry.getKey() + ":value:" + entry.getValue());
+						if (entry.getKey() != null && entry.getKey().equals(1006)) {
+							entry.setValue("HUL");
+						}
+					}
+					System.out.println(":hashMapObj:" + hashMapObj);
+				}
+			}	
+				
+		Example 3:
+		
+				public class HashMapDemo3 {
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						HashMap hashMapObj=new HashMap();
+						hashMapObj.put("434", "Grats");
+						hashMapObj.put("674", "HCL");
+						hashMapObj.put("532", "TCS");
+						hashMapObj.put("456", "Wipro");
+						hashMapObj.put("23", "Accenture");
+						hashMapObj.put("3454", "JKT");
+						Boolean flag1=hashMapObj.containsKey("434");
+						System.out.println(":flag1:"+flag1);
+						Boolean flag2=hashMapObj.containsValue("Accenture");
+						System.out.println(":flag2:"+flag2);
+						hashMapObj.clear();
+						Boolean flag3=hashMapObj.containsKey("434");
+						System.out.println(":flag3:"+flag3);
+						Boolean flag4=hashMapObj.containsValue("Accenture");
+						System.out.println(":flag4:"+flag4);
+						Boolean flag5=hashMapObj.isEmpty();
+						System.out.println(":flag5:"+flag5);
+						System.out.println(":hashMapObj:"+hashMapObj);
+						hashMapObj.put("1001", "CTS");
+						System.out.println(":hashMapObj:"+hashMapObj);
+						hashMapObj.remove("1001");
+						System.out.println(":hashMapObj:"+hashMapObj);
+					}
+				}
+				
+		Example 4:
+		
+				class Company {
+					private int compId;
+					private String compName;
+					private String address;
+					public Company(int compId, String compName, String address) {
+						super();
+						this.compId = compId;
+						this.compName = compName;
+						this.address = address;
+					}
+					public int getCompId() {
+						return compId;
+					}
+					public void setCompId(int compId) {
+						this.compId = compId;
+					}
+					public String getCompName() {
+						return compName;
+					}
+					public void setCompName(String compName) {
+						this.compName = compName;
+					}
+
+					public String getAddress() {
+						return address;
+					}
+					public void setAddress(String address) {
+						this.address = address;
+					}
+				}
+
+				public class HashMapDemo4 {
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						HashMap<String, Company> hashMapObj = new HashMap<>();
+						hashMapObj.put("1001", new Company(1001, "TCS", "Bangalore"));
+						hashMapObj.put("456", new Company(456, "Wipro", "Bangalore"));
+						hashMapObj.put("674", new Company(674, "HCL", "Bangalore"));
+						hashMapObj.put("434", new Company(434, "Grats", "Bangalore"));
+						hashMapObj.put("3443", new Company(3443, "Accenture", "Bangalore"));
+						hashMapObj.put("3454", new Company(1001, "JKT", "Bangalore"));
+						Company company = hashMapObj.get("434");
+						System.out.println(":company:" + company);
+						System.out.println(":compId:" + company.getCompId() + ":name:" + company.getCompName() + ":addresss:"
+								+ company.getAddress());
+
+					}
+				}
+				
+	
+	LinkedHashMap:
+	***************
+		LinkedHashMap is just like HashMap with the additional feature of maintaining an order of elements inserted into it. 
+		=>	It is the child class of HashMp, it is the exactly same as HashMap including methods and constructors.
+	
+		HashMap											LinkedHashMap
+		
+	1. The underlying datastructure is Hashtable		The underlying datastructure is LinkedList + Hashtable.
+	2. Insertion is not preserved. 						Insertion order is preserved.
+	3. Introduced in 1.2								Introducedd in 1.4
+		
+		->	LinkedHashMap contains values based on the key.
+		->	LinkedHashMap contains unique elements.
+		->	LinkedHashMap may have one null key and multiple null values.
+		->	LinkedHashMap is non synchronized.
+		->	LinkedHashMap maintains insertion order.
+		->	The initial default capacity of Java HashMap class is 16 with a load factor of 0.75.
+		->	LinkedHashSet and LinkedHashMap are commonly used for cache based applications.	
+		
+		constructors:
+				LinkedHashMap()		:			It is used to construct a empty HashMap with default capacity 16 and load factor 0.75	
+				LinkedHashMap(Map m)	:			Constructs a new HashMap with specified Map.
+				LinkedHashMap(int capacity)	:	Constructs a new, empty HashMap. It has the specified initial capacity and default load factor 0.75.
+				LinkedHashMap(int capacity, float loadFactor)	:	Constructs a new, empty HashMap. It has the specified initial capacity and specified load factor.
+				
+			methods:
+				put(key,value), get(key), containsKey(key), containsValue(value), isEmpty(), remove(key), replace(key,value),entrySet(),keySet()
+				
+		Example:
+		
+			public class LinkedHashMapDemo1 {
+				public static void main(String[] args) {
+					// TODO Auto-generated method stub
+					HashMap<String, String> hashMapObj = new HashMap<>();
+					hashMapObj.put("434", "Grats");
+					hashMapObj.put("674", "HCL");
+					hashMapObj.put("532", "TCS");
+					hashMapObj.put("456", "Wipro");
+					hashMapObj.put("23", "Accenture");
+					hashMapObj.put("3454", "JKT");
+					System.out.println(":hashMapObj:" + hashMapObj);
+					LinkedHashMap<String, String> linkedHashMapObj = new LinkedHashMap<>();
+					linkedHashMapObj.put("434", "Grats");
+					linkedHashMapObj.put("674", "HCL");
+					linkedHashMapObj.put("532", "TCS");
+					linkedHashMapObj.put("456", "Wipro");
+					linkedHashMapObj.put("23", "Accenture");
+					linkedHashMapObj.put("3454", "JKT");
+					System.out.println(":linkedHashMapObj:" + linkedHashMapObj);
+				}
+			}
+				
+	IdentityHashMap:
+	****************
+			=> It is exactly same as HashMap including methods and constructors. Except the following difference.
+				-> In normal HashMap JVM uses the equals() to identify duplicate keys,which compares the content.
+				-> But in case of IdentityHashMap JVM use == operator to identify the duplicate keys, which compares the references.
+					=>	Difference between == operator and equals()
+					
+			->	In general == operator meant for reference comparision.
+			->	In general equals() is meant for content comparision.
+		
+		Example:
+
+			public class IdentityHashMapDemo1 {
+				public static void main(String[] args) {
+					Integer i1=new Integer(20);
+					Integer i2=new Integer(20);
+					System.out.println(i1==i2);//false	
+					System.out.println(i1.equals(i2));//true
+					HashMap m1=new HashMap();
+					m1.put(i1,"Sachin");
+					System.out.println(m1);
+					m1.put(i2,"Sehwag");	
+					System.out.println(m1);
+					IdentityHashMap m2=new IdentityHashMap();
+					m2.put(i1,"Sachin");
+					System.out.println(m2);
+					m2.put(i2,"Sehwag");	
+					System.out.println(m2);
+				}
+			}		
+
+		WeakHashMap :
+		*************
+			WeakHashMap is an implementation of the Map interface. WeakHashMap is almost same as HashMap.
+			=>	if object is specified as key doesn’t contain any references- it is eligible for garbage collection even though it is associated with WeakHashMap.
+
+			=>	It is exactly same as HashMap exception the following difference.
+
+				In the case of HashMap eventhough object doesn't have any reference it is not eligible for GC if it is associated with HashMap i.e., HashMap dominates Garbage Collector.
+				But in the case of WeakHashMap, if object doesn't contains any reference it is eligible for GC eventhough object is associated with WeakHashMap. i.e, Garbage Collector dominates WeakHashMap
+				
+			Example:
+					class Test{
+						@Override
+						public String toString() {
+							return "Test";
+						}
+						@Override
+						protected void finalize() throws Throwable {
+							// TODO Auto-generated method stub
+							super.finalize();
+							System.out.println(":Test:finalize():called:");
+						}
+					}
+					public class WeakHashMapDemo1 {
+						public static void main(String[] args) throws InterruptedException {
+							Test t1=new Test();
+							HashMap m1=new HashMap();
+							m1.put(t1, "Grats IT");
+							System.out.println("========>:m1:"+m1);
+							t1=null;
+							System.gc();
+							Thread.sleep(3000);
+							System.out.println("========>:m1:"+m1);
+							
+							Test t2=new Test();
+							WeakHashMap m2=new WeakHashMap();
+							m2.put(t2, "Grats IT");
+							System.out.println(":m2:"+m2);
+							t2=null;
+							System.gc();
+							Thread.sleep(5000);
+							System.out.println(":m2:"+m2);
+						}
+					}
+
