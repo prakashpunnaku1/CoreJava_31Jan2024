@@ -9993,4 +9993,306 @@ Map:
 							System.out.println(":m2:"+m2);
 						}
 					}
+********************
+10-APR-2024
+********************
+	********			
+	TreeMap:
+	********
+		TreeMap class implements the SortedMap interface which implement the Map interface. 
+		The TreeMap is sorted according to the natural ordering of its keys, or by a Comparator provided at map creation time, depending on which constructor is used.
+		
+		->	The underlying data structure is RED - Black Tree.
+				->	A Red-Black Tree is a type of self-balancing binary search tree. It is named after its property of ensuring that the tree remains approximately balanced in order to guarantee optimal performance for insertion, deletion, and search operations. 
+				
+		->	TreeMap not maintains insertion order but which maintains the natural sorting order of keys.
+		->	Duplicate keys are not allowed but values can be duplicated.	
+		->	TreeMap contains only unique elements.
+		->	TreeMap cannot have a null key but can have multiple null values.
+		->	TreeMap is non synchronized.
+		->	If we are depend on default natural sorting order then the keys should be homogeneous and comparable otherwise we will get run time exception saying ClassCastException.
+		->	If we are definining our own sorting by coparator then keys need not be homogeneous and comparable, we can take hetrogeneous non comparable objects also.
+		->	For values can take non-comparable or heterogeneous objects also.
+		
+		->	SortedMap define following specified methods:
+				Object firstKey();
+				Object lastKey();
+				SortedMap headMap(Object key);
+				SortedMap tailMap(Object key);
+				SortedMap subMap(Object key1,Object key2);
+				Comparator comparator();
+		
+		constructors:
+			TreeMap()						:	It is used to construct an empty tree map that will be sorted using the natural order of its key.
+			TreeMap(Comparator comparator)	:	It is used to construct an empty tree-based map that will be sorted using the comparator comp.
+			TreeMap(Map m)					:	It is used to initialize a treemap with the entries from m, which will be sorted using the natural order of the keys.
+			TreeMap(SortedMap m)			:	It is used to initialize a treemap with the entries from the SortedMap sm, which will be sorted in the same order as sm.
+			
+			methods:
+				put(key,value), get(key), containsKey(key), containsValue(value), isEmpty(), remove(key), replace(key,value),entrySet(),keySet()
+		
+		Example:
+		
+			public class TreeMapDemo1 {
+				public static void main(String[] args) {
+					HashMap hashMapObj=new HashMap();
+					hashMapObj.put(434, "Grats");
+					hashMapObj.put(674, "HCL");
+					hashMapObj.put(532, "TCS");
+					hashMapObj.put(456, "Wipro");
+					hashMapObj.put(23, "Accenture");
+					hashMapObj.put(3454, "JKT");
+					System.out.println(":hashMapObj:"+hashMapObj);
+					
+					TreeMap treeMapObj=new TreeMap();
+			//		treeMapObj.put(null, "sdfd");
+					treeMapObj.put(434, "Grats");
+					treeMapObj.put(674, "HCL");
+					treeMapObj.put(532, "TCS");
+					treeMapObj.put(456, "Wipro");
+					treeMapObj.put(23, "Accenture");
+					treeMapObj.put(3454, "JKT");
+					treeMapObj.put(5656, null);
+					treeMapObj.put(4565, null);
+			//		treeMapObj.put("A", "PVR");
+					System.out.println(":treeMapObj:"+treeMapObj);
+					System.out.println(":firstKey:"+treeMapObj.firstKey());
+					System.out.println(":lastKey:"+treeMapObj.lastKey());
+					System.out.println(":headMap:"+treeMapObj.headMap(674));
+					System.out.println(":tailMap:"+treeMapObj.tailMap(674));
+					System.out.println(":subMap:"+treeMapObj.subMap(456,3454));
+					System.out.println(":comparator:"+treeMapObj.comparator());
+				}
+			}
 
+		
+	Hashtable:
+	************
+		Java Hashtable class implements a hashtable, which maps keys to values. It inherits Dictionary class and implements the Map interface.
+		Any non-null object can be used as a key or as a value.To successfully store and retrieve objects from a hashtable, the objects used as keys must implement the hashCode method and the equals method. 
+		
+		->	The underlying data structure is Hashtable.
+		->	Insertion order is not maintains and is based on hashcode of keys.	
+		->	A Hashtable contains values based on the key.
+		->	Hashtable class contains unique key objects,but values can be duplicate.
+		->	Heterogeneous objects are allowed for both keys and values.
+		->	Hashtable class doesn't allow null key or value. If we try to add the get the NullPointerException at runtime.
+		->	Hashtable implements Cloneable and Serializable interface.
+		->	Every method present in Hashtable is synchronized and hence it is thread-safe.
+		->	If our frequent operation is search then Hashtable is best choice.
+		->	The initial default capacity of Hashtable class is 11 whereas loadFactor is 0.75.
+				
+	constructors:
+		Hashtable()									:	It creates an empty hashtable having the initial default capacity 11 and load factor 0.75.
+		Hashtable(int capacity)						:	It accepts an integer parameter and creates a hash table that contains a specified initial capacity.
+		Hashtable(int capacity, float loadFactor)	:	It is used to create a hash table having the specified initial capacity and loadFactor.
+		Hashtable(Map t)							:	It creates a new hash table with the same mappings as the given Map.
+			
+		methods:
+				put(key,value), get(key), containsKey(key), containsValue(value), isEmpty(), remove(key), replace(key,value),entrySet(),keySet()
+
+
+	Example1:
+		public class HashtableDemo1 {
+			public static void main(String[] args) {
+				Hashtable hashtableObj=new Hashtable();
+				hashtableObj.put(1001, "TCS");
+				hashtableObj.put(456, "Wipro");
+				hashtableObj.put(674, "HCL");
+				hashtableObj.put(434, "Grats");
+				hashtableObj.put(3443, "Accenture");
+				hashtableObj.put(3454, "JKT");
+		//		hashtableObj.put(null, "asdfasd");
+		//		hashtableObj.put(3635, null);
+				String compName=(String)hashtableObj.get(434);
+				System.out.println(":compName:"+compName);
+				System.out.println(":hashMapObj:"+hashtableObj);
+			}
+		}
+			
+	Example 2:
+			public class HashtableDemo2 {
+				public static void main(String[] args) {
+					Hashtable hashtableObj=new Hashtable();
+					hashtableObj.put(1001, "TCS");
+					hashtableObj.put(456, "Wipro");
+					hashtableObj.put(674, "HCL");
+					hashtableObj.put(434, "Grats");
+					hashtableObj.put(3443, "Accenture");
+					hashtableObj.put(3454, "JKT");
+					String compName=(String)hashtableObj.get(434);
+					System.out.println(":compName:"+compName);
+					System.out.println(":hashMapObj:"+hashtableObj);
+					
+					Set keys=hashtableObj.keySet();
+					System.out.println(":keys:"+keys);
+					for(Object key:keys) {
+						System.out.println(":key:"+key+":value:"+hashtableObj.get(key));
+					}
+					Collection c=hashtableObj.values();
+					for(Object val:c) {
+						System.out.println(":value:"+val);
+					}
+					System.out.println(":===========================================>:");
+					Set entrySet=hashtableObj.entrySet();
+					for(Object entry:entrySet) {
+						System.out.println(":key:"+((Map.Entry)entry).getKey()+":value:"+((Map.Entry)entry).getValue());
+					}
+				}
+			}
+
+Difference Between Hashmap and Hashtable
+
+						Hashmap																Hashtable
+	1.	No method is synchronized.									1. Every method is synchronized.
+	2.	Multiple threads can operate simultaneously 				2. At a time only one thread is allowed to operate the Hashtable’s.	
+		Hence hashmap’s object is not thread-safe.						Hence it is thread-safe.		
+	3.	Threads are not required to wait 							3. It increases the waiting time of the thread and hence performance is low.
+		and hence relatively performance is high.
+	4.	Null is allowed for both key and value.						4. Null is not allowed for both key and value. Will get a null pointer exception.
+	5.	It is introduced in the 1.2 version.						5. It is introduced in the 1.0 version.
+	6. 	It is non-legacy.											6. It is a legacy.
+		
+
+	Property	:
+	************
+		=> In our program if anything which changes frequently username,password,email id,mobileno, are not recommended to hard code in java program, because if there is any change to reflect that change re-compilation, rebuild and redeploy the application required which creates a business impact to the client.
+		=> We can overcome this problem by using properties file, such type of variable things we have to configure in the properties file, from that properties file we have to read into java program and we can use those properties the main advantage of this approach is if there is a change in properties file to reflect that change just re-deployment is enough which won't create any business impact to the client.
+		=> we can use the Java Properties object to hold properties which are coming from properties files.
+		=> In normal Map(lime HashMap,Hashtable and TreeMap) key and value can be any type, but in the case of Properties key and value should be String type.
+		
+		Constructor:	
+				Properties p=new Properties();
+				
+		Methods:
+				String getProperty(String propertyname):
+						->	Get value associated with specified property. If the specified property is not available then it returns null.
+				String setProperty(String propertyName,String propertyValue):
+						->	If the specified property is already available then old value replaced with new value and returns new value.
+				Enumeration propertyNames():
+						->	Returns all properties present in Properties object.
+						
+				void load(InputStream is): to load properties from properties file into java properties object.
+				
+				void store(OutputStream os,String comment):
+						->	to store properties from java object into properties file.
+						
+				
+		application.properties:
+			db.username=abc
+			db.passowrd=abc@123
+			db.url=oracle:thin@128.34.234.2:8000
+
+		Example:
+		
+			public class PropertiesDemo {
+				private static final String file="src/application.properties";
+				public static void main(String[] args) throws IOException {
+					Properties p=new Properties();
+					FileInputStream fis=new FileInputStream(file);
+					p.load(fis);
+					String dbUseraName=p.getProperty("db.username");
+					String dbPassword=p.getProperty("db.passowrd");
+					String dbUrl=p.getProperty("db.url");
+					System.out.println(":dbUseraName:"+dbUseraName);
+					System.out.println(":dbPassword:"+dbPassword);
+					System.out.println(":dbUrl:"+dbUrl);
+					p.setProperty("port", "4444");
+					p.store(new FileOutputStream(file), "updating properties");
+				}
+			}
+
+
+HashMap internals:
+		
+		Hashing: 	
+				Transformation of a string characters (TEXT) to a shorted fixed-length value that represents original String. A shorter value help in indexing and faster searches.
+				
+				-> In Java every object has a method public int hashcode that will return a hash value for given object.
+				-> If two objects are equal then their hashcodes also should be equal.
+				-> If you are using your class as a key then should implement the equals and hashcode methods & your hashcode method should return robust hashcode so that no issues arises while working in maps. because HashMap uses hashcode internally. If the hash code is not consistant then we may not get proper value while look-up the values.
+
+
+				-> 
+					Node<K,V>[] table;
+					
+					each Node contains:
+					
+							-------------------
+								Node
+							-------------------
+								int hash;
+								K key;
+								V value;
+								Node<K,V> next;
+							-------------------
+							
+				-> while we call put method what happens internally. 
+				
+					put(key,value);
+					
+					put(K k,V v){
+						hash = hash(k);
+						index = hash & (n-1);
+					}
+					
+					Here n is the initial capacity i.e., 16.
+					
+					=>	In Java, the bucket index in a hashtable is calculated using the hashCode of the key that is being inserted. The steps to calculate the bucket index are as follows:
+
+						->	Obtain the hashCode: 
+							The hashCode of the key object is obtained by calling its hashCode() method. This method is typically implemented in the Object class and returns an integer that represents the hash code value for the object.
+						->	Apply hash function: 
+							Once the hashCode is obtained, it is passed through a hash function. This hash function typically manipulates the hash code to ensure that it falls within the range of valid bucket indices. The purpose of the hash function is to evenly distribute the keys across the available buckets, reducing the likelihood of collisions.
+						->	Calculate bucket index: 
+							The result of the hash function is then used to calculate the bucket index. This is usually done by taking the modulus (%) of the hash code with the number of buckets in the hashtable. This ensures that the bucket index falls within the range of valid indices for the array representing the hashtable buckets.
+					
+				-> for null keys index is zero.
+				
+				-> while we call get method what happens internally.
+					get(K k){
+						int hash=hash(key);
+						index = hash & (n-1);
+					}
+					
+				-> In Java8, when we have too many unequal keys which gives same hashcode(i.e, index)- when the number of items in hash bucket grows beyond certain threshold ( TREEIFY_THRESHOLD=8), content of that bucket switches from using linked list of Entry object to a balanced tree. This therotically improves the worst-case performance from O(n) to O(log n). A balanced tree is faster than linked list.
+				
+				-> Once Map size reaches to load factor then double the capacity and re-hashing happens.	
+
+			Example:
+			
+				public class HashMapInternalDemo {
+				//	public static void calculateIndex(String str) {
+				//		int hashcode=str.hashCode();
+				//		int index = hashcode & (capacity-1);
+				//		System.out.println(str+" "+hashcode+" "+index);
+				//	}
+					private static int capacity=16;
+					public static void calculateIndex(String str) {
+						int hashcode=str.hashCode();
+						int index = hashcode % (capacity-1);
+						index = index>=0?index:-1*index;
+						System.out.println(str+":\t"+hashcode+":\t"+index);
+					}
+					private static void calculateIndex(Map mapObj) {
+						for(Object key:mapObj.keySet()) {
+							calculateIndex((String)key);
+						}
+					}
+					public static void main(String[] args) {
+						HashMap hashMapObj=new HashMap();
+						hashMapObj.put("Grats", "1001"); 	//:hashcode:69063093	:index:3	
+						hashMapObj.put("HCL", "1002");		//:hashcode:71345		:index:5
+						hashMapObj.put("Exilant", "1002");	//:hashcode:349026545	:index:5
+						hashMapObj.put("TCS", "1003");		//:hashcode:82884		:index:9
+						hashMapObj.put("Wipro", "1004");	//:hashcode:83585659	:index:4
+						hashMapObj.put("Accenture", "1005");//:hashcode:-115637186	:index:11	
+						hashMapObj.put("JKT", "1006");		//:hashcode:73523		:index:8
+						hashMapObj.put("Infosys", "1007");	//:hashcode:-684881089	:index:4
+						hashMapObj.put("AWB", "1008");		//:hashcode:65228		:index:8
+						hashMapObj.put("SAP", "1009");		//:hashcode:81858		:index:3
+						hashMapObj.put("MRF", "1010");		//:hashcode:81858		:index:4
+						calculateIndex(hashMapObj);
+						System.out.println(":hashMapObj:"+hashMapObj);
+					}
+				}
