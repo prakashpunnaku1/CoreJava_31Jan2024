@@ -10296,3 +10296,284 @@ HashMap internals:
 						System.out.println(":hashMapObj:"+hashMapObj);
 					}
 				}
+
+*****************
+11-APR-2024		
+*****************		
+		ConcurrentHashMap:
+		*****************
+			The ConcurrentHashMap class is introduced in JDK 1.5 belongs to java.util.concurrent package, 
+			ConcurrentHashMap is an enhancement of HashMap as we know that while dealing with Threads in our application HashMap is not a good choice.
+			
+			-> The underlined data structure for ConcurrentHashMap is Hashtable.
+			-> ConcurrentHashMap class is thread-safe i.e. multiple threads can operate on a single object without any complications.
+			-> At a time any number of threads are applicable for a read operation without locking the ConcurrentHashMap object which is not there in HashMap.
+			-> In ConcurrentHashMap, the Object is divided into a number of segments according to the concurrency level.
+			-> The default concurrency-level of ConcurrentHashMap is 16.
+			-> Inserting null objects is not possible in ConcurrentHashMap as a key or value.
+			-> In ConcurrentHashMap, at a time any number of threads can perform retrieval operation.
+				But while updating the element, the thread must lock the particular segment in which the thread wants to operate. 
+				This type of locking mechanism is known as Segment locking or bucket locking. 
+				
+	
+		-> If we want we can make any collection object thread safe by following way:
+		
+			List	list=Collections.synchronizedList(listObj);
+			Set 	list=Collections.synchronizedSet(setOb);
+			Map 	map=Collections.synchronizedMap(mapObj);	
+		
+		
+		
+		Queue:
+				
+				=>	If you want to represent group of objects prior to its processing then should go for Queue.
+				=>	If you want to store object before its processing then should go for Queue.
+					Example : Sending Mail or Sending SMS.	
+				=>	Queue interface introduced as part of 1.5 enhancements 
+				=>	It is the child interface of Collection.	
+				=>	Refer the diagram.
+				
+				Implemented classes.
+				
+								Queue(I)
+						
+				
+				 	PriorityQueue    BlockingQueue(I)
+				
+													LinkedBlockingQueue
+													
+													PriorityBlockingQueue
+	
+				
+
+				=>	If we want to represent a group of individual elements prior to processing then we should go to Queue.
+					Example: Before sending SMS message we have to store all mobile numbers, in which order we added mobile numbers in the same order only message should be deliver. For this First In First Out(FIFO) requirement Queue is the best choice.
+					
+				=>	Usually Queue is follows FIFO order based on our requirement we can implement our own priority also(PriorityQueue)
+				=>	From 1.5 onwards LinkedList class also implements Queue interface. LinkedList base implementation of Queue follows FIFO.
+			
+			Queue Interface specific methods:
+				boolean offer(Object obj):	
+					To add an element to the Queue.
+				Object poll():	
+					To remove and return the head element of the Queue, if Queue is empty then it returns null.
+				Object remove():
+					To remove and return the head element of the Queue, if Queue is empty then it throws Runtime Exception : NoSuchElementException.
+				Object peek():
+					To returns the head element of the Queue,if Queue is empty then it returns null.
+				Object element():
+					To returns the head element of the Queue,if Queue is empty then it throws Runtime Exception : NoSuchElementException.
+			
+			Example with LinkedList:
+			
+				public class QueueDemo1 {
+					public static void main(String[] args) {
+						// TODO Auto-generated method stub
+						LinkedList llQueue=new LinkedList();
+						System.out.println(llQueue.peek()); //null
+				//		System.out.println(ll.remove()); //NoSuchElementException
+						llQueue.offer("Sachin@gmail.com");
+						llQueue.offer("Kohli@gmail.com");
+						llQueue.offer("Dhoni@gmail.com");
+						llQueue.offer("RohitSharma@gmail.com");
+						llQueue.offer("Ganguly@gmail.com");
+						llQueue.offer("Dravid@gmail.com");
+						System.out.println(llQueue);
+						System.out.println(llQueue.peek());
+						System.out.println(llQueue);
+						while(!llQueue.isEmpty()) {
+							System.out.println(":poll():"+llQueue.poll());
+						}
+						System.out.println(llQueue);
+						System.out.println("empty:poll():"+llQueue.poll());
+						
+						llQueue.offer("Sachin@gmail.com");
+						llQueue.offer("Kohli@gmail.com");
+						llQueue.offer("Dhoni@gmail.com");
+						llQueue.offer("RohitSharma@gmail.com");
+						llQueue.offer("Ganguly@gmail.com");
+						llQueue.offer("Dravid@gmail.com");
+						System.out.println(llQueue);
+						System.out.println(":element:"+llQueue.element());
+						while(!llQueue.isEmpty()) {
+							System.out.println(":remove():"+llQueue.remove());
+						}
+						System.out.println(llQueue);
+						System.out.println("empty:remove():"+llQueue.remove());
+						System.out.println(":element:"+llQueue.element());
+					}
+				}
+			
+			PriorityQueue:
+				If we want to represent a group of individual objects prior to processing according to some priority then we should go for PriorityQueue.
+				The priority can be either default natural sorting order or customised sorting order defined by comparator.
+				Insertion order is not preserved and it is based on some priority.
+				Duplicate objects are not allowed.
+				If we are depending on default natural sorting order compulsary object should be homogeneous and comparable otherwise we will get runtime exception saying ClassCastException.
+				If we are defining our own sorting by comparator then objects need not be homogeneous and comparable.
+				Null is not allowed even as the first element also.
+				
+				
+			Constructor.
+				PriorityQueue q=new PriorityQueue();
+					->	Creates an empty priority queue with default initial capacity 11 and all objects will be inserted according to default natural sorting order.
+				
+				PriorityQueue q=new PriorityQueue(int  initialCapacity);
+					->	
+				
+				PriorityQueue q=new PriorityQueue(int  initialCapacity,Comparator c);
+				
+				PriorityQueue q=new PriorityQueue(SortedSet s);	
+					
+				PriorityQueue q=new PriorityQueue(Collection c);
+				
+				public class QueueDemo2 {
+					public static void main(String[] args) {
+						PriorityQueue ppQueue=new PriorityQueue();
+						System.out.println(ppQueue.peek()); //null
+				//		System.out.println(ll.remove()); //NoSuchElementException
+						ppQueue.offer("Sachin@gmail.com");
+						ppQueue.offer("Kohli@gmail.com");
+						ppQueue.offer("Dhoni@gmail.com");
+						ppQueue.offer("RohitSharma@gmail.com");
+						ppQueue.offer("Ganguly@gmail.com");
+						ppQueue.offer("Dravid@gmail.com");
+						System.out.println(ppQueue);
+						System.out.println(ppQueue.peek());
+						System.out.println(ppQueue);
+						while(!ppQueue.isEmpty()) {
+							System.out.println(":poll():"+ppQueue.poll());
+						}
+						System.out.println(ppQueue);
+						System.out.println("empty:poll():"+ppQueue.poll());
+						ppQueue.offer("Sachin@gmail.com");
+						ppQueue.offer("Kohli@gmail.com");
+						ppQueue.offer("Dhoni@gmail.com");
+						ppQueue.offer("RohitSharma@gmail.com");
+						ppQueue.offer("Ganguly@gmail.com");
+						ppQueue.offer("Dravid@gmail.com");
+						System.out.println(ppQueue);
+						System.out.println(":element:"+ppQueue.element());
+						while(!ppQueue.isEmpty()) {
+							System.out.println(":remove():"+ppQueue.remove());
+						}
+						System.out.println(ppQueue);
+						System.out.println("empty:remove():"+ppQueue.remove());
+						System.out.println(":element:"+ppQueue.element());
+					}
+				}	
+		
+Assignment: Implement a program to send mail to 10 people. 
+			=>	Import below libraries to send the Mail. (JMS).
+					mail.jar
+					activation.jar
+			
+
+Generics:
+	
+	=>	Java generics allow you to write more flexible and reusable code by providing a way to define classes, interfaces, and methods with type parameters. This enables you to create classes and methods that can work with any data type, rather than being tied to a specific type.
+	
+	=>	Generics Work Only with Reference Types:  When we declare an instance of a generic type, the type argument passed to the type parameter must be a reference type. We cannot use primitive data types like int, char.
+
+	Example 1;
+			class A<T> {
+				private T value;
+
+				public A(T value) {
+					this.value = value;
+				}
+
+				public T getValue() {
+					return value;
+				}
+
+				public void setValue(T value) {
+					this.value = value;
+				}
+			}
+			public class GenericDemo1{
+				public static void main(String[] args) {
+					//In this example, A is a generic class with a type parameter T. 
+			//		This allows you to create a A object that can hold values of any type. For example
+			
+					A<Integer> intA = new A<>(10);
+					A<String> stringA = new A<>("Hello");
+					int intValue = intA.getValue(); // No need for casting
+					String stringValue = stringA.getValue(); // No need for casting
+					System.out.println(":intValue:"+intValue);
+					System.out.println(":stringValue:"+stringValue);
+					
+					//A<int> a2=new A<>(20); //Only instance types are allowed primitives are not allowed.
+				}
+			}
+					
+
+		Generic Methods: 
+			We can also write generic methods that can be called with different types of arguments based on the type of arguments passed to the generic method. The compiler handles each method.
+
+			class GenericDemo2 {
+				// A Generic method example
+				 <X> void genericDisplay(X element){
+					System.out.println(element.getClass().getName()
+									   + " = " + element);
+				}
+				public static void main(String[] args)
+				{
+					GenericDemo2 obj=new GenericDemo2();
+					obj.genericDisplay(11);
+					obj.genericDisplay("GratsIT");
+					obj.genericDisplay(1.0);
+				}
+			}
+
+
+ Generics with Collections:
+	
+	Example 1:
+			public class ArrayListDemo5 {
+				public static void main(String[] args) {
+					ArrayList namesList1=new ArrayList();
+					namesList1.add("Sachin");
+					namesList1.add("Sehwag");
+					namesList1.add("Dhoni");
+					namesList1.add(152);
+					System.out.println(":namesList:"+namesList1);
+					for(Object name:namesList1) {
+						String nm=(String)name;
+						System.out.println(":nm:"+nm);
+					}
+					
+					ArrayList<String> namesList2=new ArrayList<>();
+					namesList2.add("Sachin");
+					namesList2.add("Sehwag");
+					namesList2.add("Dhoni");
+					namesList2.add(152);
+					System.out.println(":namesList2:"+namesList2);
+					
+					for(String name:namesList2) {
+						System.out.println(":name:"+name);
+					}
+				}
+			}
+
+	Example 2:
+		public class HashMapDemo5 {
+			public static void main(String[] args) {
+				HashMap<Integer,String> hashMapObj = new HashMap<>();
+				hashMapObj.put(1001, "TCS");
+				hashMapObj.put(1002, "Wipro");
+				hashMapObj.put(1003, "HCL");
+				hashMapObj.put(1004, "Grats");
+				System.out.println(":hashMapObj:" + hashMapObj);
+
+				Set<Integer> keys = hashMapObj.keySet();
+				System.out.println(":keys:" + keys);
+				Collection<String> values = hashMapObj.values();
+				System.out.println(":values:" + values);
+				for (Map.Entry<Integer, String> entry : hashMapObj.entrySet()) {
+					int id  = entry.getKey();
+					String name = entry.getValue();
+					System.out.println(":id:"+id+":name:"+name);
+				}
+			}
+		}
