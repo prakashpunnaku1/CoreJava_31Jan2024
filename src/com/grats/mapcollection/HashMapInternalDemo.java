@@ -14,7 +14,7 @@ public class HashMapInternalDemo {
 		int hashcode=str.hashCode();
 		// int hash=hash(hashCode);
 		int index = hashcode % (capacity-1);
-		index = index>=0?index:-1*index;
+		index = index>=0? index: -1*index;
 		System.out.println(str+":\t"+hashcode+":\t"+index);
 	}
 	private static void calculateIndex(Map mapObj) {
